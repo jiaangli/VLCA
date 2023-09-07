@@ -25,14 +25,6 @@ def load_yaml(path, default_path=None):
                 default_yaml_file, Loader=yaml.FullLoader)
             main_config = ForceKeyErrorDict(**default_config_dict)
 
-        # def overwrite(output_config, update_with):
-        #     for k, v in update_with.items():
-        #         if not isinstance(v, dict):
-        #             output_config[k] = v
-        #         else:
-        #             overwrite(output_config[k], v)
-        # overwrite(main_config, config)
-
         # simpler solution
         main_config.update(config)
         config = main_config

@@ -51,7 +51,6 @@ class VMEmbedding:
         self.image_dir = Path(args.data.image_dir)
         self.model_name = args.model.model_name
         self.bs = 8
-        self.n_layers = args.model.n_layers
         self.alias_emb_dir = Path(args.data.alias_emb_dir)/ "averaged" / self.model_name
         # self.is_average = args.model.i/s_avg
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
@@ -68,13 +67,8 @@ class VMEmbedding:
         imageset = ImageDataset(self.image_dir, self.labels, feature_extractor )
         image_dataloader = torch.utils.data.DataLoader(imageset, batch_size=self.bs, num_workers=4, pin_memory=True)
 
-        # where to store layer-wise bert embeddings of particular length
-        vm_dict = {}
-
         # images_name = []
-        categories_encode = {}
-        if not categories_encode:
-            categories_encode.update({layer: [] for layer in range(self.n_layers+1)})
+        categories_encode = []
         image_categories = []
 
         for inputs, (names, category_size) in tqdm(image_dataloader, mininterval=60.0, maxinterval=360.0):
@@ -84,11 +78,7 @@ class VMEmbedding:
             with torch.no_grad():
                 outputs = model(pixel_values=inputs)
                 # chunks = torch.chunk(outputs.last_hidden_state[:,0,:].cpu(), inputs_shape[0], dim=0)
-            for layer_i in range(self.n_layers+1):
-                if layer_i < self.n_layers:
-                    chunks = torch.chunk(outputs.hidden_states[layer_i][:,1:,:].cpu(), inputs_shape[0], dim=0)
-                else:
-                    chunks = torch.chunk(outputs.last_hidden_state[:,1:,:].cpu(), inputs_shape[0], dim=0)
+                chunks = torch.chunk(outputs.last_hidden_state[:,1:,:].cpu(), inputs_shape[0], dim=0)
 
                 for idx, chip in enumerate(chunks):
                     # features for every image
@@ -96,19 +86,18 @@ class VMEmbedding:
                     images_features = chip[:category_size[idx]].numpy()
                     # features for categories
                     category_feature = np.expand_dims(images_features.mean(axis=0), 0)
-                    if layer_i == 0:
-                        image_categories.append(names[idx])
+                    image_categories.append(names[idx])
                     # images_name = [f"{names[idx]}_{i}" for i in range(category_size[idx])]
 
-                    categories_encode[layer_i].append(category_feature)
+                    categories_encode.append(category_feature)
 
-        for layer in categories_encode.keys():
-            embeddings = np.vstack(categories_encode[layer])
-        #   categories_encode = np.concatenate(categories_encode)
-            dim_size = embeddings.shape[1]
 
-            torch.save({"dico": image_categories, "vectors": torch.from_numpy(embeddings).float()}, 
-                        str(self.alias_emb_dir / f"things_{self.model_name}_dim_{dim_size}_layer_{layer}.pth"))
+        embeddings = np.vstack(categories_encode)
+    #   categories_encode = np.concatenate(categories_encode)
+        dim_size = embeddings.shape[1]
+
+        torch.save({"dico": image_categories, "vectors": torch.from_numpy(embeddings).float()}, 
+                    str(self.alias_emb_dir / f"things_{self.model_name}_dim_{dim_size}_layer_last.pth"))
             
             
 

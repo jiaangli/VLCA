@@ -16,7 +16,6 @@ class LMEmbedding:
         self.model_name = args.model.model_name
         self.model_alias = args.model.model_alias
         self.labels = labels
-        # self.is_average = args.model.i/s_avg
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
     def get_lm_layer_representations(self):
@@ -42,54 +41,45 @@ class LMEmbedding:
         start_time = tm.time()
         all_words_in_context = []
         for word_idx, keys in enumerate(tqdm(self.text_sentences_array, mininterval=300, maxinterval=3600)):
-            # if word_idx >7930:
+            # if word_idx > 22512:
             for sentence in self.text_sentences_array[keys]:
                 sentence = re.sub(pattern, replacement, sentence).lower()
                 # sentences_words = [w for w in sentences.strip().split(' ')]
-                related_words = keys.split("_")
+                related_alias = keys.replace("_", " ")
 
                 all_words_in_context.append(keys.replace("_", " "))
-                lm_dict = self.add_token_embedding_for_specific_word(sentence.strip(), tokenizer, model, related_words,
+                lm_dict = self.add_token_embedding_for_specific_word(sentence.strip(), tokenizer, model, related_alias,
                                                                     lm_dict)
-                # if word_idx == 8168:
-                #     break
-            # if word_idx == 5:
+            # if word_idx == 22513:
             #     break
-            # if word_idx % 10000 == 0:
-            #     print(f'Completed {word_idx} out of {len(self.text_sentences_array)}: {tm.time() - start_time}')
-            #     start_time = tm.time()
 
         return all_words_in_context, lm_dict
 
-    def get_word_ind_to_token_ind(self, words_in_array, sentence_words, tokenizer, words_mask):
+    def get_word_ind_to_token_ind(self, words_in_array, related_words, tokenizer, words_mask):
         word_ind_to_token_ind = []  # dict that maps index of word in words_in_array to index of tokens in seq_tokens
         token_ids = tokenizer(words_in_array).input_ids
         tokenized_text = tokenizer.convert_ids_to_tokens(token_ids)
-        mask_tokenized_text = tokenized_text.copy()
 
-        for i, word in enumerate(sentence_words):
-            # word_ind_to_token_ind[i] = []  # initialize token indices array for current word
-            if self.model_alias.startswith("bert"):
-                word_tokens = tokenizer.tokenize(word)
+        if self.model_alias.startswith("bert"):
+            word_tokens = tokenizer.tokenize(related_words)
+        else:
+            if related_words == ".22":
+                match = re.search(rf"{re.escape(related_words)}[ ]?\b", words_in_array)
+            # Use re.escape to escape special characters in word
             else:
-                # Use re.escape to escape special characters in word
-                match = re.search(rf"\b{re.escape(word)}[ ]?\b", ''.join(words_mask))
-                start_pos, end_pos = match.span()  # Use span to directly get start and end positions
+                match = re.search(rf"\b{re.escape(related_words)}[ ]?\b", words_in_array)
+            
+            start_pos, end_pos = match.span()  # Use span to directly get start and end positions
 
-                # Simplify logic for word_tokens
-                if not self.model_alias.startswith("llama"):
-                    word_tokens = tokenizer.tokenize(word) if start_pos == 0 or not words_mask[start_pos - 1].isspace() else tokenizer.tokenize(f" {word}")
-                else:
-                    word_tokens = tokenizer.tokenize(word) if start_pos == 0 or words_mask[start_pos - 1].isspace() else tokenizer.tokenize(f"({word}")[1:]
+            # Simplify logic for word_tokens
+            if not self.model_alias.startswith("llama"):
+                word_tokens = tokenizer.tokenize(related_words) if start_pos == 0 or not words_mask[start_pos - 1].isspace() else tokenizer.tokenize(f" {related_words}")
+            else:
+                word_tokens = tokenizer.tokenize(related_words) if start_pos == 0 or words_mask[start_pos - 1].isspace() else tokenizer.tokenize(f"({related_words}")[1:]
 
-                # Use list comprehension to replace characters in words_mask
-                words_mask[start_pos: end_pos] = [" "] * (end_pos - start_pos)
+            word_ind_to_token_ind = [i for i, word in enumerate(tokenized_text) if word == word_tokens[0] and tokenized_text[i:i+len(word_tokens)] == word_tokens]
 
-            for tok in word_tokens:
-                # print(sentence_words)
-                ind = mask_tokenized_text.index(tok)
-                word_ind_to_token_ind.append(ind)
-                mask_tokenized_text[ind] = "[MASK]"
+            word_ind_to_token_ind = list(range(word_ind_to_token_ind[0], word_ind_to_token_ind[0] + len(word_tokens)))
 
         return word_ind_to_token_ind
 
@@ -108,29 +98,22 @@ class LMEmbedding:
         # return outputs.hidden_states, lm_dict
 
         # only get last hidden state
-        lm_dict.update({"last": []})
+        if not lm_dict:
+            lm_dict.update({"last": []})
         return outputs.last_hidden_state, lm_dict
 
     @staticmethod
     def add_word_lm_embedding(lm_dict, embeddings_to_add, token_inds_to_avrg, specific_layer=-1):
 
-        # if specific_layer >= 0:  # only add embeddings for one specified layer
         layer_embedding = embeddings_to_add
         full_sequence_embedding = layer_embedding.cpu().detach().numpy()
         lm_dict["last"].append(np.mean(full_sequence_embedding[0, token_inds_to_avrg, :], 0))
 
-        # else:
-        #     for layer, layer_embedding in enumerate(embeddings_to_add):
-        #         full_sequence_embedding = layer_embedding.cpu().detach().numpy()
-        #         # print(full_sequence_embedding.shape)
-        #         # avrg over all tokens for specified word
-        #         lm_dict[layer].append(np.mean(full_sequence_embedding[0, token_inds_to_avrg, :], 0))
-
         return lm_dict
 
-    def add_token_embedding_for_specific_word(self, word_seq, tokenizer, model, sentence_words, lm_dict, is_avg=True):
+    def add_token_embedding_for_specific_word(self, word_seq, tokenizer, model, related_alias, lm_dict, is_avg=True):
         all_sequence_embeddings, lm_dict = self.predict_lm_embeddings(word_seq, tokenizer, model, lm_dict)
-        word_ind_to_token_ind = self.get_word_ind_to_token_ind(word_seq, sentence_words, tokenizer, list(word_seq))
+        word_ind_to_token_ind = self.get_word_ind_to_token_ind(word_seq, related_alias, tokenizer, list(word_seq))
 
         lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings, word_ind_to_token_ind)
 
