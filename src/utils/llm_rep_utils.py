@@ -14,7 +14,6 @@ class LMEmbedding:
         self.text_sentences_array = text_sentences_array
         self.pretrained_model = args.model.pretrained_model
         self.model_name = args.model.model_name
-        self.model_alias = args.model.model_alias
         self.labels = labels
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
@@ -22,7 +21,7 @@ class LMEmbedding:
         cache_path = Path.home() / ".cache/huggingface/transformers/models" / self.model_name
         tokenizer = AutoTokenizer.from_pretrained(self.pretrained_model, cache_dir=cache_path, use_fast=False, use_auth_token=True)
         max_memory = {k: '40GB' for k in self.device}
-        if self.model_alias == "bert":
+        if self.model_name.startswith("bert"): 
             model = AutoModel.from_pretrained(self.pretrained_model, cache_dir=cache_path, output_hidden_states=True)
             model = model.to(self.device[0])
         else:
@@ -30,7 +29,7 @@ class LMEmbedding:
                                               cache_dir=cache_path,
                                               output_hidden_states=True,
                                               device_map="sequential",
-                                              torch_dtype=torch.float16 if self.model_alias not in ["bert", "gpt2"] else None,
+                                              torch_dtype=torch.float16 if not self.model_name.startswith("gpt") else None,
                                               max_memory=max_memory)
         model.eval()
         # where to store layer-wise bert embeddings of particular length
@@ -60,7 +59,7 @@ class LMEmbedding:
         token_ids = tokenizer(words_in_array).input_ids
         tokenized_text = tokenizer.convert_ids_to_tokens(token_ids)
 
-        if self.model_alias.startswith("bert"):
+        if self.model_name.startswith("bert"):
             word_tokens = tokenizer.tokenize(related_words)
         else:
             if related_words == ".22":
@@ -72,7 +71,7 @@ class LMEmbedding:
             start_pos, end_pos = match.span()  # Use span to directly get start and end positions
 
             # Simplify logic for word_tokens
-            if not self.model_alias.startswith("llama"):
+            if not self.model_name.startswith("Llama"):
                 word_tokens = tokenizer.tokenize(related_words) if start_pos == 0 or not words_mask[start_pos - 1].isspace() else tokenizer.tokenize(f" {related_words}")
             else:
                 word_tokens = tokenizer.tokenize(related_words) if start_pos == 0 or words_mask[start_pos - 1].isspace() else tokenizer.tokenize(f"({related_words}")[1:]

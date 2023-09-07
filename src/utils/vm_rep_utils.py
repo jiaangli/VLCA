@@ -47,7 +47,6 @@ class VMEmbedding:
         self.args = args
         self.labels = labels
         self.pretrained_model = args.model.pretrained_model
-        self.model_alias = args.model.model_alias
         self.image_dir = Path(args.data.image_dir)
         self.model_name = args.model.model_name
         self.bs = 8
@@ -58,7 +57,7 @@ class VMEmbedding:
     def get_vm_layer_representations(self):
         cache_path = Path.home() / ".cache/huggingface/transformers/models" / self.pretrained_model
         feature_extractor = AutoFeatureExtractor.from_pretrained(self.pretrained_model, cache_dir=cache_path)
-        if self.model_alias != "resnet":
+        if not self.model_name.startwith("resnet"):
             model = AutoModel.from_pretrained(self.pretrained_model, cache_dir=cache_path, output_hidden_states=True, return_dict=True)
             model = model.to(self.device[0])
 
@@ -97,109 +96,5 @@ class VMEmbedding:
         dim_size = embeddings.shape[1]
 
         torch.save({"dico": image_categories, "vectors": torch.from_numpy(embeddings).float()}, 
-                    str(self.alias_emb_dir / f"things_{self.model_name}_dim_{dim_size}_layer_last.pth"))
+                    str(self.alias_emb_dir / f"imagenet_{self.model_name}_dim_{dim_size}.pth"))
             
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #     pattern = r'\s+([^\w\s]+)(\s*)$'
-    #     replacement = r'\1\2'
-    #     # get the token embeddings
-    #     start_time = tm.time()
-    #     all_words_in_context = []
-    #     for sent_idx, sentences in enumerate(tqdm(self.text_sentences_array, mininterval=300, maxinterval=3600)):
-    #         sentences = re.sub(pattern, replacement, sentences)
-
-    #         sentences_words = [w for w in sentences.strip().split(' ')]
-    #         all_words_in_context.extend(sentences_words)
-    #         lm_dict = self.add_token_embedding_for_specific_word(sentences.strip(), tokenizer, model, sentences_words,
-    #                                                              lm_dict)
-
-    #         if sent_idx % 10000 == 0:
-    #             print(f'Completed {sent_idx} out of {len(self.text_sentences_array)}: {tm.time() - start_time}')
-    #             start_time = tm.time()
-
-    #     return all_words_in_context, lm_dict
-
-    # def get_word_ind_to_token_ind(self, words_in_array, sentence_words, tokenizer, words_mask):
-    #     word_ind_to_token_ind = {}  # dict that maps index of word in words_in_array to index of tokens in seq_tokens
-    #     token_ids = tokenizer(words_in_array).input_ids
-    #     tokenized_text = tokenizer.convert_ids_to_tokens(token_ids)
-    #     mask_tokenized_text = tokenized_text.copy()
-
-    #     for i, word in enumerate(sentence_words):
-    #         word_ind_to_token_ind[i] = []  # initialize token indices array for current word
-    #         if self.model_alias.startswith("bert"):
-    #             word_tokens = tokenizer.tokenize(word)
-    #         else:
-    #             # Use re.escape to escape special characters in word
-    #             match = re.search(rf"\b{re.escape(word)}[ ]?\b", ''.join(words_mask))
-    #             start_pos, end_pos = match.span()  # Use span to directly get start and end positions
-
-    #             # Simplify logic for word_tokens
-    #             word_tokens = tokenizer.tokenize(word) if start_pos == 0 or words_mask[start_pos - 1] in (
-    #                 '(', '\"', '-', '\'', "‘") else tokenizer.tokenize(f" {word}")
-
-    #             # Use list comprehension to replace characters in words_mask
-    #             words_mask[start_pos: end_pos] = [" "] * (end_pos - start_pos)
-
-    #         for tok in word_tokens:
-    #             ind = mask_tokenized_text.index(tok)
-    #             word_ind_to_token_ind[i].append(ind)
-    #             mask_tokenized_text[ind] = "[MASK]"
-
-    #     return word_ind_to_token_ind
-
-    # def predict_lm_embeddings(self, words_in_array, tokenizer, model, lm_dict):
-
-    #     indexed_tokens = tokenizer(words_in_array, return_tensors="pt")
-    #     indexed_tokens = indexed_tokens.to(self.device[0])
-    #     with torch.no_grad():
-    #         outputs = model(**indexed_tokens)
-
-    #     # Use dictionary comprehension and update method to initialize lm_dict
-    #     if not lm_dict:
-    #         lm_dict.update({layer: [] for layer in range(len(outputs.hidden_states))})
-    #     return outputs.hidden_states, lm_dict
-
-    # @staticmethod
-    # def add_word_lm_embedding(lm_dict, embeddings_to_add, token_inds_to_avrg, specific_layer=-1):
-
-    #     if specific_layer >= 0:  # only add embeddings for one specified layer
-    #         layer_embedding = embeddings_to_add[specific_layer]
-    #         full_sequence_embedding = layer_embedding.cpu().detach().numpy()
-    #         lm_dict[specific_layer].append(np.mean(full_sequence_embedding[0, token_inds_to_avrg, :], 0))
-    #     else:
-    #         for layer, layer_embedding in enumerate(embeddings_to_add):
-    #             full_sequence_embedding = layer_embedding.cpu().detach().numpy()
-    #             # print(full_sequence_embedding.shape)
-    #             # avrg over all tokens for specified word
-    #             lm_dict[layer].append(np.mean(full_sequence_embedding[0, token_inds_to_avrg, :], 0))
-
-    #     return lm_dict
-
-    # def add_token_embedding_for_specific_word(self, word_seq, tokenizer, model, sentence_words, lm_dict, is_avg=True):
-    #     all_sequence_embeddings, lm_dict = self.predict_lm_embeddings(word_seq, tokenizer, model, lm_dict)
-    #     word_ind_to_token_ind = self.get_word_ind_to_token_ind(word_seq, sentence_words, tokenizer, list(word_seq))
-
-    #     for token_inds_to_avrg in list(word_ind_to_token_ind.keys()):
-    #         if is_avg:
-    #             token_ind = word_ind_to_token_ind[token_inds_to_avrg]
-    #         else:
-    #             # only use the first token
-    #             token_ind = [word_ind_to_token_ind[token_inds_to_avrg][0]]
-    #         lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings, token_ind)
-
-    #     return lm_dict

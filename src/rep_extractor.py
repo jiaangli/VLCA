@@ -8,8 +8,9 @@ import torch
 import json
 from sklearn.decomposition import PCA
 
-from .utils.vm_rep_utils import VMEmbedding
-from .utils.llm_rep_utils import LMEmbedding
+from src.utils.vm_rep_utils import VMEmbedding
+from src.utils.llm_rep_utils import LMEmbedding
+from src.utils.crawl_sentences import sentences_download
 
 
 class RepExtractor:
@@ -17,14 +18,11 @@ class RepExtractor:
         self.config = config
         self.dataset_name = config.data.dataset_name
         self.model_name = config.model.model_name
-        self.model_alias = config.model.model_alias
         self.num_classes = config.data.num_classes
         self.model_type = config.model.model_type
-        # self.suffix = "averaged" if config.model.is_avg else "first"
-        self.suffix = "averaged"
-        self.alias_emb_dir = Path(config.data.alias_emb_dir)/ self.suffix / self.model_name
+        self.alias_emb_dir = Path(config.data.alias_emb_dir) / self.model_type
         self.sentences_path = Path(config.data.sentences_path)
-        self.seed = config.setup.seed
+        self.seed = config.seed
         self.model_dim = config.model.dim
 
 
@@ -34,10 +32,11 @@ class RepExtractor:
         else:
             dim_list = [self.num_classes, self.model_dim]
         # print(f"Dictionary size: {len(self.pairs_dict)}")
-        if self.model_name == "fasttext" or self.model_alias == "openai":
+        if self.model_name == "fasttext":
             # self.__process_api_embeddings(config, dim_list)
             pass
         else:
+            sentences_download(args=config)
             self.__process_embeddings(dim_list)
 
     def __process_embeddings(self, dim_list):
@@ -49,7 +48,6 @@ class RepExtractor:
             labels_array = [i for i in list(sentences_array.keys())]
 
         for dim_size in dim_list:
-            # for layer in range(self.config.model.n_layers):
             save_file_path = self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{dim_size}_layer_last.pth"
             if save_file_path.exists():
                 print(f"File {save_file_path} already exists.")
@@ -59,20 +57,20 @@ class RepExtractor:
                 self.__get_vm_rep(labels_array)
 
     def __get_vm_rep(self, image_labels):
-        if self.model_alias in ["sf", 'mae']:
+        if not self.model_name.startwith("res"):
             embeddings_extractor = VMEmbedding(self.config, image_labels)
             embeddings_extractor.get_vm_layer_representations()
         pass
 
     def __get_lm_rep(self, all_sentences, all_labels):
-        if self.model_alias == "ft":
+        if self.model_name == "fasttext":
             self.fasttext_emb() # to do
             return
-        elif self.model_alias in ["bert", "gpt2", "opt", "llama2"]:
+        else:
             embeddings_extractor = LMEmbedding(self.config, all_sentences, all_labels)
             all_context_words, model_layer_dict = embeddings_extractor.get_lm_layer_representations()
-        else:
-            model_layer_dict = {}
+        # else:
+        #     model_layer_dict = {}
 
         wordlist = np.array(all_context_words)
         if "bert" in self.model_name:
@@ -85,21 +83,21 @@ class RepExtractor:
         embeddings = np.vstack(model_layer_dict[layer])
         if self.config.data.emb_per_sentence:
             torch.save({"dico": wordlist, "vectors": torch.from_numpy(embeddings).float()},
-                        str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}_layer_{layer}_per_sentence.pth"))
+                        str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}_per_sentence.pth"))
         word_embeddings = self.__get_mean_word_embeddings(embeddings, wordlist, unique_words)
         # torch.save({'dico': unique_words, 'vectors': word_embeddings}, save_file_path)
-        self.__save_layer_representations(unique_words, word_embeddings, layer)
+        self.__save_layer_representations(unique_words, word_embeddings)
         
-    def __save_layer_representations(self, words, embeddings, layer):
+    def __save_layer_representations(self, words, embeddings):
         # print(embeddings.shape)
         torch.save({"dico": words, "vectors": torch.from_numpy(embeddings).float()},
-            str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}_layer_{layer}.pth")
+            str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}.pth")
             )
         if embeddings.shape[1] > self.num_classes:
             pca = PCA(n_components=self.num_classes, random_state=self.seed)
             reduced_embeddings = pca.fit_transform(embeddings)
             torch.save({"dico": words, "vectors": torch.from_numpy(reduced_embeddings).float()},
-                        str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{self.num_classes}_layer_{layer}.pth")
+                        str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{self.num_classes}.pth")
                         )
         print(f"Saved extracted features to {str(self.alias_emb_dir)}")
 

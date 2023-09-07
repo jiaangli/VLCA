@@ -1,97 +1,52 @@
 import argparse
 import copy
+import json
 import os
 from collections import OrderedDict
+from pathlib import Path
 
-import pandas as pd
+import torch
 import wandb
+import pandas as pd
 
+from config import ModelConfig, MODEL_DIM, MuseConfig
 from MUSE.src.evaluation import Evaluator
 from MUSE.src.models import build_model
 from MUSE.src.trainer import Trainer
 from MUSE.src.utils import bool_flag, initialize_exp
-from src.utils.utils_helper import *
-
 
 class MuseExp:
-    def __init__(self, config, train_eval, fmri_type="type"):
-        super().__init__(config)
+    def __init__(self, config):
         self.config = config
-        self.num_folds = config.data.num_folds
-        self.model_type = config.model.model_type
-        self.model_name = config.model.model_name
-        self.model_alias = config.model.model_alias
-        self.dict_dir = config.data.dict_dir + f"/{fmri_type}"
-        self.word_decon_embs_dir = config.data.word_decontextualized_embs_dir
-        self.layers = config.model.get("n_layers")
-        self.is_average = config.model.is_avg
-        self.if_cased = "uncased" if "uncased" in self.model_name else "cased"
-        self.suffix = "averaged" if self.is_average else "first"
-        self.do = train_eval
-        self.vec_dim = min(config.data.tr_num, config.model.dim) if self.do == "train" else config.model.dim
-        self.src_lang = config.muse_parameters.src_lang
-        self.tgt_lang = config.muse_parameters.tgt_lang
-
-    def set_muse_param(self, layer, sub, bin_name, fold=None):
-        self.config.muse_parameters.src_lang = f"subject-{sub}"
-        self.config.muse_parameters.tgt_lang = f"{self.model_name}.layer_{layer}"
-        self.config.muse_parameters.verbose = 2 if layer == 0 and sub == 1 else 0
-        muse_params = copy.deepcopy(self.config.muse_parameters)
-        if self.model_alias == "ft" or self.model_alias == "openai" or self.model_alias == "bg":
-            muse_params.tgt_emb = f"{self.word_decon_embs_dir}/{self.suffix}/{self.model_name}/{self.dataset_name}_{self.model_name}_dim_{self.vec_dim}_layer_{layer}.pth"
-        else:
-            muse_params.tgt_emb = f"{self.word_decon_embs_dir}_{self.suffix}/{self.model_name}/{self.dataset_name}_decon_{self.model_name}_dim_{self.vec_dim}_layer_{layer}.pth"
-
-        if fold is not None:  # if fold is None, it means in regression evaluation
-            muse_params.dico_eval = f"{self.dict_dir}/{self.if_cased}_{self.model_type}_test_{self.dataset_name}_fold_{fold}{bin_name}.txt"
-            muse_params.dico_train = f"{self.dict_dir}/{self.if_cased}_{self.model_type}_train_{self.dataset_name}_fold_{fold}.txt"
-            muse_params.src_emb = f"{str(self.outfile_dir)}/{self.dataset_name}-{self.fmri_type}-sub--{sub}-{self.lookback}-{self.lookout}-{self.vec_dim}.pth"
-            muse_params.emb_dim = self.vec_dim
-        else:
-            muse_params.dico_eval = f"{self.dict_dir}/{self.if_cased}_LM_all_words_{self.dataset_name}_regression_eval{bin_name}.txt"
-            muse_params.src_emb = f"{self.word_decon_embs_dir}_regression-{self.fmri_type}/{self.model_name}/{self.dataset_name}_{self.model_name}_dim_{self.config.model.dim}_layer_{layer}_sub_{sub}.pth"
-        return muse_params
-
-    def run(self, extend_exp=None):
+        
+    def run(self, extend_exp=None, model_info=MODEL_DIM, data_split="1k_only"):
         exp_flag = "" if extend_exp is None else f"_{extend_exp}"
         bins = {
             "_freq": ["_freq500", "_freq5000", "_freq_end"],
-            # "_poly": ["_one_meaning", "_over3_meaning", "_2or3_meaning"],
-            "_poly": ["_in_babelnet", "_out_babelnet"],
-            "_pos": ["_noun", "_verb", "_others"]
+            "_poly": ["_one_meaning", "_over3_meaning", "_2or3_meaning"]
         }.get(exp_flag[:5], [""])
 
-        project_type = "procrustes" if self.do == "train" else "regression"
-        project_name = f"{self.dataset_name}-{self.fmri_type}-brain2{self.model_type}_{project_type}_{self.suffix}{exp_flag}"
-        wandb.init(project=project_name, name=f"{self.src_lang}_{self.tgt_lang}",
-                   tags=[f"{self.src_lang}", f"{self.tgt_lang}"])
+        project_name = f"image2{self.model_type}-TACL-{exp_flag}"
+        wandb.init(project=project_name, name=f"{self.src_lang}_{self.tgt_lang}")
         metrics_df = pd.DataFrame()
+        # for v_model in model_info["VM"]:
+        for l_model in model_info["LM"]:
+            emb_dim = min(model_info["VM"][self.config.model.model_name], model_info["LM"][l_model])
+            for bin_name in bins:
+                for fold in [203, 255, 633, 813, 881]:
+                    metrics = {"VM": self.config.model.model_name,
+                                "LM": l_model,
+                                "dim": emb_dim,
+                                "Bins": bin_name[1:],
+                                "Fold": f"fold_{fold}"}
+                    muse_params = MuseConfig("imagenet", l_model, self.config.model.model_name, 
+                                                emb_dim, fold, bin_name, data_split)
+                    muse_res = muse_supervised(muse_params)
+                    metrics.update(muse_res)
+                    # build dataframe from dictionary
+                    metrics_df = pd.concat([metrics_df, pd.DataFrame(metrics, index=[0])])
+            # metrics.clear()
 
-        for layer in range(self.layers):
-            for sub in range(1, self.config.data.num_subjects + 1):
-                metrics = {"Subjects": f"subject-{sub}",
-                           "Models": self.model_name,
-                           "Layers": f"layer-{layer}"}
-                for bin_name in bins:
-                    if extend_exp is not None:
-                        metrics.update({"Bins": bin_name[1:]})
-                    if self.do == "train":
-                        for fold in range(self.num_folds):
-                            metrics.update({"Fold": f"fold_{fold}"})
-
-                            muse_params = self.set_muse_param(layer, sub, bin_name, fold)
-
-                            muse_res = muse_supervised(muse_params)
-                            metrics.update(muse_res)
-                            # build dataframe from dictionary
-                            metrics_df = pd.concat([metrics_df, pd.DataFrame(metrics, index=[0])])
-                    else:
-                        muse_params = self.set_muse_param(layer, sub, bin_name)
-                        muse_res = muse_evaluate(muse_params)
-                        metrics.update(muse_res)
-                        # build dataframe from dictionary
-                        metrics_df = pd.concat([metrics_df, pd.DataFrame(metrics, index=[0])])
-                metrics.clear()
         wandb.log({"Results": wandb.Table(dataframe=metrics_df.round(2))}, commit=True)
         wandb.finish()
 
@@ -112,18 +67,6 @@ def muse_supervised(configs):
     # build logger / model / trainer / evaluator
     logger = initialize_exp(params)
     src_emb, tgt_emb, mapping, _ = build_model(params, False)
-    # if "pereira" not in params.src_emb:
-    #     logger.info("Manually Normalization for Source")
-    #     src_normal_emb = normalization(torch.load(params.src_emb)["vectors"]).cuda()
-    #     src_emb.weight.data.copy_(src_normal_emb)
-    #     logger.info("Manually Normalization for Target")
-    #     tgt_normal_emb = normalization(torch.load(params.tgt_emb)["vectors"]).cuda()
-    #     tgt_emb.weight.data.copy_(tgt_normal_emb)
-    # else:
-    #     logger.info("Manually Normalization for Source")
-    #     src_normal_emb = normalization(torch.load(params.src_emb)["vectors"]).cuda()
-    #     src_emb.weight.data.copy_(src_normal_emb)
-
     trainer = Trainer(src_emb, tgt_emb, mapping, None, params)
     evaluator = Evaluator(trainer)
 
@@ -166,63 +109,12 @@ def muse_supervised(configs):
         'P@10-NN': to_log["precision_at_10-nn"],
         'P@30-NN': to_log["precision_at_30-nn"],
         'P@50-NN': to_log["precision_at_50-nn"],
-        'P@100-NN': to_log["precision_at_100-nn"]
+        'P@100-NN': to_log["precision_at_100-nn"],
+        "mean_cosin": to_log["mean_cosine-csls_knn_100-S2T-10000"]
     }
-
-    # trainer.save_best(to_log, VALIDATION_METRIC)
-    # params.export = "pth"
-    # trainer.reload_best()
-    # trainer.export()
 
     return result_metrics
 
-
-def muse_evaluate(configs):
-    params = argparse.Namespace(**configs)
-    # check parameters
-    params.normalize_embeddings = ""
-    assert params.src_lang, "source language undefined"
-    assert os.path.isfile(params.src_emb)
-    assert not params.tgt_lang or os.path.isfile(params.tgt_emb)
-    assert params.dico_eval == 'default' or os.path.isfile(params.dico_eval)
-
-    # build logger / model / trainer / evaluator
-    logger = initialize_exp(params)
-    src_emb, tgt_emb, mapping, _ = build_model(params, False)
-
-    # logger.info("Manually Normalization for Source")
-    # src_normal_emb = normalization_debug(torch.load(params.src_emb)["vectors"]).cuda()
-    # src_emb.weight.data.copy_(src_normal_emb)
-    logger.info("Manually Normalization for Target")
-    tgt_normal_emb = normalization(torch.load(params.tgt_emb)["vectors"]).cuda()
-    tgt_emb.weight.data.copy_(tgt_normal_emb)
-
-    trainer = Trainer(src_emb, tgt_emb, mapping, None, params)
-    evaluator = Evaluator(trainer)
-
-    # run evaluations
-    to_log = OrderedDict({'n_iter': 0})
-    evaluator.monolingual_wordsim(to_log)
-    # evaluator.monolingual_wordanalogy(to_log)
-    if params.tgt_lang:
-        evaluator.crosslingual_wordsim(to_log)
-        evaluator.word_translation(to_log)
-        evaluator.sent_translation(to_log)
-    result_metrics = {
-        'P@1-CSLS': to_log["precision_at_1-csls_knn_100"],
-        'P@5-CSLS': to_log["precision_at_5-csls_knn_100"],
-        'P@10-CSLS': to_log["precision_at_10-csls_knn_100"],
-        'P@30-CSLS': to_log["precision_at_30-csls_knn_100"],
-        'P@50-CSLS': to_log["precision_at_50-csls_knn_100"],
-        'P@100-CSLS': to_log["precision_at_100-csls_knn_100"],
-        'P@1-NN': to_log["precision_at_1-nn"],
-        'P@5-NN': to_log["precision_at_5-nn"],
-        'P@10-NN': to_log["precision_at_10-nn"],
-        'P@30-NN': to_log["precision_at_30-nn"],
-        'P@50-NN': to_log["precision_at_50-nn"],
-        'P@100-NN': to_log["precision_at_100-nn"]
-    }
-    return result_metrics
 
 if __name__ == "__main__":
     # main
@@ -264,3 +156,4 @@ if __name__ == "__main__":
     # parse parameters
     config = parser.parse_args()
     muse_supervised(config)
+
