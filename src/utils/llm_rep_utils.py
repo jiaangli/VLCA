@@ -10,11 +10,13 @@ from tqdm import tqdm
 
 class LMEmbedding:
     def __init__(self, args, text_sentences_array, labels):
-        self.args = args
+        self.config = args
         self.text_sentences_array = text_sentences_array
         self.pretrained_model = args.model.pretrained_model
         self.model_name = args.model.model_name
         self.labels = labels
+        self.alias_emb_dir = Path(args.data.alias_emb_dir) / args.model.model_type
+        self.dataset_name = args.data.dataset_name
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
     def get_lm_layer_representations(self):
@@ -40,7 +42,7 @@ class LMEmbedding:
         start_time = tm.time()
         all_words_in_context = []
         for word_idx, keys in enumerate(tqdm(self.text_sentences_array, mininterval=300, maxinterval=3600)):
-            # if word_idx > 22512:
+            # if word_idx > 66183:
             for sentence in self.text_sentences_array[keys]:
                 sentence = re.sub(pattern, replacement, sentence).lower()
                 # sentences_words = [w for w in sentences.strip().split(' ')]
@@ -49,10 +51,10 @@ class LMEmbedding:
                 all_words_in_context.append(keys.replace("_", " "))
                 lm_dict = self.add_token_embedding_for_specific_word(sentence.strip(), tokenizer, model, related_alias,
                                                                     lm_dict)
-            # if word_idx == 22513:
-            #     break
-
-        return all_words_in_context, lm_dict
+            # if word_idx == 66186:
+                # break
+        self.save_embeddings(all_words_in_context, lm_dict)
+        # return all_words_in_context, lm_dict
 
     def get_word_ind_to_token_ind(self, words_in_array, related_words, tokenizer, words_mask):
         word_ind_to_token_ind = []  # dict that maps index of word in words_in_array to index of tokens in seq_tokens
@@ -117,3 +119,31 @@ class LMEmbedding:
         lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings, word_ind_to_token_ind)
 
         return lm_dict
+    
+    def save_embeddings(self, all_context_words, model_layer_dict):
+
+        wordlist = np.array(all_context_words)
+        if "bert" in self.model_name:
+            wordlist = np.array([w.lower() for w in wordlist])
+        unique_words = list(dict.fromkeys(wordlist))
+
+        # print(len(model_layer_dict), len(model_layer_dict[0])) # number of layers, number of words
+
+        layer = "last"
+        embeddings = np.vstack(model_layer_dict[layer])
+        if self.config.data.emb_per_object:
+            torch.save({"dico": wordlist, "vectors": torch.from_numpy(embeddings).float()},
+                        str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}_per_object.pth"))
+        word_embeddings = self.__get_mean_word_embeddings(embeddings, wordlist, unique_words)
+
+        torch.save({"dico": unique_words, "vectors": torch.from_numpy(word_embeddings).float()},
+            str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{word_embeddings.shape[1]}.pth")
+            )
+        print(f"Saved extracted features to {str(self.alias_emb_dir)}")
+
+    def __get_mean_word_embeddings(self, vecs, all_words, uni_words):
+        word_indices = [np.where(all_words == w)[0] for w in uni_words]
+        word_embeddings = np.empty((len(uni_words), vecs.shape[1]))
+        for i, indices in enumerate(word_indices):
+            word_embeddings[i] = np.mean(vecs[indices], axis=0)
+        return word_embeddings

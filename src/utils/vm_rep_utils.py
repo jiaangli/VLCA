@@ -50,7 +50,8 @@ class VMEmbedding:
         self.image_dir = Path(args.data.image_dir)
         self.model_name = args.model.model_name
         self.bs = 8
-        self.alias_emb_dir = Path(args.data.alias_emb_dir)/ "averaged" / self.model_name
+        self.per_image = args.data.emb_per_object
+        self.alias_emb_dir = Path(args.data.alias_emb_dir)/ args.model.model_type
         # self.is_average = args.model.i/s_avg
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
@@ -86,9 +87,11 @@ class VMEmbedding:
                     # features for categories
                     category_feature = np.expand_dims(images_features.mean(axis=0), 0)
                     image_categories.append(names[idx])
-                    # images_name = [f"{names[idx]}_{i}" for i in range(category_size[idx])]
-
                     categories_encode.append(category_feature)
+                    if self.per_image:
+                        images_name = [f"{names[idx]}_{i}" for i in range(category_size[idx])]
+                        torch.save({"dico": images_name, "vectors": torch.from_numpy(images_features).float()}, 
+                                   str(self.alias_emb_dir / f"imagenet_{self.model_name}_dim_{images_features.shape[1]}_per_object.pth"))
 
 
         embeddings = np.vstack(categories_encode)

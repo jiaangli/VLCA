@@ -9,7 +9,7 @@ import torch
 import wandb
 import pandas as pd
 
-from config import ModelConfig, MODEL_DIM, MuseConfig
+from src.config import ModelConfig, MODEL_DIM, MuseConfig
 from MUSE.src.evaluation import Evaluator
 from MUSE.src.models import build_model
 from MUSE.src.trainer import Trainer

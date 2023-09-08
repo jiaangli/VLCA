@@ -5,7 +5,7 @@ dataset_name = "imagenet"
 sentences_path = "./data/sentences_lv.json"
 wordlist_path = "./data/labels.json"
 alias_emb_dir = "./data/exps/embeddings" # path to save word embeddings (decontextualized)
-emb_per_sentence = True
+emb_per_object = True
 num_classes = 1000000 # number of sample ratio
 image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small"
 dictionary_path = "./data/dicts"
@@ -44,7 +44,7 @@ class ModelConfig(argparse.Namespace):
             "sentences_path": sentences_path,
             "wordlist_path": wordlist_path,
             "alias_emb_dir": alias_emb_dir,
-            "emb_per_sentence": emb_per_sentence,
+            "emb_per_object": emb_per_object,
             "num_classes": num_classes,
             "image_dir": image_dir
         })
