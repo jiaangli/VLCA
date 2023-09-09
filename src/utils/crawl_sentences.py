@@ -113,7 +113,7 @@ def sentences_download(args):
         print('Sentences already downloaded.')
     else:
         with open(Path(args.data.wordlist_path)) as json_file:
-            wordlist = json.load(json_file)["non_digit_labels"]
+            wordlist = json.load(json_file)["all_words"]
         # wordlist = pd.read_json(str(Path(args.data.wordlist_path)))["non_digit_labels"].tolist()
         download_path = Path("./data/downloads")
 

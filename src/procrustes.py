@@ -22,14 +22,16 @@ class MuseExp:
     def run(self, extend_exp=None, model_info=MODEL_DIM, data_split="1k_only"):
         exp_flag = "" if extend_exp is None else f"_{extend_exp}"
         bins = {
-            "_freq": ["_freq500", "_freq5000", "_freq_end"],
-            "_poly": ["_one_meaning", "_over3_meaning", "_2or3_meaning"]
-        }.get(exp_flag[:5], [""])
+            "_freq": ["freq_500", "freq_5000", "freq_end"],
+            "_poly": ["1_meaning", "over_3", "2_or_3"],
+            "_disp": ["disp0.1", "disp0.5", "disp0.9"]
+        }.get(exp_flag[:5], ["original"])
 
         project_name = f"image2{self.model_type}-TACL-{exp_flag}"
         wandb.init(project=project_name, name=f"{self.src_lang}_{self.tgt_lang}")
         metrics_df = pd.DataFrame()
         # for v_model in model_info["VM"]:
+        # assume the input is VM
         for l_model in model_info["LM"]:
             emb_dim = min(model_info["VM"][self.config.model.model_name], model_info["LM"][l_model])
             for bin_name in bins:
@@ -37,7 +39,7 @@ class MuseExp:
                     metrics = {"VM": self.config.model.model_name,
                                 "LM": l_model,
                                 "dim": emb_dim,
-                                "Bins": bin_name[1:],
+                                "Bins": bin_name,
                                 "Fold": f"fold_{fold}"}
                     muse_params = MuseConfig("imagenet", l_model, self.config.model.model_name, 
                                                 emb_dim, fold, bin_name, data_split)

@@ -24,6 +24,7 @@ class RepExtractor:
         self.sentences_path = Path(config.data.sentences_path)
         self.seed = config.seed
         self.model_dim = config.model.dim
+        self.image_id_pairs = config.data.image_id_pairs
 
 
     def process_embeddings(self, config):
@@ -40,18 +41,22 @@ class RepExtractor:
         with open(self.sentences_path, "r") as f:
             sentences_array = json.load(f)
             # text_sentences_array = [j for i in list(sentences_array.values()) for j in i ]
-            labels_array = [i for i in list(sentences_array.keys())]
+            words_array = [i for i in list(sentences_array.keys())]
+        
+        with open(self.image_id_pairs, "r") as f:
+            image_id_pairs = json.load(f)
+            image_ids = [i for i in list(image_id_pairs.keys())]
 
-        save_file_path = self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{self.model_dim}.pth"
+        save_file_path = self.alias_emb_dir / f"{self.model_name}_{self.model_dim}.pth"
         if save_file_path.exists():
             print(f"File {save_file_path} already exists.")
         elif self.model_type == "LM":
-            self.__get_lm_rep(sentences_array, labels_array)
+            self.__get_lm_rep(sentences_array, words_array)
         else:
-            self.__get_vm_rep(labels_array)
+            self.__get_vm_rep(image_ids)
 
     def __get_vm_rep(self, image_labels):
-        if not self.model_name.startwith("res"):
+        if not self.model_name.startswith("res"):
             embeddings_extractor = VMEmbedding(self.config, image_labels)
             embeddings_extractor.get_vm_layer_representations()
         pass

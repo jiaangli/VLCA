@@ -16,7 +16,7 @@ class ImageDataset(Dataset):
         self.labels = image_classes
         # self.names = [i.strip('\n').split(': ')[1] for i in self.id_name_pairs]
         self.extractor = extractor
-        self.MAX_SIZE = 50
+        self.MAX_SIZE = 200
         self.RESOLUTION_HEIGHT = resolution
         self.RESOLUTION_WIDTH = resolution
         self.CHANNELS = 3
@@ -49,23 +49,24 @@ class VMEmbedding:
         self.pretrained_model = args.model.pretrained_model
         self.image_dir = Path(args.data.image_dir)
         self.model_name = args.model.model_name
-        self.bs = 8
-        self.per_image = args.data.emb_per_object
-        self.alias_emb_dir = Path(args.data.alias_emb_dir)/ args.model.model_type
+        self.bs = 2
+        self.per_image = args.data.emb_per_object if "huge" in self.model_name else False
+        self.alias_emb_dir = Path(args.data.alias_emb_dir) /args.model.model_type
         # self.is_average = args.model.i/s_avg
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
     def get_vm_layer_representations(self):
         cache_path = Path.home() / ".cache/huggingface/transformers/models" / self.pretrained_model
         feature_extractor = AutoFeatureExtractor.from_pretrained(self.pretrained_model, cache_dir=cache_path)
-        if not self.model_name.startwith("resnet"):
+        if not self.model_name.startswith("resnet"):
             model = AutoModel.from_pretrained(self.pretrained_model, cache_dir=cache_path, output_hidden_states=True, return_dict=True)
             model = model.to(self.device[0])
 
-        model.eval()
+        model = model.eval()
 
-        imageset = ImageDataset(self.image_dir, self.labels, feature_extractor )
-        image_dataloader = torch.utils.data.DataLoader(imageset, batch_size=self.bs, num_workers=4, pin_memory=True)
+        resolution = 224 if self.model_name.startswith("vit") else int(self.model_name[-3:])
+        imageset = ImageDataset(self.image_dir, self.labels, feature_extractor, resolution)
+        image_dataloader = torch.utils.data.DataLoader(imageset, batch_size=self.bs, num_workers=8, pin_memory=True)
 
         # images_name = []
         categories_encode = []
@@ -78,26 +79,37 @@ class VMEmbedding:
             with torch.no_grad():
                 outputs = model(pixel_values=inputs)
                 # chunks = torch.chunk(outputs.last_hidden_state[:,0,:].cpu(), inputs_shape[0], dim=0)
-                chunks = torch.chunk(outputs.last_hidden_state[:,1:,:].cpu(), inputs_shape[0], dim=0)
+                if self.model_name.startswith("vit"):
+                    chunks = torch.chunk(outputs.hidden_states[-1][:,1:,:].cpu(), inputs_shape[0], dim=0)
+                else:
+                    chunks = torch.chunk(outputs.last_hidden_state.cpu(), inputs_shape[0], dim=0)
+
 
                 for idx, chip in enumerate(chunks):
                     # features for every image
-                    # images_features = np.mean(chip[:category_size[idx]].numpy(), axis=(2,3), keepdims=True).squeeze()
-                    images_features = chip[:category_size[idx]].numpy()
+                    if self.model_name.startswith("vit"):
+                        images_features = np.mean(chip[:category_size[idx]].numpy(), axis=1, keepdims=True).squeeze()
+                    else:
+                        images_features = np.mean(chip[:category_size[idx]].numpy(), axis=(2,3), keepdims=True).squeeze()
                     # features for categories
                     category_feature = np.expand_dims(images_features.mean(axis=0), 0)
                     image_categories.append(names[idx])
                     categories_encode.append(category_feature)
+                    
                     if self.per_image:
                         images_name = [f"{names[idx]}_{i}" for i in range(category_size[idx])]
+                        save_per_path = Path("/projects/nlp/people/kfb818/Dir/datasets/dispersions") / self.model_name
+                        if not save_per_path.exists():
+                            save_per_path.mkdir(parents=True, exist_ok=True)
                         torch.save({"dico": images_name, "vectors": torch.from_numpy(images_features).float()}, 
-                                   str(self.alias_emb_dir / f"imagenet_{self.model_name}_dim_{images_features.shape[1]}_per_object.pth"))
+                                   str(save_per_path / f"{names[idx]}.pth"))
 
 
         embeddings = np.vstack(categories_encode)
     #   categories_encode = np.concatenate(categories_encode)
         dim_size = embeddings.shape[1]
-
+        save_category_path = self.alias_emb_dir / f"{self.model_name}_{dim_size}.pth"
         torch.save({"dico": image_categories, "vectors": torch.from_numpy(embeddings).float()}, 
-                    str(self.alias_emb_dir / f"imagenet_{self.model_name}_dim_{dim_size}.pth"))
+                    str(save_category_path))
+        print("save to ", str(save_category_path))
             

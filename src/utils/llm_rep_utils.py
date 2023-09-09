@@ -15,8 +15,8 @@ class LMEmbedding:
         self.pretrained_model = args.model.pretrained_model
         self.model_name = args.model.model_name
         self.labels = labels
-        self.alias_emb_dir = Path(args.data.alias_emb_dir) / args.model.model_type
         self.dataset_name = args.data.dataset_name
+        self.alias_emb_dir = Path(args.data.alias_emb_dir) / args.model.model_type
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
     def get_lm_layer_representations(self):
@@ -33,7 +33,7 @@ class LMEmbedding:
                                               device_map="sequential",
                                               torch_dtype=torch.float16 if not self.model_name.startswith("gpt") else None,
                                               max_memory=max_memory)
-        model.eval()
+        model = model.eval()
         # where to store layer-wise bert embeddings of particular length
         lm_dict = {}
         pattern = r'\s+([^\w\s]+)(\s*)$'
@@ -48,7 +48,7 @@ class LMEmbedding:
                 # sentences_words = [w for w in sentences.strip().split(' ')]
                 related_alias = keys.replace("_", " ")
 
-                all_words_in_context.append(keys.replace("_", " "))
+                all_words_in_context.append(keys)
                 lm_dict = self.add_token_embedding_for_specific_word(sentence.strip(), tokenizer, model, related_alias,
                                                                     lm_dict)
             # if word_idx == 66186:
@@ -133,11 +133,11 @@ class LMEmbedding:
         embeddings = np.vstack(model_layer_dict[layer])
         if self.config.data.emb_per_object:
             torch.save({"dico": wordlist, "vectors": torch.from_numpy(embeddings).float()},
-                        str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}_per_object.pth"))
+                        str(self.alias_emb_dir / f"{self.model_name}_{embeddings.shape[1]}_per_object.pth"))
         word_embeddings = self.__get_mean_word_embeddings(embeddings, wordlist, unique_words)
 
         torch.save({"dico": unique_words, "vectors": torch.from_numpy(word_embeddings).float()},
-            str(self.alias_emb_dir / f"{self.dataset_name}_{self.model_name}_dim_{word_embeddings.shape[1]}.pth")
+            str(self.alias_emb_dir / f"{self.model_name}_{word_embeddings.shape[1]}.pth")
             )
         print(f"Saved extracted features to {str(self.alias_emb_dir)}")
 

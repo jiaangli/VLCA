@@ -3,14 +3,16 @@ from pathlib import Path
 from src.utils import io_utils
 from src.rep_extractor import RepExtractor
 from src.procrustes import MuseExp
-from src.config import ModelConfig
-
+from src.config import ModelConfig, MODEL_DIM
+from src.utils.utils_helper import reduce_dim
 
 def get_reps(args):
     config = ModelConfig(args.model_type, args.pretrained)
     rep_extractor = RepExtractor(config=config)
     rep_extractor.process_embeddings(config)
     print("-" * 25 + "Extract and Decontextualize representation completed!" + "-" * 25)
+    
+    reduce_dim(config, MODEL_DIM)
     
 def run_muse(args):
 

@@ -3,12 +3,13 @@ import argparse
 seed = 42
 dataset_name = "imagenet"
 sentences_path = "./data/sentences_lv.json"
-wordlist_path = "./data/labels.json"
-alias_emb_dir = "./data/exps/embeddings" # path to save word embeddings (decontextualized)
+wordlist_path = "./data/all_words.json"
+alias_emb_dir = "/projects/nlp/people/kfb818/Dir/datasets/" # path to save word embeddings (decontextualized)
 emb_per_object = True
 num_classes = 1000000 # number of sample ratio
 image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small"
 dictionary_path = "./data/dicts"
+image_id_pairs = "./data/id_pairs_21k.json"
 
 MODEL_DIM = { 
     "VM": {
@@ -46,22 +47,23 @@ class ModelConfig(argparse.Namespace):
             "alias_emb_dir": alias_emb_dir,
             "emb_per_object": emb_per_object,
             "num_classes": num_classes,
-            "image_dir": image_dir
+            "image_dir": image_dir,
+            "image_id_pairs": image_id_pairs
         })
 
 
 # f"{self.dataset_name}_{self.model_name}_dim_{embeddings.shape[1]}_layer_{layer}_per_sentence.pth")
 class MuseConfig(argparse.Namespace):
-    def __init__(self, dataset, lm, vm, dim, fold, bin_name, data_range ) -> None:
+    def __init__(self, dataset, lm, vm, dim, fold, bin_name="orginal", data_range="cleaned") -> None:
         super().__init__()
         self.muse_params = argparse.Namespace(**{
             "tgt_lang": "lang",
             "src_lang": "image",
             "n_refinement": 0,
-            "dico_eval": dictionary_path + f"/test/test_{fold}{bin_name}_{data_range}.txt",
-            "dico_train": dictionary_path + f"/train/train_{fold}{bin_name}_{data_range}.txt",
-            "src_emb": f"/VM/{dataset}_{vm}_dim_{dim}_layer_last.pth",
-            "tgt_emb": f"/LM/{dataset}_{lm}_dim_{dim}_layer_last.pth",
+            "dico_eval": dictionary_path + f"/{bin_name}/test_{fold}_{data_range}.txt",
+            "dico_train": dictionary_path + f"/{bin_name}/train_{fold}_{data_range}.txt",
+            "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{vm}_{dim}.pth",
+            "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
             "exp_name": "./exps/muse_results",
             "exp_id": "",
             "cuda": True,
