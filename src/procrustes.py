@@ -9,7 +9,7 @@ import torch
 import wandb
 import pandas as pd
 
-from src.config import ModelConfig, MODEL_DIM, MuseConfig
+from src.config import MODEL_DIM, MuseConfig
 from MUSE.src.evaluation import Evaluator
 from MUSE.src.models import build_model
 from MUSE.src.trainer import Trainer
@@ -18,6 +18,8 @@ from MUSE.src.utils import bool_flag, initialize_exp
 class MuseExp:
     def __init__(self, config):
         self.config = config
+        self.model_type = config.model_type
+        self.model_name = config.pretrained.split("/")[-1]
         
     def run(self, extend_exp=None, model_info=MODEL_DIM, data_split="1k_only"):
         exp_flag = "" if extend_exp is None else f"_{extend_exp}"
@@ -27,22 +29,23 @@ class MuseExp:
             "_disp": ["disp0.1", "disp0.5", "disp0.9"]
         }.get(exp_flag[:5], ["original"])
 
-        project_name = f"image2{self.model_type}-TACL-{exp_flag}"
-        wandb.init(project=project_name, name=f"{self.src_lang}_{self.tgt_lang}")
+        project_name = f"image2{self.model_type}-TACL-{data_split}{exp_flag}_debug"
+        wandb.init(project=project_name, name=f"{self.model_name}")
         metrics_df = pd.DataFrame()
         # for v_model in model_info["VM"]:
-        # assume the input is VM
-        for l_model in model_info["LM"]:
-            emb_dim = min(model_info["VM"][self.config.model.model_name], model_info["LM"][l_model])
+
+        # assume the input is LM
+        for v_model in model_info["VM"]:
+            emb_dim = min(model_info["LM"][self.model_name], model_info["VM"][v_model])
             for bin_name in bins:
                 for fold in [203, 255, 633, 813, 881]:
-                    metrics = {"VM": self.config.model.model_name,
-                                "LM": l_model,
+                    metrics = {"VM": v_model,
+                                "LM": self.model_name,
                                 "dim": emb_dim,
                                 "Bins": bin_name,
                                 "Fold": f"fold_{fold}"}
-                    muse_params = MuseConfig("imagenet", l_model, self.config.model.model_name, 
-                                                emb_dim, fold, bin_name, data_split)
+                    muse_params = MuseConfig(exp_flag, self.model_name, v_model,
+                                             emb_dim, fold, bin_name, data_split).hyperparams
                     muse_res = muse_supervised(muse_params)
                     metrics.update(muse_res)
                     # build dataframe from dictionary
@@ -54,7 +57,8 @@ class MuseExp:
 
 
 def muse_supervised(configs):
-    params = argparse.Namespace(**configs)
+    # params = argparse.Namespace(**configs)
+    params = configs
     # check parameters
     assert not params.cuda or torch.cuda.is_available()
     assert params.dico_train in ["identical_char", "default"] or os.path.isfile(params.dico_train)

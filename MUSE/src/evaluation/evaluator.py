@@ -34,6 +34,7 @@ class Evaluator(object):
         self.mapping = trainer.mapping
         self.discriminator = trainer.discriminator
         self.params = trainer.params
+        self.disp_calculation = trainer.params.disp_flag
 
     def monolingual_wordsim(self, to_log):
         """
@@ -118,7 +119,8 @@ class Evaluator(object):
                 self.src_dico.lang, self.src_dico.word2id, src_emb,
                 self.tgt_dico.lang, self.tgt_dico.word2id, tgt_emb,
                 method=method,
-                dico_eval=self.params.dico_eval
+                dico_eval=self.params.dico_eval,
+                disp_flag=self.disp_calculation
             )
             to_log.update([('%s-%s' % (k, method), v) for k, v in results])
 

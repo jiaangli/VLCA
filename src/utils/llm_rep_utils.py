@@ -51,8 +51,8 @@ class LMEmbedding:
                 all_words_in_context.append(keys)
                 lm_dict = self.add_token_embedding_for_specific_word(sentence.strip(), tokenizer, model, related_alias,
                                                                     lm_dict)
-            # if word_idx == 66186:
-                # break
+            # if word_idx == 30000:
+            #     break
         self.save_embeddings(all_words_in_context, lm_dict)
         # return all_words_in_context, lm_dict
 

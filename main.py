@@ -20,7 +20,7 @@ def run_muse(args):
     # method = config.method
     # config = utils_helper.uniform_config(args=config)
     procrustes_exp = MuseExp(args)
-    procrustes_exp.run(data_split="1k_only")
+    procrustes_exp.run(data_split="cleaned", extend_exp=None)
     pass
 
 def main(args):

@@ -84,7 +84,7 @@ def load_dictionary(path, word2id1, word2id2):
     return dico
 
 
-def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, method, dico_eval):
+def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, method, dico_eval, disp_flag=False):
     """
     Given source and target word embeddings, and a dictionary,
     evaluate the translation accuracy using the precision@k.
@@ -166,15 +166,22 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
         _matching = (top_k_matches == dico[:, 1][:, None].expand_as(top_k_matches)).sum(1).cpu().numpy()
         # allow for multiple possible translations
         matching = {}
-        for i, src_id in enumerate(dico[:, 0].cpu().numpy()):
-            matching[src_id] = min(matching.get(src_id, 0) + _matching[i], 1)
-            
-            # for words' dispersion, frequency, polysemy experiments
-            # if src_id in matching:
-            #     # print(_matching[i])
-            #     matching[src_id] = np.mean([matching[src_id], _matching[i]])
-            # else:
-            #     matching[src_id] = _matching[i]
+
+        if not disp_flag:
+        # Original code
+            for i, src_id in enumerate(dico[:, 0].cpu().numpy()):
+                matching[src_id] = min(matching.get(src_id, 0) + _matching[i], 1)
+        else:
+        # for dispersion and polysemy calculation
+            for i, src_id in enumerate(dico[:, 0].cpu().numpy()):
+                if src_id in matching:
+                    matching[src_id].append(_matching[i])
+                else:
+                    matching[src_id] = [_matching[i]]
+
+            # Calculate the average for each src_id
+            for src_id, scores in matching.items():
+                matching[src_id] = np.mean(scores)
 
         # evaluate precision@k
         precision_at_k = 100 * np.mean(list(matching.values()))

@@ -47,3 +47,4 @@ def reduce_dim(config, model_info):
                                 config.data.alias_emb_dir + f"/{config.model.model_type}/{config.model.model_name}_{emb_dim}.pth")
                     print(f"Saved {config.model.model_name}_{emb_dim}.pth")
                     
+                    del pca, reduced_emb

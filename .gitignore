@@ -167,3 +167,4 @@ scripts/
 *.pth
 *.json
 *.txt
+wandb/
