@@ -1,4 +1,5 @@
 import argparse
+import dis
 
 seed = 42
 dataset_name = "imagenet"
@@ -53,9 +54,16 @@ class ModelConfig(argparse.Namespace):
 
 
 class MuseConfig(argparse.Namespace):
-    def __init__(self, more_exp, lm, vm, dim, fold, bin_name="orginal", data_range="cleaned") -> None:
+    def __init__(self, more_exp, lm, vm, dim, fold, bin_name, data_range="cleaned") -> None:
         super().__init__()
         disp_flag = False if len(more_exp)==0 else True
+        if disp_flag:
+            if "image" in more_exp:
+                test_dict_dir = f"{vm}_disp"
+            else:
+                test_dict_dir = f"{lm}_disp"
+        else:
+            test_dict_dir = f"original"
         self.hyperparams = argparse.Namespace(**{
             "disp_flag": disp_flag,
             "seed": seed,
@@ -64,8 +72,8 @@ class MuseConfig(argparse.Namespace):
             "n_refinement": 0,
             "normalize_embeddings": "center",
             "emb_dim": dim,
-            "dico_eval": dictionary_path + f"/{bin_name}/test_{fold}_{data_range}.txt",
-            "dico_train": dictionary_path + f"/{bin_name}/train_{fold}_{data_range}.txt",
+            "dico_eval": dictionary_path + f"/{test_dict_dir}/test_{fold}_{data_range}{bin_name}.txt",
+            "dico_train": dictionary_path + f"/original/train_{fold}_{data_range}.txt",
             "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{vm}_{dim}.pth",
             "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
             "exp_name": "./exps/muse_results",

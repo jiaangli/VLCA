@@ -39,7 +39,6 @@ class LMEmbedding:
         pattern = r'\s+([^\w\s]+)(\s*)$'
         replacement = r'\1\2'
         # get the token embeddings
-        start_time = tm.time()
         all_words_in_context = []
         for word_idx, keys in enumerate(tqdm(self.text_sentences_array, mininterval=300, maxinterval=3600)):
             # if word_idx > 66183:

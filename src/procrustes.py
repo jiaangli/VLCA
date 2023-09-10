@@ -21,35 +21,54 @@ class MuseExp:
         self.model_type = config.model_type
         self.model_name = config.pretrained.split("/")[-1]
         
-    def run(self, extend_exp=None, model_info=MODEL_DIM, data_split="1k_only"):
-        exp_flag = "" if extend_exp is None else f"_{extend_exp}"
+    def run(self, extend_exp="", model_info=MODEL_DIM, data_split="1k_only"):
+        exp_flag = extend_exp
         bins = {
-            "_freq": ["freq_500", "freq_5000", "freq_end"],
-            "_poly": ["1_meaning", "over_3", "2_or_3"],
-            "_disp": ["disp0.1", "disp0.5", "disp0.9"]
-        }.get(exp_flag[:5], ["original"])
+            "freq": ["_freq_500", "_freq_5000", "_freq_end"],
+            "poly": ["_1_meaning", "_over_3", "_2_or_3"],
+            "lang_disp": ["_low", "_medium", "_high"],
+            "image_disp": ["_low", "_medium", "_high"],
+        }.get(exp_flag, [""])
 
-        project_name = f"image2{self.model_type}-TACL-{data_split}{exp_flag}_debug"
+        project_name = f"image2{self.model_type}-TACL-{data_split}{exp_flag}"
         wandb.init(project=project_name, name=f"{self.model_name}")
         metrics_df = pd.DataFrame()
         # for v_model in model_info["VM"]:
 
         # assume the input is LM
-        for v_model in model_info["VM"]:
-            emb_dim = min(model_info["LM"][self.model_name], model_info["VM"][v_model])
-            for bin_name in bins:
-                for fold in [203, 255, 633, 813, 881]:
-                    metrics = {"VM": v_model,
-                                "LM": self.model_name,
-                                "dim": emb_dim,
-                                "Bins": bin_name,
-                                "Fold": f"fold_{fold}"}
-                    muse_params = MuseConfig(exp_flag, self.model_name, v_model,
-                                             emb_dim, fold, bin_name, data_split).hyperparams
-                    muse_res = muse_supervised(muse_params)
-                    metrics.update(muse_res)
-                    # build dataframe from dictionary
-                    metrics_df = pd.concat([metrics_df, pd.DataFrame(metrics, index=[0])])
+        if self.model_type == "LM":
+            for v_model in model_info["VM"]:
+                emb_dim = min(model_info["LM"][self.model_name], model_info["VM"][v_model])
+                for bin_name in bins:
+                    for fold in [203, 255, 633, 813, 881]:
+                        metrics = {"VM": v_model,
+                                    "LM": self.model_name,
+                                    "dim": emb_dim,
+                                    "Bins": bin_name,
+                                    "Fold": f"fold_{fold}"}
+                        muse_params = MuseConfig(exp_flag, self.model_name, v_model,
+                                                emb_dim, fold, bin_name, data_split).hyperparams
+                        muse_res = muse_supervised(muse_params)
+                        metrics.update(muse_res)
+                        # build dataframe from dictionary
+                        metrics_df = pd.concat([metrics_df, pd.DataFrame(metrics, index=[0])])
+        else:
+            for l_model in model_info["LM"]:
+                emb_dim = min(model_info["VM"][self.model_name], model_info["LM"][l_model])
+                for bin_name in bins:
+                    for fold in [203, 255, 633, 813, 881]:
+                        metrics = {"VM": self.model_name,
+                                    "LM": l_model,
+                                    "dim": emb_dim,
+                                    "Bins": bin_name,
+                                    "Fold": f"fold_{fold}"}
+                        muse_params = MuseConfig(exp_flag, l_model, self.model_name,
+                                                emb_dim, fold, bin_name, data_split).hyperparams
+                        print(muse_params)
+                        muse_res = muse_supervised(muse_params)
+                        metrics.update(muse_res)
+                        # build dataframe from dictionary
+                        metrics_df = pd.concat([metrics_df, pd.DataFrame(metrics, index=[0])])
             # metrics.clear()
 
         wandb.log({"Results": wandb.Table(dataframe=metrics_df.round(2))}, commit=True)
