@@ -1,12 +1,5 @@
-import os
 from pathlib import Path
-
-import fasttext
-import fasttext.util
-import numpy as np
-import torch
 import json
-from sklearn.decomposition import PCA
 
 from src.utils.vm_rep_utils import VMEmbedding
 from src.utils.llm_rep_utils import LMEmbedding
@@ -47,7 +40,7 @@ class RepExtractor:
             image_id_pairs = json.load(f)
             image_ids = [i for i in list(image_id_pairs.keys())]
 
-        save_file_path = self.alias_emb_dir / f"{self.model_name}_{self.model_dim}.pth"
+        save_file_path = self.alias_emb_dir / f"{self.model_name}_{self.model_dim}_xxx.pth"
         if save_file_path.exists():
             print(f"File {save_file_path} already exists.")
         elif self.model_type == "LM":

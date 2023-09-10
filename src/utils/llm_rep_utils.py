@@ -1,5 +1,4 @@
 import re
-import time as tm
 from pathlib import Path
 
 import numpy as np
@@ -22,6 +21,7 @@ class LMEmbedding:
     def get_lm_layer_representations(self):
         cache_path = Path.home() / ".cache/huggingface/transformers/models" / self.model_name
         tokenizer = AutoTokenizer.from_pretrained(self.pretrained_model, cache_dir=cache_path, use_fast=False, use_auth_token=True)
+        tokenizer.pad_token = tokenizer.eos_token
         max_memory = {k: '40GB' for k in self.device}
         if self.model_name.startswith("bert"): 
             model = AutoModel.from_pretrained(self.pretrained_model, cache_dir=cache_path, output_hidden_states=True)
@@ -40,16 +40,19 @@ class LMEmbedding:
         replacement = r'\1\2'
         # get the token embeddings
         all_words_in_context = []
+
         for word_idx, keys in enumerate(tqdm(self.text_sentences_array, mininterval=300, maxinterval=3600)):
             # if word_idx > 66183:
+            batch_sentences = []
             for sentence in self.text_sentences_array[keys]:
                 sentence = re.sub(pattern, replacement, sentence).lower()
                 # sentences_words = [w for w in sentences.strip().split(' ')]
                 related_alias = keys.replace("_", " ")
-
                 all_words_in_context.append(keys)
-                lm_dict = self.add_token_embedding_for_specific_word(sentence.strip(), tokenizer, model, related_alias,
-                                                                    lm_dict)
+                batch_sentences.append(sentence.strip())
+
+            lm_dict = self.add_token_embedding_for_specific_word(batch_sentences, tokenizer, model, related_alias,
+                                                                 lm_dict)
             # if word_idx == 30000:
             #     break
         self.save_embeddings(all_words_in_context, lm_dict)
@@ -83,9 +86,9 @@ class LMEmbedding:
 
         return word_ind_to_token_ind
 
-    def predict_lm_embeddings(self, words_in_array, tokenizer, model, lm_dict):
+    def predict_lm_embeddings(self, batch_setences, tokenizer, model, lm_dict):
 
-        indexed_tokens = tokenizer(words_in_array, return_tensors="pt")
+        indexed_tokens = tokenizer(batch_setences, return_tensors="pt", padding=True)
         indexed_tokens = indexed_tokens.to(self.device[0])
         with torch.no_grad():
             outputs = model(**indexed_tokens)
@@ -111,11 +114,13 @@ class LMEmbedding:
 
         return lm_dict
 
-    def add_token_embedding_for_specific_word(self, word_seq, tokenizer, model, related_alias, lm_dict, is_avg=True):
-        all_sequence_embeddings, lm_dict = self.predict_lm_embeddings(word_seq, tokenizer, model, lm_dict)
-        word_ind_to_token_ind = self.get_word_ind_to_token_ind(word_seq, related_alias, tokenizer, list(word_seq))
+    def add_token_embedding_for_specific_word(self, batch, tokenizer, model, related_alias, lm_dict, is_avg=True):
+        all_sequence_embeddings, lm_dict = self.predict_lm_embeddings(batch, tokenizer, model, lm_dict)
+        
+        for i, sentence in enumerate(batch):
+            word_ind_to_token_ind = self.get_word_ind_to_token_ind(sentence, related_alias, tokenizer, list(sentence))
+            lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings[i:i+1], word_ind_to_token_ind)
 
-        lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings, word_ind_to_token_ind)
 
         return lm_dict
     
