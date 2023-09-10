@@ -164,6 +164,5 @@ debug/
 scripts/
 *.out
 *.pth
-*.json
-*.txt
 wandb/
+sorted*
