@@ -22,7 +22,8 @@ class LMEmbedding:
         cache_path = Path.home() / ".cache/huggingface/transformers/models" / self.model_name
         tokenizer = AutoTokenizer.from_pretrained(self.pretrained_model, cache_dir=cache_path, use_fast=False, use_auth_token=True)
         tokenizer.pad_token = tokenizer.eos_token
-        max_memory = {k: '40GB' for k in self.device}
+        max_memory = {k: f"{torch.cuda.get_device_properties(k).total_memory//1024**3}GB" for k in self.device}
+        print(max_memory)
         if self.model_name.startswith("bert"): 
             model = AutoModel.from_pretrained(self.pretrained_model, cache_dir=cache_path, output_hidden_states=True)
             model = model.to(self.device[0])
