@@ -40,7 +40,7 @@ class RepExtractor:
             image_id_pairs = json.load(f)
             image_ids = [i for i in list(image_id_pairs.keys())]
 
-        save_file_path = self.alias_emb_dir / f"{self.model_name}_{self.model_dim}_xxx.pth"
+        save_file_path = self.alias_emb_dir / f"{self.model_name}_{self.model_dim}.pth"
         if save_file_path.exists():
             print(f"File {save_file_path} already exists.")
         elif self.model_type == "LM":
