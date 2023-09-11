@@ -37,7 +37,7 @@ MODEL_DIM = {
 
 
 class ModelConfig(argparse.Namespace):
-    def __init__(self, model_type="LM", pretrained_model='bert-base-uncased', muse=False):
+    def __init__(self, model_type="LM", pretrained_model='bert-base-uncased'):
         super().__init__()
         self.seed = seed
         self.model = argparse.Namespace(**{

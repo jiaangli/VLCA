@@ -135,11 +135,10 @@ class LMEmbedding:
         # print(len(model_layer_dict), len(model_layer_dict[0])) # number of layers, number of words
 
         layer = "last"
-        embeddings = np.vstack(model_layer_dict[layer])
         if self.config.data.emb_per_object:
-            torch.save({"dico": wordlist, "vectors": torch.from_numpy(embeddings).float()},
-                        str(self.alias_emb_dir / f"{self.model_name}_{embeddings.shape[1]}_per_object.pth"))
-        word_embeddings = self.__get_mean_word_embeddings(embeddings, wordlist, unique_words)
+            torch.save({"dico": wordlist, "vectors": torch.from_numpy(np.vstack(model_layer_dict[layer])).float()},
+                        str(self.alias_emb_dir / f"{self.model_name}_{len(model_layer_dict[layer][0])}_per_object.pth"))
+        word_embeddings = self.__get_mean_word_embeddings(np.vstack(model_layer_dict[layer]), wordlist, unique_words)
 
         torch.save({"dico": unique_words, "vectors": torch.from_numpy(word_embeddings).float()},
             str(self.alias_emb_dir / f"{self.model_name}_{word_embeddings.shape[1]}.pth")
@@ -148,7 +147,7 @@ class LMEmbedding:
 
     def __get_mean_word_embeddings(self, vecs, all_words, uni_words):
         word_indices = [np.where(all_words == w)[0] for w in uni_words]
-        word_embeddings = np.empty((len(uni_words), vecs.shape[1]))
+        word_embeddings = np.empty((len(uni_words), vecs.shape[1]), dtype=np.float16)
         for i, indices in enumerate(word_indices):
             word_embeddings[i] = np.mean(vecs[indices], axis=0)
         return word_embeddings
