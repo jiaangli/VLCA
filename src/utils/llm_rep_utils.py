@@ -1,10 +1,13 @@
 import re
 from pathlib import Path
+import token
 
 import numpy as np
 import torch
-from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer, AutoModel, AutoConfig
 from tqdm import tqdm
+
+from src import config
 
 
 class LMEmbedding:
@@ -20,8 +23,11 @@ class LMEmbedding:
 
     def get_lm_layer_representations(self):
         cache_path = Path.home() / ".cache/huggingface/transformers/models" / self.model_name
-        tokenizer = AutoTokenizer.from_pretrained(self.pretrained_model, cache_dir=cache_path, use_fast=False, use_auth_token=True)
+        configuration = AutoConfig.from_pretrained(self.pretrained_model, cache_dir=cache_path, output_hidden_states=True)
+        # configuration.pad_token_id  = 0
+        tokenizer = AutoTokenizer.from_pretrained(self.pretrained_model, config=configuration, cache_dir=cache_path, use_fast=False, use_auth_token=True)
         tokenizer.pad_token = tokenizer.eos_token
+
         max_memory = {k: f"{torch.cuda.get_device_properties(k).total_memory//1024**3}GB" for k in self.device}
         print(max_memory)
         if self.model_name.startswith("bert"): 
@@ -30,10 +36,16 @@ class LMEmbedding:
         else:
             model = AutoModel.from_pretrained(self.pretrained_model,
                                               cache_dir=cache_path,
-                                              output_hidden_states=True,
                                               device_map="sequential",
                                               torch_dtype=torch.float16 if not self.model_name.startswith("gpt") else None,
-                                              max_memory=max_memory)
+                                              max_memory=max_memory,
+                                              config=configuration)
+            # model = AutoModel.from_pretrained(self.pretrained_model,
+            #                                   cache_dir=cache_path,
+            #                                   output_hidden_states=True,
+            #                                   device_map="sequential",
+            #                                   torch_dtype=torch.float16 if not self.model_name.startswith("gpt") else None,
+            #                                   max_memory=max_memory)
         model = model.eval()
         # where to store layer-wise bert embeddings of particular length
         lm_dict = {}

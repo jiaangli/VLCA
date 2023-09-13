@@ -4,6 +4,7 @@ import numpy as np
 import torch
 from sklearn.decomposition import PCA
 from pathlib import Path
+import gc
 
 
 def enforce_reproducibility(seed=42):
@@ -37,6 +38,11 @@ def reduce_dim(config, model_info):
     for model_type in model_info:
         if model_type == config.model.model_type:
             continue
+        # for dim in [256,512,768,1024,1280,2048]:
+        #     if dim <= config.model.dim:
+        #         pca =  PCA(n_components=dim, random_state=config.seed)
+        #         reduced_emb = pca.fit_transform(embeddings)
+        #         print(f"Explained variance ratio for {config.model.model_name}_{dim}.pth kept: ", sum(pca.explained_variance_ratio_))
         for model_name in model_info[model_type]:
             if model_info[model_type][model_name] < int(config.model.dim):
                 emb_dim = model_info[model_type][model_name]
@@ -48,3 +54,4 @@ def reduce_dim(config, model_info):
                     print(f"Saved {config.model.model_name}_{emb_dim}.pth")
                     
                     del pca, reduced_emb
+                    gc.collect()

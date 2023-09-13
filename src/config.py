@@ -5,6 +5,7 @@ dataset_name = "imagenet"
 sentences_path = "./data/sentences.json"
 wordlist_path = "./data/all_words.json"
 alias_emb_dir = "/projects/nlp/people/kfb818/Dir/datasets/" # path to save word embeddings (decontextualized)
+# alias_emb_dir = "./data/"
 emb_per_object = True
 num_classes = 1000000 # number of sample ratio
 image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small"
@@ -25,7 +26,7 @@ MODEL_DIM = {
         'bert_uncased_L-2_H-128_A-2': 128, 'bert_uncased_L-4_H-256_A-4': 256, 'bert_uncased_L-4_H-512_A-8': 512,
         'bert_uncased_L-8_H-512_A-8': 512, 'bert-base-uncased': 768, 'bert-large-uncased': 1024,
         'gpt2': 768, 'gpt2-large': 1280, 'gpt2-xl': 1600,
-        'opt-125m':768, 'opt-6.7b':4096, 'opt-30b':7168, 'opt-66b':9126,
+        'opt-125m':768, 'opt-6.7b':4096, 'opt-30b':7168, 'opt-66b':9216,
         "Llama-2-7b-hf": 4096, "Llama-2-13b-hf":5120, "Llama-2-70b-hf":8192}
         # "LM": {
         # 'bert_uncased_L-2_H-128_A-2': 128, 'bert_uncased_L-4_H-256_A-4': 256, 'bert_uncased_L-4_H-512_A-8': 512,
@@ -61,12 +62,14 @@ class ModelConfig(argparse.Namespace):
 class MuseConfig(argparse.Namespace):
     def __init__(self, more_exp, lm, vm, dim, fold, bin_name, data_range="cleaned") -> None:
         super().__init__()
-        disp_flag = False if len(more_exp)==0 else True
-        if disp_flag:
-            if "image" in more_exp:
-                test_dict_dir = f"{vm}_disp"
-            else:
+        disp_flag = False if len(more_exp)==0 or "image" in more_exp else True
+        if "image" in more_exp:
+            test_dict_dir = f"{vm}_disp"
+        elif disp_flag:
+            if "disp" in more_exp:
                 test_dict_dir = f"{lm}_disp"
+            else:
+                test_dict_dir = f"poly"
         else:
             test_dict_dir = f"original"
         self.hyperparams = argparse.Namespace(**{
@@ -80,7 +83,8 @@ class MuseConfig(argparse.Namespace):
             "dico_eval": dictionary_path + f"/{test_dict_dir}/test_{fold}_{data_range}{bin_name}.txt",
             "dico_train": dictionary_path + f"/original/train_{fold}_{data_range}.txt",
             "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{vm}_{dim}.pth",
-            "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
+            # "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
+            "tgt_emb": f"{alias_emb_dir}/LM/{lm}_{dim}.pth",
             "exp_name": "./exps/muse_results",
             "cuda": True,
             "export": "",

@@ -7,6 +7,7 @@ def parser():
     parser.add_argument('--pretrained', type=str, default="facebook/opt-125m", help='Model to use.')
     parser.add_argument("--muse", type=bool, default=False)
     parser.add_argument("--more_exps", type=str, default="", help="image_disp, lang_disp, freq, poly")
+    parser.add_argument("--data_class", type=str, default="cleaned", help="cleaned, 1k_only")
     # parser.add_argument('--method', type=str, default="Procrustes", help='Procrustes or Regression')
     # parser.add_argument("--log_path", type=str, default="",
     #                     help='the path to save experiment logs')

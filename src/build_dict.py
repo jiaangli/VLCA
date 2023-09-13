@@ -10,7 +10,9 @@ model_type = "lm"
 # dispersion_ranking_path = "./sorted_dispersion_bert-large-uncased.txt"
 # dispersion_ranking_path = "./sorted_dispersion_gpt2-xl.txt"
 # dispersion_ranking_path = "./sorted_dispersion_opt-66b.txt"
-dispersion_ranking_path = "./sorted_dispersion_Llama-2-70b-hf.txt"
+# dispersion_ranking_path = "./sorted_dispersion_opt-30b.txt"
+# dispersion_ranking_path = "./sorted_dispersion_Llama-2-70b-hf.txt"
+dispersion_ranking_path = "./sorted_dispersion_Llama-2-13b-hf.txt"
 model_name = dispersion_ranking_path.split("_")[-1][:-4]
 data = open(dispersion_ranking_path, "r").readlines()
 
@@ -26,11 +28,11 @@ data = open(dispersion_ranking_path, "r").readlines()
 keys1, keys2, keys3 = [], [], []
 for i, pair in enumerate(data):
     if i < len(data) // 3:
-        keys1.append(pair.split(":")[0])
+        keys1.append(pair.split(":")[0].replace(" ","_"))
     elif i < 2 * len(data) // 3:
-        keys2.append(pair.split(":")[0])
+        keys2.append(pair.split(":")[0].replace(" ","_"))
     else:
-        keys3.append(pair.split(":")[0])
+        keys3.append(pair.split(":")[0].replace(" ","_"))
 
 original_path = Path("./data/dicts/original")
 

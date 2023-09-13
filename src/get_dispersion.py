@@ -11,8 +11,8 @@ import torch
 root_path = "/projects/nlp/people/kfb818/Dir/datasets/dispersions/vit-mae-huge"
 save_file = "./sorted_dispersion_mae.txt"
 
-new_file = "./data/LM/Llama-2-70b-hf_8192_per_object.pth"
-new_save_file = "./sorted_dispersion_Llama-2-70b-hf.txt"
+new_file = "/projects/nlp/people/kfb818/Dir/datasets/dispersions/Llama-2-13b-hf_5120_per_sentence.pth"
+new_save_file = "./sorted_dispersion_Llama-2-13b-hf.txt"
 
 def old_get_sorted_dispersion():
     """
@@ -26,7 +26,7 @@ def old_get_sorted_dispersion():
 
     categories = os.listdir(root_path)
     num_categories = len(categories)
-    num_cpus = 8
+    num_cpus = 16
     block_size = math.ceil(num_categories / num_cpus)
     p = mp.Pool(processes=num_cpus)
     

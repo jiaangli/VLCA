@@ -22,7 +22,7 @@ class MuseExp:
         exp_flag = extend_exp
         bins = {
             "freq": ["_freq_500", "_freq_5000", "_freq_end"],
-            "poly": ["_1_meaning", "_over_3", "_2_or_3"],
+            "poly": ["_1", "_over_3", "_2_or_3"],
             "lang_disp": ["_low", "_medium", "_high"],
             "image_disp": ["_low", "_medium", "_high"],
         }.get(exp_flag, [""])
@@ -61,7 +61,7 @@ class MuseExp:
                                     "Fold": f"fold_{fold}"}
                         muse_params = MuseConfig(exp_flag, l_model, self.model_name,
                                                 emb_dim, fold, bin_name, data_split).hyperparams
-                        print(muse_params)
+                        # print(muse_params)
                         muse_res = muse_supervised(muse_params)
                         metrics.update(muse_res)
                         # build dataframe from dictionary
