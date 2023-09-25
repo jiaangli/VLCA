@@ -21,7 +21,7 @@ class MuseExp:
     def run(self, extend_exp="", model_info=MODEL_DIM, data_split="1k_only"):
         exp_flag = extend_exp
         bins = {
-            "freq": ["_freq_500", "_freq_5000", "_freq_end"],
+            "freq": ["_freq10000", "_freq100000", "_freq_end"],
             "poly": ["_1", "_over_3", "_2_or_3"],
             "lang_disp": ["_low", "_medium", "_high"],
             "image_disp": ["_low", "_medium", "_high"],

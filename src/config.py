@@ -28,12 +28,6 @@ MODEL_DIM = {
         'gpt2': 768, 'gpt2-large': 1280, 'gpt2-xl': 1600,
         'opt-125m':768, 'opt-6.7b':4096, 'opt-30b':7168, 'opt-66b':9216,
         "Llama-2-7b-hf": 4096, "Llama-2-13b-hf":5120, "Llama-2-70b-hf":8192}
-        # "LM": {
-        # 'bert_uncased_L-2_H-128_A-2': 128, 'bert_uncased_L-4_H-256_A-4': 256, 'bert_uncased_L-4_H-512_A-8': 512,
-        # 'bert_uncased_L-8_H-512_A-8': 512, 'bert-base-uncased': 768, 'bert-large-uncased': 1024,
-        # 'gpt2': 768, 'gpt2-large': 1280, 'gpt2-xl': 1600,
-        # 'opt-125m':768, 'opt-6.7b':4096, 'opt-30b':7168,
-        # "Llama-2-7b-hf": 4096, "Llama-2-13b-hf":5120}
     }
 
 
@@ -68,8 +62,10 @@ class MuseConfig(argparse.Namespace):
         elif disp_flag:
             if "disp" in more_exp:
                 test_dict_dir = f"{lm}_disp"
+            elif "poly" in more_exp:
+                test_dict_dir = "poly"
             else:
-                test_dict_dir = f"poly"
+                test_dict_dir = "freq"
         else:
             test_dict_dir = f"original"
         self.hyperparams = argparse.Namespace(**{

@@ -166,3 +166,4 @@ scripts/
 *.pth
 wandb/
 sorted*
+*old
