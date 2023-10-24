@@ -1,0 +1,7 @@
+n02747177 trash_bin
+n03250847 drumstick
+n02788148 bannister
+n03804744 nail
+n04599235 woollen
+n02747177 trash_can
+n02788148 handrail

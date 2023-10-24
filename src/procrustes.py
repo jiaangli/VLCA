@@ -37,7 +37,7 @@ class MuseExp:
             for v_model in model_info["VM"]:
                 emb_dim = min(model_info["LM"][self.model_name], model_info["VM"][v_model])
                 for bin_name in bins:
-                    for fold in [203, 255, 633, 813, 881]:
+                    for fold in [1,2,3,4,5]:
                         metrics = {"VM": v_model,
                                     "LM": self.model_name,
                                     "dim": emb_dim,
@@ -53,7 +53,7 @@ class MuseExp:
             for l_model in model_info["LM"]:
                 emb_dim = min(model_info["VM"][self.model_name], model_info["LM"][l_model])
                 for bin_name in bins:
-                    for fold in [203, 255, 633, 813, 881]:
+                    for fold in [1,2,3,4,5]:
                         metrics = {"VM": self.model_name,
                                     "LM": l_model,
                                     "dim": emb_dim,

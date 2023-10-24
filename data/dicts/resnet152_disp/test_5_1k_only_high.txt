@@ -1,0 +1,6 @@
+n02788148 banister
+n04127249 safety_pin
+n02788148 balustrade
+n02747177 trash_can
+n04435653 tile_roof
+n04599235 wool
