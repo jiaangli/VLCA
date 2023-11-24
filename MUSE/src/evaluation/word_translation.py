@@ -146,7 +146,7 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
     for k in [1, 5, 10, 30, 50, 100]:
     # for k in [100]:
     # # for k in [1, 10, 100]:
-    #     top_k_matches = top_matches[:, :k]
+        top_k_matches = top_matches[:, :k]
     #     id12word = {y: x for x, y in word2id1.items()}
     #     id22word = {y: x for x, y in word2id2.items()}
     #     mapping_res = {}

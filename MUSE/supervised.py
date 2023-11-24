@@ -125,11 +125,11 @@ for n_iter in range(params.n_refinement + 1):
 
     # JSON log / save best model / end of epoch
     # logger.info("__log__:%s" % json.dumps(to_log))
-    # trainer.save_best(to_log, VALIDATION_METRIC)
+    trainer.save_best(to_log, VALIDATION_METRIC)
     logger.info('End of iteration %i.\n\n' % n_iter)
 
 
 # export embeddings
-if params.export:
-    trainer.reload_best()
-    trainer.export()
+# if params.export:
+#     trainer.reload_best()
+#     trainer.export()

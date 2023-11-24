@@ -18,7 +18,7 @@ from src.evaluation import Evaluator
 from src.models import build_model
 from src.trainer import Trainer
 from src.utils import bool_flag, initialize_exp
-from sklearn.preprocessing import MinMaxScaler
+
 
 VALIDATION_METRIC = 'mean_cosine-csls_knn_100-S2T-10000'
 
@@ -44,20 +44,20 @@ parser.add_argument("--map_beta", type=float, default=0.001, help="Beta for orth
 parser.add_argument("--dis_layers", type=int, default=2, help="Discriminator layers")
 parser.add_argument("--dis_hid_dim", type=int, default=2048, help="Discriminator hidden layer dimensions")
 parser.add_argument("--dis_dropout", type=float, default=0., help="Discriminator dropout")
-parser.add_argument("--dis_input_dropout", type=float, default=0., help="Discriminator input dropout")
+parser.add_argument("--dis_input_dropout", type=float, default=0.1, help="Discriminator input dropout")
 parser.add_argument("--dis_steps", type=int, default=5, help="Discriminator steps")
 parser.add_argument("--dis_lambda", type=float, default=1, help="Discriminator loss feedback coefficient")
-parser.add_argument("--dis_most_frequent", type=int, default=1000, help="Select embeddings of the k most frequent words for discrimination (0 to disable)")
+parser.add_argument("--dis_most_frequent", type=int, default=75000, help="Select embeddings of the k most frequent words for discrimination (0 to disable)")
 parser.add_argument("--dis_smooth", type=float, default=0.1, help="Discriminator smooth predictions")
 parser.add_argument("--dis_clip_weights", type=float, default=0, help="Clip discriminator weights (0 to disable)")
 # training adversarial
 parser.add_argument("--adversarial", type=bool_flag, default=True, help="Use adversarial training")
 parser.add_argument("--n_epochs", type=int, default=5, help="Number of epochs")
-parser.add_argument("--epoch_size", type=int, default=100000, help="Iterations per epoch")
+parser.add_argument("--epoch_size", type=int, default=1000000, help="Iterations per epoch")
 parser.add_argument("--batch_size", type=int, default=32, help="Batch size")
 parser.add_argument("--map_optimizer", type=str, default="sgd,lr=0.1", help="Mapping optimizer")
 parser.add_argument("--dis_optimizer", type=str, default="sgd,lr=0.1", help="Discriminator optimizer")
-parser.add_argument("--lr_decay", type=float, default=0.8, help="Learning rate decay (SGD only)")
+parser.add_argument("--lr_decay", type=float, default=0.98, help="Learning rate decay (SGD only)")
 parser.add_argument("--min_lr", type=float, default=1e-6, help="Minimum learning rate (SGD only)")
 parser.add_argument("--lr_shrink", type=float, default=0.5, help="Shrink the learning rate if the validation metric decreases (1 to disable)")
 # training refinement
@@ -67,7 +67,7 @@ parser.add_argument("--dico_eval", type=str, default="default", help="Path to ev
 parser.add_argument("--dico_method", type=str, default='csls_knn_10', help="Method used for dictionary generation (nn/invsm_beta_30/csls_knn_10)")
 parser.add_argument("--dico_build", type=str, default='S2T', help="S2T,T2S,S2T|T2S,S2T&T2S")
 parser.add_argument("--dico_threshold", type=float, default=0, help="Threshold confidence for dictionary generation")
-parser.add_argument("--dico_max_rank", type=int, default=6000, help="Maximum dictionary words rank (0 to disable)")
+parser.add_argument("--dico_max_rank", type=int, default=150000, help="Maximum dictionary words rank (0 to disable)")
 parser.add_argument("--dico_min_size", type=int, default=0, help="Minimum generated dictionary size (0 to disable)")
 parser.add_argument("--dico_max_size", type=int, default=0, help="Maximum generated dictionary size (0 to disable)")
 # reload pre-trained embeddings
@@ -76,6 +76,7 @@ parser.add_argument("--tgt_emb", type=str, default="", help="Reload target embed
 parser.add_argument("--normalize_embeddings", type=str, default="", help="Normalize embeddings before training")
 parser.add_argument("--load_optim", type=bool_flag, default=False, help="Reload optimal")
 parser.add_argument("--offset", type=str, default='0.0', help="shift percentage")
+parser.add_argument("--disp_flag", type=bool, default=False, help="if we do dispersion")
 
 
 # parse parameters
@@ -98,11 +99,6 @@ logger = initialize_exp(params)
 src_emb, tgt_emb, mapping, discriminator = build_model(params, True, logger)
 
 logger.info("Manually Normalization for Source")
-# src_normal_emb = normalization(torch.load(params.src_emb)["vectors"]).cuda()
-# src_emb.weight.data.copy_(src_normal_emb)
-# logger.info("Manually Normalization for Target")
-# tgt_normal_emb = normalization(torch.load(params.tgt_emb)["vectors"]).cuda()
-# tgt_emb.weight.data.copy_(tgt_normal_emb)
 
 trainer = Trainer(src_emb, tgt_emb, mapping, discriminator, params)
 evaluator = Evaluator(trainer)

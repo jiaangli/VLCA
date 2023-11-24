@@ -1,33 +1,45 @@
 import json
 import random
 
-with open("./data/id_pairs_21k.json", 'r') as f:
-    id_pairs = json.load(f)
+def get_dict(file_path, seeds, id_pairs_1k=None):
+    with open(file_path, 'r') as f:
+        id_pairs = json.load(f)
 
-with open("./data/id_pairs_1k.json", 'r') as f:
-    id_pairs_1k = json.load(f)
+    if "21k" in file_path:
+        file_suffix = "cleaned"
+        for id in id_pairs_1k:
+            id_pairs.pop(id)
+    else:
+        file_suffix = "1k_only"
 
-id_pairs_content = []
-words = []
-id_1k = []
+    for seed in seeds:
+        id_pairs_content = []
+        words = []
+        shuffle_keys = list(id_pairs.keys())
+        random.seed(seed)
+        random.shuffle(shuffle_keys)
 
-for id in id_pairs_1k:
-    for word in id_pairs_1k[id]:
-        id_pairs_content.append(f"{id} {word}")
-        words.append(word)
+        for id in shuffle_keys:
+            for word in id_pairs[id]:
+                id_pairs_content.append(f"{id} {word}")
+                words.append(word)
 
-# for id in id_pairs:
-#     if id in id_pairs_1k:
-#         continue
-#     for word in id_pairs[id]:
-#         id_pairs_content.append(f"{id} {word}")
-#         words.append(word)
+        train = id_pairs_content[:int(len(id_pairs_content)*0.7)]
+        test = id_pairs_content[int(len(id_pairs_content)*0.7):]
+        with open(f"./data/dicts/original/train_{seed}_{file_suffix}.txt", 'w') as f:
+            f.write("\n".join(train))
+        with open(f"./data/dicts/original/test_{seed}_{file_suffix}.txt", 'w') as f:
+            f.write("\n".join(test))
 
-for seed in [1,2,3,4,5]:
-    random.Random(seed).shuffle(id_pairs_content)
-    train = id_pairs_content[:int(len(id_pairs_content)*0.7)]
-    test = id_pairs_content[int(len(id_pairs_content)*0.7):]
-    with open(f"./data/dicts/original/train_{seed}_1k_only.txt", 'w') as f:
-        f.write("\n".join(train))
-    with open(f"./data/dicts/original/test_{seed}_1k_only.txt", 'w') as f:
-        f.write("\n".join(test))
+
+
+if __name__ == "__main__":
+    file_1k_path = "./data/id_pairs_1k.json"
+    file_21k_path = "./data/id_pairs_21k.json"
+    seeds = [1,2,3,4,5]
+
+    with open(file_1k_path, 'r') as f:
+        id_1k_pairs = list(json.load(f).keys())
+
+    get_dict(file_1k_path, seeds)
+    get_dict(file_21k_path, seeds, id_pairs_1k=id_1k_pairs)
