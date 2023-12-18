@@ -1,16 +1,18 @@
 import argparse
 
 seed = 42
-dataset_name = "imagenet"
+dataset_name = "cldi"
 sentences_path = "./data/sentences.json"
 wordlist_path = "./data/all_words.json"
 alias_emb_dir = "/projects/nlp/people/kfb818/Dir/datasets/" # path to save word embeddings (decontextualized)
 # alias_emb_dir = "./data/"
 emb_per_object = True
 num_classes = 1000000 # number of sample ratio
-image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small"
 dictionary_path = "./data/dicts"
-image_id_pairs = "./data/id_pairs_21k.json"
+# image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small" # for imagenet dataset
+# image_id_pairs = "./data/id_pairs_21k.json" # for imagenet dataset
+image_dir = "/projects/nlp/people/kfb818/Dir/datasets/cldi2" # for clidi dataset
+image_id_pairs = "./data/cldi.json" # for cldi dataset
 
 MODEL_DIM = { 
     "VM": {
@@ -78,7 +80,7 @@ class MuseConfig(argparse.Namespace):
             "emb_dim": dim,
             "dico_eval": dictionary_path + f"/{test_dict_dir}/test_{fold}_{data_range}{bin_name}.txt",
             "dico_train": dictionary_path + f"/original/train_{fold}_{data_range}.txt",
-            "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{vm}_{dim}.pth",
+            "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{dataset_name}/{vm}_{dim}.pth",
             # "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
             "tgt_emb": f"{alias_emb_dir}/LM/{lm}_{dim}.pth",
             "exp_name": "./exps/muse_results",

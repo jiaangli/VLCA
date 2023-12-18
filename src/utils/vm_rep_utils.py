@@ -1,5 +1,3 @@
-import re
-import time as tm
 from pathlib import Path
 from PIL import Image
 from torch.utils.data import Dataset
@@ -35,7 +33,11 @@ class ImageDataset(Dataset):
                 print('Failed to pil', filename)
 
         category_size = len(images)
-        values = self.extractor(images=images, return_tensors="pt")
+        try:
+            values = self.extractor(images=images, return_tensors="pt")
+        except:
+            print("*"*20 + 'Failed to extract' + "*"*20, category_path)
+            return None, None
         inputs = torch.zeros(self.MAX_SIZE, self.CHANNELS, self.RESOLUTION_HEIGHT, self.RESOLUTION_WIDTH)
         with torch.no_grad():
             inputs[:category_size,:,:,:].copy_(values.pixel_values)
@@ -51,7 +53,7 @@ class VMEmbedding:
         self.model_name = args.model.model_name
         self.bs = 2
         self.per_image = args.data.emb_per_object if "huge" in self.model_name else False
-        self.alias_emb_dir = Path(args.data.alias_emb_dir) /args.model.model_type
+        self.alias_emb_dir = Path(args.data.alias_emb_dir) / args.model.model_type / args.data.dataset_name
         # self.is_average = args.model.i/s_avg
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
@@ -66,7 +68,7 @@ class VMEmbedding:
 
         resolution = 224 if self.model_name.startswith("vit") else int(self.model_name[-3:])
         imageset = ImageDataset(self.image_dir, self.labels, feature_extractor, resolution)
-        image_dataloader = torch.utils.data.DataLoader(imageset, batch_size=self.bs, num_workers=8, pin_memory=True)
+        image_dataloader = torch.utils.data.DataLoader(imageset, batch_size=self.bs, num_workers=4, pin_memory=True)
 
         # images_name = []
         categories_encode = []
@@ -98,7 +100,7 @@ class VMEmbedding:
                     
                     if self.per_image:
                         images_name = [f"{names[idx]}_{i}" for i in range(category_size[idx])]
-                        save_per_path = Path("/projects/nlp/people/kfb818/Dir/datasets/dispersions") / self.model_name
+                        save_per_path = Path("/projects/nlp/people/kfb818/Dir/datasets/dispersions") / self.args.data.dataset_name / self.model_name 
                         if not save_per_path.exists():
                             save_per_path.mkdir(parents=True, exist_ok=True)
                         torch.save({"dico": images_name, "vectors": torch.from_numpy(images_features).float()}, 

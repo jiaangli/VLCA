@@ -460,6 +460,6 @@ def export_embeddings(src_emb, tgt_emb, params):
         src_path = os.path.join(params.exp_path, 'vectors-%s.pth' % params.src_lang)
         tgt_path = os.path.join(params.exp_path, 'vectors-%s.pth' % params.tgt_lang)
         logger.info('Writing source embeddings to %s ...' % src_path)
-        torch.save({'dico': params.src_dico, 'vectors': src_emb}, src_path)
+        torch.save({'dico': [params.src_dico[i] for i in range(len(params.src_dico))], 'vectors': src_emb}, src_path)
         logger.info('Writing target embeddings to %s ...' % tgt_path)
-        torch.save({'dico': params.tgt_dico, 'vectors': tgt_emb}, tgt_path)
+        torch.save({'dico': [params.tgt_dico[i] for i in range(len(params.tgt_dico))], 'vectors': tgt_emb}, tgt_path)

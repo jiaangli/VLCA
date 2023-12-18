@@ -33,24 +33,24 @@ def CV_ind(n, n_folds):
     return ind
 
 def reduce_dim(config, model_info):
-    data = torch.load(config.data.alias_emb_dir + f"/{config.model.model_type}/{config.model.model_name}_{config.model.dim}.pth")
+    if config.model.model_type == "LM":
+        data_path = Path(config.data.alias_emb_dir) / config.model.model_type / f"{config.model.model_name}_{config.model.dim}.pth"
+    else:
+        data_path = Path(config.data.alias_emb_dir) / config.model.model_type / config.data.dataset_name / f"{config.model.model_name}_{config.model.dim}.pth"
+    data = torch.load(data_path)
     embeddings = data["vectors"]
     for model_type in model_info:
         if model_type == config.model.model_type:
             continue
-        # for dim in [256,512,768,1024,1280,2048]:
-        #     if dim <= config.model.dim:
-        #         pca =  PCA(n_components=dim, random_state=config.seed)
-        #         reduced_emb = pca.fit_transform(embeddings)
-        #         print(f"Explained variance ratio for {config.model.model_name}_{dim}.pth kept: ", sum(pca.explained_variance_ratio_))
         for model_name in model_info[model_type]:
             if model_info[model_type][model_name] < int(config.model.dim):
                 emb_dim = model_info[model_type][model_name]
-                if not Path(config.data.alias_emb_dir + f"/{config.model.model_type}/{config.model.model_name}_{emb_dim}.pth").exists():
+                # if not Path(config.data.alias_emb_dir + f"/{config.model.model_type}/{config.model.model_name}_{emb_dim}.pth").exists():
+                if not Path(data_path.parent / f"{config.model.model_name}_{emb_dim}.pth").exists():
                     pca = PCA(n_components=emb_dim, random_state=config.seed)
                     reduced_emb = pca.fit_transform(embeddings)
                     torch.save({"dico": data["dico"], "vectors": torch.from_numpy(reduced_emb).float()},
-                                config.data.alias_emb_dir + f"/{config.model.model_type}/{config.model.model_name}_{emb_dim}.pth")
+                                Path(data_path.parent / f"{config.model.model_name}_{emb_dim}.pth"))
                     print(f"Saved {config.model.model_name}_{emb_dim}.pth")
                     
                     del pca, reduced_emb

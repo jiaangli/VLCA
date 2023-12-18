@@ -29,6 +29,8 @@ class RepExtractor:
             self.__process_embeddings()
 
     def __process_embeddings(self):
+        if self.model_type == "VM":
+            self.alias_emb_dir = self.alias_emb_dir / self.dataset_name
         if not self.alias_emb_dir.exists():
             self.alias_emb_dir.mkdir(parents=True, exist_ok=True)
         with open(self.sentences_path, "r") as f:

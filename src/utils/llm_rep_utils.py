@@ -1,13 +1,10 @@
 import re
 from pathlib import Path
-import token
 
 import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModel, AutoConfig
 from tqdm import tqdm
-
-from src import config
 
 
 class LMEmbedding:
