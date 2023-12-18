@@ -1,7 +1,3 @@
-n04599235 woollen
-n04127249 safety_pin
-n02786058 band_aid
-n02788148 balusters
-n02747177 dustbin
 n04435653 tile_roof
-n02788148 handrail
+n03804744 nail
+n04525038 velvet

@@ -1,5 +1,4 @@
-n02788148 handrail
-n02747177 trash_bin
-n04127249 safety_pin
 n03250847 drumstick
-n04525038 velvet
+n04209239 shower_curtain
+n03729826 matchstick
+n04127249 safety_pin

@@ -1,6 +1,9 @@
-n02788148 banister
 n04127249 safety_pin
+n03804744 nail
+n04209239 shower_curtain
+n03250847 drumstick
 n02788148 balustrade
-n02747177 trash_can
-n04435653 tile_roof
-n04599235 wool
+n02788148 banister
+n02788148 handrail
+n02788148 bannister
+n02788148 balusters
