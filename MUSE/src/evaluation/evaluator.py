@@ -34,7 +34,7 @@ class Evaluator(object):
         self.mapping = trainer.mapping
         self.discriminator = trainer.discriminator
         self.params = trainer.params
-        self.disp_calculation = trainer.params.disp_flag
+        self.disp_calculation = getattr(trainer.params, 'disp_flag', False) 
 
     def monolingual_wordsim(self, to_log):
         """

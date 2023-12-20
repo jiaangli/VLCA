@@ -3,6 +3,7 @@ import random
 import numpy as np
 import torch
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import MinMaxScaler
 from pathlib import Path
 import gc
 
@@ -55,3 +56,12 @@ def reduce_dim(config, model_info):
                     
                     del pca, reduced_emb
                     gc.collect()
+
+def normalization(vecs):
+    # return vecs.sub_(vecs.mean(0, keepdim=True).expand_as(vecs))
+    mms = MinMaxScaler()
+    vecs = torch.from_numpy(mms.fit_transform(vecs.cpu().numpy()))
+    # vecs = torch.from_numpy(zscore(vecs.cpu().numpy()))
+    # vecs = vecs.sub_(vecs.mean(0, keepdim=True).expand_as(vecs))
+    return vecs.float()
+    # return vecs

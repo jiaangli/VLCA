@@ -1,7 +1,7 @@
 import argparse
 
 seed = 42
-dataset_name = "cldi"
+dataset_name = "imagenet" # imagenet or cldi
 sentences_path = "./data/sentences.json"
 wordlist_path = "./data/all_words.json"
 alias_emb_dir = "/projects/nlp/people/kfb818/Dir/datasets/" # path to save word embeddings (decontextualized)
@@ -9,10 +9,10 @@ alias_emb_dir = "/projects/nlp/people/kfb818/Dir/datasets/" # path to save word 
 emb_per_object = True
 num_classes = 1000000 # number of sample ratio
 dictionary_path = "./data/dicts"
-# image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small" # for imagenet dataset
-# image_id_pairs = "./data/id_pairs_21k.json" # for imagenet dataset
-image_dir = "/projects/nlp/people/kfb818/Dir/datasets/cldi2" # for clidi dataset
-image_id_pairs = "./data/cldi.json" # for cldi dataset
+image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small" # for imagenet dataset
+image_id_pairs = "./data/id_pairs_21k.json" # for imagenet dataset
+# image_dir = "/projects/nlp/people/kfb818/Dir/datasets/cldi2" # for clidi dataset
+# image_id_pairs = "./data/cldi.json" # for cldi dataset
 
 MODEL_DIM = { 
     "VM": {
@@ -25,6 +25,7 @@ MODEL_DIM = {
         "segformer-b5-finetuned-ade-640-640":512,
         "vit-mae-base":768, "vit-mae-large":1024, "vit-mae-huge":1280},
     "LM": {
+        # "fasttext": 300,
         'bert_uncased_L-2_H-128_A-2': 128, 'bert_uncased_L-4_H-256_A-4': 256, 'bert_uncased_L-4_H-512_A-8': 512,
         'bert_uncased_L-8_H-512_A-8': 512, 'bert-base-uncased': 768, 'bert-large-uncased': 1024,
         'gpt2': 768, 'gpt2-large': 1280, 'gpt2-xl': 1600,

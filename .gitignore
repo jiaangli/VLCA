@@ -167,3 +167,6 @@ scripts/
 wandb/
 sorted*
 *old
+weak*
+*.bin
+*.gz

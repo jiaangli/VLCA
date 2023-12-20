@@ -63,11 +63,10 @@ def build_model(params, with_dis, logger=None):
     mapping = nn.Linear(params.emb_dim, params.emb_dim, bias=False)
     if getattr(params, 'map_id_init', True):
         mapping.weight.data.copy_(torch.diag(torch.ones(params.emb_dim)))
-    elif getattr(params, 'adversarial', True) and not getattr(params, 'map_id_init', False) and getattr(params, 'load_optim', True):
+    elif getattr(params, 'adversarial', False) and not getattr(params, 'map_id_init', False) and getattr(params, 'load_optim', True):
         # path = os.path.join(os.path.expanduser('~/Dir/projects/IPLVE/data/best_mapping'), \
         #     f'seed_{params.seed}_best_mapping_{params.src_lang}_{params.tgt_lang}.pth')
-        path = os.path.join(os.path.expanduser(f'~/Dir/projects/IPLVE/data/unsup_best_mapping/Random_seed_{params.seed}'), \
-            f'offset_mapping_{params.offset}.pth')
+        path = os.path.join(os.path.expanduser(f'/home/kfb818/projects/vislm-geo/super_image_mae-lang-bert-best_mapping.pth'))
         logger.info('* Reloading the best model from %s ...' % path)
         # reload the model
         assert os.path.isfile(path)
