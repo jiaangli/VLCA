@@ -1,0 +1,7 @@
+n03211789 shop_window
+n03211789 display_window
+n04561965 water_pump
+n03914106 peplum
+n01959985 cockle
+n04059947 rearview_mirror
+n02012185 least_bittern

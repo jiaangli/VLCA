@@ -1,3 +1,8 @@
+n01965529 zebra_mussel
+n03797264 mufti
+n07808904 tabbouleh
+n12230540 manzanita
+n07709881 bean_curd
 n03986949 portmanteau
 n03986949 gladstone
 n12070016 laelia

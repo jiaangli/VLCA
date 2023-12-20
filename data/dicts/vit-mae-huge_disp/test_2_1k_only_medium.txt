@@ -1,3 +1,5 @@
+n04486054 triumphal_arch
+n02086910 papillon
 n02105505 komondor
 n02085936 maltese
 n03785016 moped

@@ -1,3 +1,7 @@
+n03002341 chair_lift
+n04126066 safety_bicycle
+n07899292 sweet_vermouth
+n01457852 trumpetfish
 n04413969 terraced_house
 n01928517 nemertean
 n02879309 dress_shop

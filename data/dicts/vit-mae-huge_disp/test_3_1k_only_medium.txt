@@ -1,4 +1,3 @@
-n04371774 swing
 n04486054 triumphal_arch
 n02111129 leonberg
 n04044716 radio_telescope

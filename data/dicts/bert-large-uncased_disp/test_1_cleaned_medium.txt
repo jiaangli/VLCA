@@ -1,3 +1,7 @@
+n07756951 watermelon
+n03543394 hot_rod
+n00466630 match_play
+n01569566 blackpoll
 n02415130 urial
 n09289331 glacier
 n12597466 saw_palmetto

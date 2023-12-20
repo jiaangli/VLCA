@@ -1,3 +1,6 @@
+n03543394 hot_rod
+n00466630 match_play
+n03587205 irrigation_ditch
 n02811618 battle_cruiser
 n02415130 urial
 n01504344 nestling

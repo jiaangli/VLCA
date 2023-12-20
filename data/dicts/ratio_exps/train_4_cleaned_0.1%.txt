@@ -1,0 +1,7 @@
+n02918112 bullring
+n02047045 pigeon_guillemot
+n07562881 fad_diet
+n02413917 cheviot
+n03904433 pedicab
+n03904433 cycle_rickshaw
+n02553028 lingcod

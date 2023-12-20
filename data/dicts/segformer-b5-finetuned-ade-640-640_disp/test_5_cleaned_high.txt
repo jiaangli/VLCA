@@ -1,3 +1,5 @@
+n04114069 roundel
+n03667235 lighting
 n04432043 thwart
 n02993368 thurible
 n02993368 censer

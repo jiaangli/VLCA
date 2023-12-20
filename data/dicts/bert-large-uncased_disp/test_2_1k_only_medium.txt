@@ -1,3 +1,5 @@
+n03535780 horizontal_bar
+n03535780 high_bar
 n02085936 maltese
 n04525038 velvet
 n02747177 dustbin

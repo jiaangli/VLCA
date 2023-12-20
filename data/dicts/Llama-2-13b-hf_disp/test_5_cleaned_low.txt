@@ -1,3 +1,10 @@
+n01965529 zebra_mussel
+n07808904 tabbouleh
+n03822767 newtonian_telescope
+n02745611 artificial_horizon
+n02175916 stag_beetle
+n07709881 bean_curd
+n09217230 beach
 n03986949 portmanteau
 n03986949 gladstone
 n01481498 chimaera_monstrosa

@@ -1,3 +1,13 @@
+n01965529 zebra_mussel
+n07592317 chicken_stew
+n07808904 tabbouleh
+n03822767 newtonian_reflector
+n03822767 newtonian_telescope
+n12095647 moneywort
+n02745611 artificial_horizon
+n12230540 madrona
+n02175916 stag_beetle
+n07709881 bean_curd
 n12070016 laelia
 n01481498 rabbitfish
 n01481498 chimaera_monstrosa

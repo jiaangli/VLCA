@@ -1,3 +1,5 @@
+n04024983 punt
+n03667235 lighting
 n03293863 equatorial
 n03088707 conductor
 n13865904 heart

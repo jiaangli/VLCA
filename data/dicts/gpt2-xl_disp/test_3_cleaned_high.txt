@@ -1,7 +1,3 @@
-n01876667 bilby
-n03518631 high
-n03518631 high_gear
-n13896217 crescent
 n02901620 brigantine
 n13882201 pentagon
 n04097760 roaster

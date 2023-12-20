@@ -1,3 +1,7 @@
+n04486054 triumphal_arch
+n02086910 papillon
+n03535780 horizontal_bar
+n03535780 high_bar
 n02093647 bedlington_terrier
 n02105505 komondor
 n02085936 maltese

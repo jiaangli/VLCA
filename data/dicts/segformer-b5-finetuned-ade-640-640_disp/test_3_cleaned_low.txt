@@ -1,9 +1,3 @@
-n03236093 dreadnaught
-n02407521 guernsey
-n01808291 rock_partridge
-n12552893 restharrow
-n01612628 caracara
-n01671479 desert_tortoise
 n02901620 brigantine
 n07807922 fruit_salad
 n02427470 kob

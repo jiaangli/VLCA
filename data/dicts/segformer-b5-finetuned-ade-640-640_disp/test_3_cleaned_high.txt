@@ -1,7 +1,3 @@
-n01397690 arame
-n07621264 nonpareil
-n03222722 doorframe
-n03222722 doorcase
 n13882201 pentagon
 n04097760 roaster
 n03736147 meat_hook

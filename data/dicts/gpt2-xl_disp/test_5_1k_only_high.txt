@@ -1,3 +1,6 @@
+n02730930 apron
+n04023962 punching_bag
+n02106030 collie
 n02165456 ladybug
 n02165456 ladybird
 n02092002 deerhound

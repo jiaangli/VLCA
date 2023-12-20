@@ -1,3 +1,6 @@
+n02077923 sea_lion
+n04486054 triumphal_arch
+n03658185 letter_opener
 n02093647 bedlington_terrier
 n07583066 guacamole
 n02643566 lionfish

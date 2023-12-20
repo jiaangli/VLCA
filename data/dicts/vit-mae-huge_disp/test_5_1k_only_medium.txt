@@ -1,3 +1,8 @@
+n02091467 elkhound
+n02091467 norwegian_elkhound
+n02730930 apron
+n02106030 collie
+n02165105 tiger_beetle
 n02092002 deerhound
 n02104029 kuvasz
 n02107142 doberman

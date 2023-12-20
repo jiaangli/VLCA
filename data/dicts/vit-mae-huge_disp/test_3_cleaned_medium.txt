@@ -1,7 +1,3 @@
-n03518631 high
-n03518631 high_gear
-n01808291 rock_partridge
-n01612628 caracara
 n04097760 roaster
 n02427470 kob
 n02276355 red_admiral

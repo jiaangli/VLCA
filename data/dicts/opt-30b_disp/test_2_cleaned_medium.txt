@@ -1,4 +1,3 @@
-n01485479 basking_shark
 n07858336 tapenade
 n04314522 sten_gun
 n06263762 storage_medium

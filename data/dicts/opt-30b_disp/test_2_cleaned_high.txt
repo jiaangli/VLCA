@@ -1,7 +1,3 @@
-n04295777 staddle
-n02710600 aneroid
-n05259914 pigtail
-n11717577 american_lotus
 n12777680 snowbell
 n04290259 spur
 n04290259 gad

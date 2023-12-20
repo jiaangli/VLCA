@@ -1,7 +1,3 @@
-n03518631 high_gear
-n07621264 nonpareil
-n01808291 rock_partridge
-n12552893 restharrow
 n04086663 rheometer
 n06267655 gazette
 n04020912 pullman_car

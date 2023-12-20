@@ -1,3 +1,6 @@
+n03002341 chairlift
+n03002341 chair_lift
+n03646296 lathe
 n03435743 georgette
 n12305654 green_ash
 n03009794 charnel

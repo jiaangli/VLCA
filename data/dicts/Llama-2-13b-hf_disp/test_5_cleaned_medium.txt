@@ -1,3 +1,6 @@
+n03797264 mufti
+n03822767 newtonian_reflector
+n12230540 manzanita
 n12070016 laelia
 n04432043 thwart
 n02993368 censer

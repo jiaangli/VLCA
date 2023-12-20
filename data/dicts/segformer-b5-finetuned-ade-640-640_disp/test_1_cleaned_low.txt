@@ -1,3 +1,9 @@
+n01548492 western_kingbird
+n11984542 inula
+n04611351 yardarm
+n03543394 hot_rod
+n00466630 match_play
+n01569566 blackpoll
 n02811618 battle_cruiser
 n02485371 grivet
 n02415130 urial

@@ -1,7 +1,3 @@
-n04141076 sax
-n02091032 italian_greyhound
-n04458633 totem_pole
-n04346328 stupa
 n03916031 essence
 n02951585 can_opener
 n01986214 hermit_crab

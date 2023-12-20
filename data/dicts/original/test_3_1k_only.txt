@@ -1,12 +1,3 @@
-n04033901 quill_pen
-n04033901 quill
-n04371774 swing
-n04435653 tile_roof
-n02086079 peke
-n02086079 pekingese
-n03742115 medicine_cabinet
-n03742115 medicine_chest
-n01518878 ostrich
 n04501370 turnstile
 n09288635 geyser
 n01744401 rock_python

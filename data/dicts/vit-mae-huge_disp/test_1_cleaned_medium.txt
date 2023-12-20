@@ -1,3 +1,10 @@
+n01548492 western_kingbird
+n07756951 watermelon
+n11984542 inula
+n04611351 yardarm
+n01613807 eaglet
+n07845087 formula
+n01569566 blackpoll
 n02485371 grivet
 n07888465 white_beer
 n07888465 wheat_beer

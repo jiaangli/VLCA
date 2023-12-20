@@ -1,10 +1,3 @@
-n02099712 labrador_retriever
-n04141076 saxophone
-n04141076 sax
-n02110806 basenji
-n04458633 totem_pole
-n01847000 drake
-n01980166 fiddler_crab
 n03916031 essence
 n03916031 perfume
 n02013706 limpkin

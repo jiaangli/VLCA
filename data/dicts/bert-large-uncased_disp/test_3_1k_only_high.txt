@@ -1,7 +1,3 @@
-n04033901 quill_pen
-n04033901 quill
-n04371774 swing
-n02086079 peke
 n04501370 turnstile
 n01744401 rock_python
 n12267677 acorn

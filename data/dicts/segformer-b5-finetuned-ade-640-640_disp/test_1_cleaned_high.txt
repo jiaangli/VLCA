@@ -1,3 +1,6 @@
+n07756951 watermelon
+n07845087 formula
+n03587205 irrigation_ditch
 n11646694 araucaria_bidwillii
 n11646694 bunya_bunya
 n01504344 nestling

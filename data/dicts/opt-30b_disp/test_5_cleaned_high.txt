@@ -1,3 +1,12 @@
+n04114069 roundel
+n03822767 newtonian_reflector
+n04024983 punt
+n03667235 lighting
+n03166514 deanery
+n12230540 madrona
+n02175916 stag_beetle
+n02716626 abm
+n03373611 flying_boat
 n08614632 fairground
 n01481498 rabbitfish
 n04432043 thwart

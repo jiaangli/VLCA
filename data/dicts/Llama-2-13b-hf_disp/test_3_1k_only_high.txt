@@ -1,6 +1,3 @@
-n04033901 quill
-n04371774 swing
-n02086079 peke
 n04501370 turnstile
 n09288635 geyser
 n09421951 sandbar

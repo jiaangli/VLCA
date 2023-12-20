@@ -1,3 +1,14 @@
+n01965529 zebra_mussel
+n07592317 chicken_stew
+n03797264 mufti
+n07808904 tabbouleh
+n03822767 newtonian_reflector
+n03822767 newtonian_telescope
+n04024983 punt
+n12095647 moneywort
+n03166514 deanery
+n07709881 bean_curd
+n09217230 beach
 n03986949 portmanteau
 n03986949 gladstone
 n12070016 laelia

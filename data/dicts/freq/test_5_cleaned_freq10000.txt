@@ -1,3 +1,5 @@
+n03667235 lighting
+n09217230 beach
 n03088707 conductor
 n03745146 zoo
 n13865904 heart

@@ -454,5 +454,3 @@ n02814860 beacon
 n02814860 beacon_light
 n02814860 lighthouse
 n02814860 pharos
-n02109525 saint_bernard
-n02109525 st_bernard

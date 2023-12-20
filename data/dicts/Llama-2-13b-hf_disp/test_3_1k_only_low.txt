@@ -1,5 +1,3 @@
-n04435653 tile_roof
-n02086079 pekingese
 n12057211 cypripedium_calceolus
 n04486054 triumphal_arch
 n04019541 hockey_puck

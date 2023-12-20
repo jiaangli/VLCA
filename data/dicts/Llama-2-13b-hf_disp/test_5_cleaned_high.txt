@@ -1,3 +1,13 @@
+n07592317 chicken_stew
+n04114069 roundel
+n04024983 punt
+n12095647 moneywort
+n03667235 lighting
+n03166514 deanery
+n12230540 madrona
+n02716626 abm
+n07709881 tofu
+n03373611 flying_boat
 n08614632 fairground
 n01481498 rabbitfish
 n02759387 autogiro

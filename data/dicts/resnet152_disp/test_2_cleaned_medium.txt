@@ -1,7 +1,3 @@
-n02710600 aneroid_barometer
-n02710600 aneroid
-n11717577 american_lotus
-n11717577 nelumbo_lutea
 n07858336 tapenade
 n03161016 dampener
 n07919894 drip_coffee

@@ -1,3 +1,6 @@
+n02077923 sea_lion
+n03535780 horizontal_bar
+n03535780 high_bar
 n02085936 maltese
 n03785016 moped
 n04525038 velvet

@@ -1,3 +1,7 @@
+n02077923 sea_lion
+n03535780 horizontal_bar
+n03535780 high_bar
+n03658185 letter_opener
 n04525038 velvet
 n03958227 plastic_bag
 n02786058 band_aid

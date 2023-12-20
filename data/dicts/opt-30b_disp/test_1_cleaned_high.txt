@@ -1,3 +1,8 @@
+n07886176 hooch
+n01613807 eaglet
+n03543394 hot_rod
+n00466630 match_play
+n07845087 formula
 n02811618 battle_cruiser
 n02415130 urial
 n01504344 nestling

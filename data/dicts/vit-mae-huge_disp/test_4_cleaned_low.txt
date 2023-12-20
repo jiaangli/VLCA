@@ -1,3 +1,11 @@
+n03002341 chairlift
+n03002341 chair_lift
+n07870167 lasagna
+n07870167 lasagne
+n04126066 safety_bicycle
+n03646296 lathe
+n02278024 comma
+n03280216 electroscope
 n04413969 terraced_house
 n02879309 boutique
 n02879309 dress_shop

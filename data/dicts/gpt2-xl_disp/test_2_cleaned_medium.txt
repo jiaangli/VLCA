@@ -1,7 +1,3 @@
-n02710600 aneroid_barometer
-n02962938 heart_monitor
-n01485479 basking_shark
-n11717577 american_lotus
 n12777680 snowbell
 n07858336 tapenade
 n04314522 sten_gun

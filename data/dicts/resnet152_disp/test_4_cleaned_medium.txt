@@ -1,3 +1,9 @@
+n03002341 chairlift
+n03002341 chair_lift
+n07899292 sweet_vermouth
+n01457852 trumpetfish
+n03646296 lathe
+n03280216 electroscope
 n04533499 victrola
 n02879309 boutique
 n02879309 dress_shop

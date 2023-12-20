@@ -1,3 +1,6 @@
+n04213353 sickle
+n03646296 lathe
+n02278024 comma
 n04413969 terraced_house
 n02879309 boutique
 n03435743 georgette

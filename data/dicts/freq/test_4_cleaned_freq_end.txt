@@ -1,3 +1,10 @@
+n03002341 chair_lift
+n07870167 lasagna
+n07870167 lasagne
+n04126066 safety_bicycle
+n07899292 sweet_vermouth
+n01457852 trumpetfish
+n03280216 electroscope
 n04413969 terraced_house
 n01847407 dabbling_duck
 n01928517 nemertean

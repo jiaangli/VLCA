@@ -1,6 +1,3 @@
-n04141076 sax
-n02091032 italian_greyhound
-n01980166 fiddler_crab
 n03916031 essence
 n02013706 limpkin
 n01687978 agama

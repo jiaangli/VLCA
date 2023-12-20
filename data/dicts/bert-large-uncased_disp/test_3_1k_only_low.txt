@@ -1,7 +1,3 @@
-n04435653 tile_roof
-n02086079 pekingese
-n03742115 medicine_cabinet
-n01518878 ostrich
 n09421951 sandbar
 n09421951 sand_bar
 n12057211 cypripedium_calceolus

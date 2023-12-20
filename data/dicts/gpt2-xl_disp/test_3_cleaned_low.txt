@@ -1,8 +1,3 @@
-n02407521 guernsey
-n07621264 nonpareil
-n03222722 doorcase
-n12552893 restharrow
-n01612628 caracara
 n12124818 lolium_perenne
 n12124818 perennial_ryegrass
 n04086663 rheometer

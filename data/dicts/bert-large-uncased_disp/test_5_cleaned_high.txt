@@ -1,3 +1,5 @@
+n04114069 roundel
+n12230540 madrona
 n03088707 conductor
 n03548195 huck
 n11916696 yarrow

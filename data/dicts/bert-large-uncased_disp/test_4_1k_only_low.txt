@@ -1,7 +1,3 @@
-n02099712 labrador_retriever
-n04141076 saxophone
-n02091032 italian_greyhound
-n04346328 stupa
 n04532670 viaduct
 n03916031 perfume
 n02013706 limpkin

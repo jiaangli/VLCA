@@ -1,3 +1,9 @@
+n03002341 chairlift
+n03002341 chair_lift
+n04126066 safety_bicycle
+n04213353 sickle
+n01457852 trumpetfish
+n02278024 comma
 n01928517 nemertean
 n12305654 green_ash
 n03805725 nail_polish

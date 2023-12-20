@@ -1,3 +1,9 @@
+n07592317 chicken_stew
+n07808904 tabbouleh
+n03822767 newtonian_reflector
+n03822767 newtonian_telescope
+n02175916 stag_beetle
+n02716626 abm
 n03986949 portmanteau
 n03986949 gladstone
 n12070016 laelia

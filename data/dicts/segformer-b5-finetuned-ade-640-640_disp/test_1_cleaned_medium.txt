@@ -1,3 +1,5 @@
+n07886176 hooch
+n01613807 eaglet
 n07888465 white_beer
 n07888465 wheat_beer
 n04003241 primus

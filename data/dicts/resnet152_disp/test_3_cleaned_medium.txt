@@ -1,6 +1,3 @@
-n03518631 high
-n03518631 high_gear
-n12552893 restharrow
 n04192361 sheltered_workshop
 n03164929 davit
 n03318136 fairlead

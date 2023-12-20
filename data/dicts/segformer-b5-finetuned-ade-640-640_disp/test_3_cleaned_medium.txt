@@ -1,7 +1,3 @@
-n01876667 bilby
-n03518631 high
-n03518631 high_gear
-n13896217 crescent
 n12124818 lolium_perenne
 n12124818 perennial_ryegrass
 n04086663 rheometer

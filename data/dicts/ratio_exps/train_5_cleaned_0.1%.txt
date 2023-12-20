@@ -1,0 +1,7 @@
+n04410886 tensiometer
+n00483205 professional_tennis
+n02763306 secondary_storage
+n02763306 external_storage
+n07862348 spareribs
+n04119091 rumble
+n03560860 ignition_coil

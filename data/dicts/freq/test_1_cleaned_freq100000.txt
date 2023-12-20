@@ -1,3 +1,7 @@
+n07756951 watermelon
+n07886176 hooch
+n03543394 hot_rod
+n00466630 match_play
 n01504344 nestling
 n04003241 primus
 n08539072 business_district

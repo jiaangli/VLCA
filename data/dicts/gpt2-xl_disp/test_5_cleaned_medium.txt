@@ -1,3 +1,10 @@
+n07592317 chicken_stew
+n03822767 newtonian_telescope
+n12095647 moneywort
+n03166514 deanery
+n12230540 madrona
+n07709881 tofu
+n09217230 beach
 n02382750 welsh_pony
 n02993368 censer
 n02759387 gyroplane

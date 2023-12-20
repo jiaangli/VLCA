@@ -1,5 +1,3 @@
-n03742115 medicine_cabinet
-n03742115 medicine_chest
 n01744401 rock_python
 n09421951 sandbar
 n09421951 sand_bar

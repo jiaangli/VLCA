@@ -1,3 +1,5 @@
+n02077923 sea_lion
+n03658185 letter_opener
 n03958227 plastic_bag
 n04074963 remote
 n04074963 remote_control

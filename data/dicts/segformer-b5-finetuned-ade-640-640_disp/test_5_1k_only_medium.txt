@@ -1,3 +1,7 @@
+n02091467 elkhound
+n02091467 norwegian_elkhound
+n02730930 apron
+n04023962 punching_bag
 n02092002 deerhound
 n03908618 pencil_case
 n03770439 miniskirt

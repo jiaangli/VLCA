@@ -1,8 +1,3 @@
-n03236093 dreadnaught
-n01397690 arame
-n01876667 bilby
-n03518631 high
-n13896217 crescent
 n02901620 brigantine
 n13882201 pentagon
 n04097760 roaster

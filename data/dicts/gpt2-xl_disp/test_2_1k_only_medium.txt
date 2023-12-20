@@ -1,3 +1,5 @@
+n02086910 papillon
+n03658185 letter_opener
 n02643566 lionfish
 n01682714 anole
 n02747177 trash_can

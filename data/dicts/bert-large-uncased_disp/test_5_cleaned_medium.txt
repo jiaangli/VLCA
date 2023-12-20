@@ -1,3 +1,10 @@
+n03667235 lighting
+n02745611 artificial_horizon
+n12230540 manzanita
+n02175916 stag_beetle
+n02716626 abm
+n07709881 tofu
+n03373611 flying_boat
 n04432043 thwart
 n02993368 thurible
 n02993368 censer

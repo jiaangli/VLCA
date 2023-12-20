@@ -1,3 +1,6 @@
+n07756951 watermelon
+n04611351 yardarm
+n01569566 blackpoll
 n02485371 grivet
 n07888465 wheat_beer
 n02687682 air_spring

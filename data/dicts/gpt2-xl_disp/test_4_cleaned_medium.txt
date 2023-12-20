@@ -1,3 +1,9 @@
+n03002341 chair_lift
+n07870167 lasagne
+n04126066 safety_bicycle
+n04213353 sickle
+n01457852 trumpetfish
+n02278024 comma
 n01847407 dabbling_duck
 n04533499 victrola
 n02879309 dress_shop

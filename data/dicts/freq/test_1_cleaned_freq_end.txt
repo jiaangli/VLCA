@@ -1,3 +1,9 @@
+n01548492 western_kingbird
+n11984542 inula
+n04611351 yardarm
+n01613807 eaglet
+n03587205 irrigation_ditch
+n01569566 blackpoll
 n02811618 battle_cruiser
 n02485371 grivet
 n11646694 araucaria_bidwillii

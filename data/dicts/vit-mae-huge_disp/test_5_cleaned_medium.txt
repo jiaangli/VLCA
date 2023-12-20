@@ -1,3 +1,9 @@
+n01965529 zebra_mussel
+n04114069 roundel
+n04024983 punt
+n12230540 manzanita
+n12230540 madrona
+n03373611 flying_boat
 n01481498 rabbitfish
 n01481498 chimaera_monstrosa
 n02993368 thurible

@@ -1,5 +1,3 @@
-n02110806 basenji
-n02091032 italian_greyhound
 n03916031 essence
 n03916031 perfume
 n02951585 can_opener

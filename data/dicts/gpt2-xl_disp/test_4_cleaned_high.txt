@@ -1,3 +1,4 @@
+n03002341 chairlift
 n02879309 boutique
 n03009794 charnel
 n03009794 charnel_house

@@ -1,8 +1,3 @@
-n03236093 dreadnaught
-n01397690 arame
-n01808291 rock_partridge
-n03222722 doorframe
-n01671479 desert_tortoise
 n06267655 gazette
 n02276355 red_admiral
 n04020912 pullman_car

@@ -1,3 +1,7 @@
+n07870167 lasagna
+n07899292 sweet_vermouth
+n03646296 lathe
+n03280216 electroscope
 n04413969 terraced_house
 n01928517 nemertean
 n00451635 motorcycling

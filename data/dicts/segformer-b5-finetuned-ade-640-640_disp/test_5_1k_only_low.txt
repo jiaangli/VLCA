@@ -1,3 +1,5 @@
+n02106030 collie
+n02165105 tiger_beetle
 n02504013 elephas_maximus
 n02504013 indian_elephant
 n02165456 ladybird_beetle

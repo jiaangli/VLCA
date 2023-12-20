@@ -1,3 +1,7 @@
+n07870167 lasagna
+n07870167 lasagne
+n04126066 safety_bicycle
+n02278024 comma
 n04413969 terraced_house
 n01847407 dabbling_duck
 n12183452 malope

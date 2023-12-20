@@ -1,3 +1,2 @@
-n04435653 tile_roof
 n03804744 nail
 n04525038 velvet

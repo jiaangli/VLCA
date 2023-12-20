@@ -1,3 +1,7 @@
+n01548492 western_kingbird
+n03543394 hot_rod
+n00466630 match_play
+n01569566 blackpoll
 n02811618 battle_cruiser
 n02485371 grivet
 n07888465 white_beer

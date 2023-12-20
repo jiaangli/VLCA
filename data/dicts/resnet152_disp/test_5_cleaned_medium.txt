@@ -1,3 +1,13 @@
+n01965529 zebra_mussel
+n03797264 mufti
+n04024983 punt
+n12095647 moneywort
+n02745611 artificial_horizon
+n03166514 deanery
+n07709881 bean_curd
+n07709881 tofu
+n09217230 beach
+n03373611 flying_boat
 n02759387 gyroplane
 n02759387 autogyro
 n02759387 autogiro

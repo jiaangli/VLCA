@@ -1,3 +1,5 @@
+n02109525 saint_bernard
+n02109525 st_bernard
 n03874293 paddlewheel
 n07614500 icecream
 n07614500 ice_cream

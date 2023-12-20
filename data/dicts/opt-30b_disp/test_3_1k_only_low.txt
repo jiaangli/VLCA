@@ -1,4 +1,3 @@
-n04435653 tile_roof
 n12057211 cypripedium_calceolus
 n04486054 triumphal_arch
 n02105056 groenendael

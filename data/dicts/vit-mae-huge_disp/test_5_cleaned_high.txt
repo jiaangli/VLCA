@@ -1,3 +1,7 @@
+n03822767 newtonian_reflector
+n03822767 newtonian_telescope
+n03667235 lighting
+n02175916 stag_beetle
 n02992795 scotch_tape
 n03293863 equatorial
 n04403925 telescopic_sight

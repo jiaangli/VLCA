@@ -1,3 +1,5 @@
+n03535780 horizontal_bar
+n03535780 high_bar
 n02643566 lionfish
 n01682714 anole
 n02747177 trash_can

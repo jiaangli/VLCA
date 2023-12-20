@@ -456,3 +456,12 @@ n04229816 ski_mask
 n04606251 wreck
 n06794110 street_sign
 n03388183 fountain_pen
+n04033901 quill_pen
+n04033901 quill
+n04371774 swing
+n04435653 tile_roof
+n02086079 peke
+n02086079 pekingese
+n03742115 medicine_cabinet
+n03742115 medicine_chest
+n01518878 ostrich

@@ -1,9 +1,3 @@
-n03236093 dreadnaught
-n02407521 guernsey
-n01876667 bilby
-n01808291 rock_partridge
-n01612628 caracara
-n01671479 desert_tortoise
 n02901620 brigantine
 n04086663 rheometer
 n07807922 fruit_salad

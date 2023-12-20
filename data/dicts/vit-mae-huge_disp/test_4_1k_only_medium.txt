@@ -1,6 +1,3 @@
-n02091032 italian_greyhound
-n04346328 tope
-n04346328 stupa
 n04532670 viaduct
 n01687978 agama
 n02106166 border_collie

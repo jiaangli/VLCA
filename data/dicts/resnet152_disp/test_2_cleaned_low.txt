@@ -1,6 +1,3 @@
-n04295777 staddle
-n02962938 heart_monitor
-n01485479 basking_shark
 n04314522 sten_gun
 n08547544 crest
 n03178674 derringer

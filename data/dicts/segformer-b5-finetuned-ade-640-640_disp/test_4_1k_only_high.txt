@@ -1,4 +1,3 @@
-n02099712 labrador_retriever
 n03733281 labyrinth
 n03733281 maze
 n03825788 nipple

@@ -1,3 +1,5 @@
+n02077923 sea_lion
+n02086910 papillon
 n02085936 maltese
 n03785016 moped
 n04525038 velvet

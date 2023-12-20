@@ -1,3 +1,11 @@
+n04114069 roundel
+n03797264 mufti
+n04024983 punt
+n03166514 deanery
+n12230540 manzanita
+n02716626 abm
+n07709881 tofu
+n03373611 flying_boat
 n03986949 portmanteau
 n03986949 gladstone
 n08614632 fairground

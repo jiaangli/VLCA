@@ -456,3 +456,13 @@ n03197337 digital_watch
 n03529860 home_theatre
 n03529860 home_theater
 n04371430 swimming_trunks
+n02099712 labrador_retriever
+n04141076 saxophone
+n04141076 sax
+n02110806 basenji
+n02091032 italian_greyhound
+n04458633 totem_pole
+n04346328 tope
+n04346328 stupa
+n01847000 drake
+n01980166 fiddler_crab

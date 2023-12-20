@@ -450,9 +450,3 @@ n03868863 oxygen_mask
 n04147183 schooner
 n03891251 park_bench
 n02002724 black_stork
-n02091467 elkhound
-n02091467 norwegian_elkhound
-n02730930 apron
-n04023962 punching_bag
-n02106030 collie
-n02165105 tiger_beetle

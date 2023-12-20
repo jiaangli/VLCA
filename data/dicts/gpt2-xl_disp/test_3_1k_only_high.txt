@@ -1,7 +1,3 @@
-n04033901 quill
-n04371774 swing
-n03742115 medicine_cabinet
-n03742115 medicine_chest
 n04501370 turnstile
 n01744401 rock_python
 n04019541 puck

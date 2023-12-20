@@ -1,3 +1,10 @@
+n01965529 zebra_mussel
+n03822767 newtonian_reflector
+n03822767 newtonian_telescope
+n03166514 deanery
+n12230540 manzanita
+n12230540 madrona
+n02175916 stag_beetle
 n02759387 gyroplane
 n02759387 autogyro
 n02759387 autogiro

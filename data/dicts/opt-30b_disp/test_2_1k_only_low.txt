@@ -1,3 +1,4 @@
+n04486054 triumphal_arch
 n02093647 bedlington_terrier
 n02105505 komondor
 n07583066 guacamole
