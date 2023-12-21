@@ -1,32 +1,32 @@
 from pathlib import Path
 import numpy as np
 
-model_type = "lm" # "lm" or "vm"
+model_type = "vm" # "lm" or "vm"
 if model_type == "vm":
-    dispersion_ranking_paths = ["./data_old/sorted_dispersion_vit-mae-huge.txt",
-                            "./data_old/sorted_dispersion_resnet152.txt",
-                            "./data_old/sorted_dispersion_segformer-b5-finetuned-ade-640-640.txt"
+    dispersion_ranking_paths = ["./data_v1/sorted_dispersion_vit-mae-huge.txt",
+                            "./data_v1/sorted_dispersion_resnet152.txt",
+                            "./data_v1/sorted_dispersion_segformer-b5-finetuned-ade-640-640.txt"
                             ]
 else:
-    dispersion_ranking_paths = ["./data_old/sorted_dispersion_bert-large-uncased.txt",
-                            "./data_old/sorted_dispersion_gpt2-xl.txt",
-                            "./data_old/sorted_dispersion_opt-30b.txt",
-                            # "./data_old/sorted_dispersion_opt-66b.txt",
-                            # "./data_old/sorted_dispersion_Llama-2-70b-hf.txt",
-                            "./data_old/sorted_dispersion_Llama-2-13b-hf.txt"
+    dispersion_ranking_paths = ["./data_v1/sorted_dispersion_bert-large-uncased.txt",
+                            "./data_v1/sorted_dispersion_gpt2-xl.txt",
+                            "./data_v1/sorted_dispersion_opt-30b.txt",
+                            # "./data_v1/sorted_dispersion_opt-66b.txt",
+                            # "./data_v1/sorted_dispersion_Llama-2-70b-hf.txt",
+                            "./data_v1/sorted_dispersion_Llama-2-13b-hf.txt"
                             ]
     
-# dispersion_ranking_path = "./data_old/sorted_dispersion_resnet152.txt"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_segformer-b5-finetuned-ade-640-640.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_resnet152.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_segformer-b5-finetuned-ade-640-640.txt"
 
 # LMs
 # model_type = "lm"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_bert-large-uncased.txt"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_gpt2-xl.txt"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_opt-66b.txt"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_opt-30b.txt"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_Llama-2-70b-hf.txt"
-# dispersion_ranking_path = "./data_old/sorted_dispersion_Llama-2-13b-hf.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_bert-large-uncased.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_gpt2-xl.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_opt-66b.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_opt-30b.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_Llama-2-70b-hf.txt"
+# dispersion_ranking_path = "./data_v1/sorted_dispersion_Llama-2-13b-hf.txt"
 
 for dispersion_ranking_path in dispersion_ranking_paths:
     model_name = dispersion_ranking_path.split("_")[-1][:-4]

@@ -51,10 +51,10 @@ class RepExtractor:
             self.__get_vm_rep(image_ids)
 
     def __get_vm_rep(self, image_labels):
-        if not self.model_name.startswith("res"):
-            embeddings_extractor = VMEmbedding(self.config, image_labels)
-            embeddings_extractor.get_vm_layer_representations()
-        pass
+        # if not self.model_name.startswith("res"):
+        embeddings_extractor = VMEmbedding(self.config, image_labels)
+        embeddings_extractor.get_vm_layer_representations()
+
 
     def __get_lm_rep(self, all_sentences, all_labels):
         if self.model_name == "fasttext":
