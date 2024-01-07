@@ -13,11 +13,11 @@ if __name__ == "__main__":
     dims = [1280, 2048, 512]
 
     exp_flag=''
-    wandb.init(project=project_name, name=f"{LM}")
+    wandb.init(project=project_name, name=f"{LM}_v2")
     metrics_df = pd.DataFrame()
     for idx, vm in enumerate(VM):
         emb_dim = dims[idx]
-        for train_ratio in [0.1, 0.5, 1, 5, 10, 70]:
+        for train_ratio in [0.1, 0.5, 1, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70]:
             for fold in [1,2,3,4,5]:
                 metrics = {"VM": vm,
                             "LM": LM,

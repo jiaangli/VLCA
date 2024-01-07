@@ -64,7 +64,7 @@ parser.add_argument("--src_emb", type=str, default='', help="Reload source embed
 parser.add_argument("--tgt_emb", type=str, default='', help="Reload target embeddings")
 parser.add_argument("--normalize_embeddings", type=str, default="", help="Normalize embeddings before training")
 parser.add_argument("--load_optim", type=bool_flag, default=False, help="Reload optimal")
-parser.add_argument("--disp_flag", type=bool_flag, default=False, help="Reload optimal")
+parser.add_argument("--disp_flag", type=bool_flag, default=False, help="Use original precision calculation method")
 
 # parse parameters
 params = parser.parse_args()

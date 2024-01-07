@@ -402,7 +402,6 @@ n03105645 corbel_arch
 n03855756 orlon
 n02874537 bootlace
 n01664990 eretmochelys_imbricata
-n01664990 hawksbill
 n01664990 hawkbill
 n01664990 hawksbill_turtle
 n03128427 crazy_quilt

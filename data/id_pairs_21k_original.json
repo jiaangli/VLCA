@@ -47,9 +47,18 @@
         "mountainside",
         "versant"
     ],
+    "n04285008": [
+        "sports_car",
+        "sport_car"
+    ],
     "n02666501": [
         "abandoned_ship",
         "derelict"
+    ],
+    "n02415577": [
+        "bighorn_sheep",
+        "cimarron",
+        "bighorn"
     ],
     "n04273796": [
         "speedometer",
@@ -57,6 +66,10 @@
     ],
     "n04343740": [
         "student_union"
+    ],
+    "n04019541": [
+        "puck",
+        "hockey_puck"
     ],
     "n07610890": [
         "charlotte"
@@ -119,9 +132,18 @@
     "n14858292": [
         "litter"
     ],
+    "n01955084": [
+        "chiton"
+    ],
+    "n11879895": [
+        "rapeseed"
+    ],
     "n04246731": [
         "meat_house",
         "smokehouse"
+    ],
+    "n03891251": [
+        "park_bench"
     ],
     "n02892499": [
         "brasserie"
@@ -138,6 +160,10 @@
     ],
     "n00456465": [
         "day_game"
+    ],
+    "n03207941": [
+        "dishwasher",
+        "dish_washer"
     ],
     "n03894051": [
         "particle_detector"
@@ -245,6 +271,10 @@
     "n04102618": [
         "roller_skate"
     ],
+    "n04461696": [
+        "wrecker",
+        "tow_truck"
+    ],
     "n02043063": [
         "tern"
     ],
@@ -276,6 +306,9 @@
     "n12708941": [
         "bergamot_orange",
         "bergamot"
+    ],
+    "n07742313": [
+        "granny_smith"
     ],
     "n11617878": [
         "knobcone_pine"
@@ -385,6 +418,10 @@
     ],
     "n03557590": [
         "ice_machine"
+    ],
+    "n03742115": [
+        "medicine_chest",
+        "medicine_cabinet"
     ],
     "n12274358": [
         "burr_oak",
@@ -538,9 +575,19 @@
     "n12801520": [
         "parnassia"
     ],
+    "n03938244": [
+        "pillow"
+    ],
     "n07730708": [
         "celeriac",
         "celery_root"
+    ],
+    "n02788148": [
+        "balusters",
+        "handrail",
+        "banister",
+        "bannister",
+        "balustrade"
     ],
     "n02769669": [
         "backlighting"
@@ -550,12 +597,20 @@
         "lariat",
         "reata"
     ],
+    "n03888605": [
+        "bars",
+        "parallel_bars"
+    ],
     "n02405440": [
         "banting",
         "banteng"
     ],
     "n02327842": [
         "snowshoe_hare"
+    ],
+    "n01665541": [
+        "leatherback_turtle",
+        "leatherback"
     ],
     "n02333546": [
         "brown_rat",
@@ -619,6 +674,9 @@
     ],
     "n04970398": [
         "indigo"
+    ],
+    "n02102480": [
+        "sussex_spaniel"
     ],
     "n03842585": [
         "cyma_reversa",
@@ -686,6 +744,9 @@
         "windshield",
         "windscreen"
     ],
+    "n01644900": [
+        "tailed_frog"
+    ],
     "n12390099": [
         "pale_violet"
     ],
@@ -701,6 +762,10 @@
     "n13915023": [
         "ovoid"
     ],
+    "n09421951": [
+        "sandbar",
+        "sand_bar"
+    ],
     "n03934565": [
         "pier_table"
     ],
@@ -711,6 +776,9 @@
         "steakhouse",
         "chophouse"
     ],
+    "n02447366": [
+        "badger"
+    ],
     "n01931520": [
         "pinworm",
         "enterobius_vermicularis",
@@ -720,6 +788,9 @@
         "yacht",
         "racing_yacht"
     ],
+    "n04317175": [
+        "stethoscope"
+    ],
     "n12884260": [
         "toadflax"
     ],
@@ -728,6 +799,9 @@
     ],
     "n03256631": [
         "dunce_cap"
+    ],
+    "n02500267": [
+        "indri"
     ],
     "n03708843": [
         "magnetometer"
@@ -740,6 +814,10 @@
     ],
     "n02470238": [
         "simian"
+    ],
+    "n03599486": [
+        "rickshaw",
+        "jinrikisha"
     ],
     "n12058822": [
         "dactylorhiza_fuchsii"
@@ -754,6 +832,12 @@
     ],
     "n01405007": [
         "fucus"
+    ],
+    "n02165456": [
+        "lady_beetle",
+        "ladybird",
+        "ladybug",
+        "ladybird_beetle"
     ],
     "n10155849": [
         "hairdresser",
@@ -796,6 +880,9 @@
     "n01579578": [
         "jackdaw",
         "daw"
+    ],
+    "n07720875": [
+        "bell_pepper"
     ],
     "n07768068": [
         "bosc"
@@ -932,6 +1019,10 @@
     ],
     "n05263183": [
         "stubble"
+    ],
+    "n02120079": [
+        "white_fox",
+        "arctic_fox"
     ],
     "n03565288": [
         "imprint"
@@ -1082,6 +1173,10 @@
         "jersey_pine",
         "virginia_pine"
     ],
+    "n02123597": [
+        "siamese",
+        "siamese_cat"
+    ],
     "n02947977": [
         "candid_camera"
     ],
@@ -1125,6 +1220,9 @@
         "oka",
         "oca"
     ],
+    "n03837869": [
+        "obelisk"
+    ],
     "n01848648": [
         "widgeon",
         "wigeon"
@@ -1154,6 +1252,10 @@
     ],
     "n11906127": [
         "golden_cup"
+    ],
+    "n02927161": [
+        "butcher_shop",
+        "meat_market"
     ],
     "n02173373": [
         "japanese_beetle"
@@ -1195,6 +1297,10 @@
     "n07913537": [
         "virgin_mary"
     ],
+    "n03355925": [
+        "flagstaff",
+        "flagpole"
+    ],
     "n03915118": [
         "percolator"
     ],
@@ -1214,6 +1320,16 @@
     "n01858281": [
         "coscoroba"
     ],
+    "n01614925": [
+        "american_eagle",
+        "bald_eagle"
+    ],
+    "n02791124": [
+        "barber_chair"
+    ],
+    "n04366367": [
+        "suspension_bridge"
+    ],
     "n03086580": [
         "concert_hall"
     ],
@@ -1225,6 +1341,10 @@
     ],
     "n07896422": [
         "dubonnet"
+    ],
+    "n02109525": [
+        "saint_bernard",
+        "st_bernard"
     ],
     "n04266162": [
         "space_platform",
@@ -1284,6 +1404,10 @@
     ],
     "n07878283": [
         "stuffed_cabbage"
+    ],
+    "n03000684": [
+        "chain_saw",
+        "chainsaw"
     ],
     "n01490360": [
         "dusky_shark"
@@ -1415,6 +1539,9 @@
     "n01841679": [
         "wryneck"
     ],
+    "n01669191": [
+        "box_turtle"
+    ],
     "n02783994": [
         "baluster"
     ],
@@ -1479,6 +1606,10 @@
     ],
     "n01603600": [
         "waxwing"
+    ],
+    "n02992211": [
+        "violoncello",
+        "cello"
     ],
     "n03572321": [
         "inkwell"
@@ -1568,6 +1699,9 @@
     "n04168840": [
         "seismograph"
     ],
+    "n01692333": [
+        "gila_monster"
+    ],
     "n12498055": [
         "palo_verde"
     ],
@@ -1631,6 +1765,10 @@
     "n02380052": [
         "lipizzan"
     ],
+    "n03218198": [
+        "dog_sled",
+        "dogsled"
+    ],
     "n03518135": [
         "highball_glass"
     ],
@@ -1644,6 +1782,9 @@
     ],
     "n03443543": [
         "godown"
+    ],
+    "n03868863": [
+        "oxygen_mask"
     ],
     "n03323319": [
         "farthingale"
@@ -1705,6 +1846,11 @@
     "n01323355": [
         "sire"
     ],
+    "n03425413": [
+        "petrol_pump",
+        "gasoline_pump",
+        "gas_pump"
+    ],
     "n03302938": [
         "exhaust",
         "exhaust_system"
@@ -1733,12 +1879,19 @@
         "mezcal",
         "mescal"
     ],
+    "n02027492": [
+        "dunlin"
+    ],
     "n12023726": [
         "tanacetum_vulgare",
         "tansy"
     ],
     "n03784896": [
         "horseshoe_arch"
+    ],
+    "n01494475": [
+        "hammerhead_shark",
+        "hammerhead"
     ],
     "n03277149": [
         "electron_gun"
@@ -1797,6 +1950,9 @@
         "tyrannosaurus",
         "tyrannosaur"
     ],
+    "n01980166": [
+        "fiddler_crab"
+    ],
     "n03140126": [
         "crucible",
         "melting_pot"
@@ -1814,6 +1970,10 @@
     ],
     "n07583978": [
         "alphabet_soup"
+    ],
+    "n02120505": [
+        "gray_fox",
+        "grey_fox"
     ],
     "n07920663": [
         "instant_coffee"
@@ -1836,6 +1996,14 @@
     ],
     "n02200850": [
         "aedes_aegypti"
+    ],
+    "n02747177": [
+        "trash_can",
+        "wastebin",
+        "garbage_can",
+        "trash_bin",
+        "ashcan",
+        "dustbin"
     ],
     "n04035748": [
         "quirt"
@@ -1901,6 +2069,9 @@
     "n03495671": [
         "harpoon"
     ],
+    "n03376595": [
+        "folding_chair"
+    ],
     "n07741461": [
         "pippin"
     ],
@@ -1930,6 +2101,11 @@
     ],
     "n12047345": [
         "brassavola"
+    ],
+    "n07697537": [
+        "hot_dog",
+        "hotdog",
+        "red_hot"
     ],
     "n03549589": [
         "hurdle"
@@ -1965,11 +2141,18 @@
     "n07858484": [
         "tahini"
     ],
+    "n01689811": [
+        "alligator_lizard"
+    ],
     "n04525821": [
         "venn_diagram"
     ],
     "n03536568": [
         "horizontal_tail"
+    ],
+    "n02939185": [
+        "cauldron",
+        "caldron"
     ],
     "n12351091": [
         "achira",
@@ -2051,6 +2234,9 @@
     "n12733870": [
         "populus_tremula",
         "quaking_aspen"
+    ],
+    "n02979186": [
+        "cassette_player"
     ],
     "n04542329": [
         "voussoir"
@@ -2136,6 +2322,9 @@
     "n03256788": [
         "dune_buggy"
     ],
+    "n02074367": [
+        "dugong"
+    ],
     "n02247655": [
         "bemisia_tabaci",
         "superbug"
@@ -2143,6 +2332,10 @@
     "n02624987": [
         "chub_mackerel",
         "tinker"
+    ],
+    "n02835271": [
+        "tandem",
+        "tandem_bicycle"
     ],
     "n12957803": [
         "nardoo",
@@ -2189,8 +2382,17 @@
     "n04280845": [
         "spirometer"
     ],
+    "n02871525": [
+        "bookshop",
+        "bookstore",
+        "bookstall"
+    ],
     "n04070964": [
         "refrigerator_car"
+    ],
+    "n07836838": [
+        "chocolate_syrup",
+        "chocolate_sauce"
     ],
     "n03193107": [
         "diesel",
@@ -2203,9 +2405,23 @@
     "n11545350": [
         "pecopteris"
     ],
+    "n02002556": [
+        "white_stork"
+    ],
+    "n02105855": [
+        "shetland_sheepdog",
+        "shetland"
+    ],
+    "n03899768": [
+        "terrace",
+        "patio"
+    ],
     "n02256172": [
         "psyllid",
         "psylla"
+    ],
+    "n04266014": [
+        "space_shuttle"
     ],
     "n03423479": [
         "gas_heater"
@@ -2279,6 +2495,9 @@
     "n02146371": [
         "brown_bat"
     ],
+    "n06794110": [
+        "street_sign"
+    ],
     "n04158002": [
         "scuttle"
     ],
@@ -2297,8 +2516,14 @@
         "panty",
         "scanty"
     ],
+    "n02085936": [
+        "maltese"
+    ],
     "n04348070": [
         "submarine_torpedo"
+    ],
+    "n04462240": [
+        "toyshop"
     ],
     "n11682659": [
         "gemma"
@@ -2335,6 +2560,9 @@
     "n12513933": [
         "redbud"
     ],
+    "n02115913": [
+        "dhole"
+    ],
     "n03102516": [
         "coolant_system"
     ],
@@ -2367,6 +2595,10 @@
     "n03785721": [
         "morion"
     ],
+    "n02114712": [
+        "maned_wolf",
+        "red_wolf"
+    ],
     "n04265428": [
         "space_helmet"
     ],
@@ -2377,6 +2609,10 @@
         "tomato_ketchup",
         "catsup",
         "ketchup"
+    ],
+    "n03874293": [
+        "paddlewheel",
+        "paddle_wheel"
     ],
     "n02689748": [
         "air_horn"
@@ -2421,6 +2657,9 @@
     ],
     "n02962414": [
         "car_carrier"
+    ],
+    "n04479046": [
+        "trench_coat"
     ],
     "n04364160": [
         "lightning_arrester"
@@ -2497,8 +2736,18 @@
         "baulk",
         "rafter"
     ],
+    "n03649909": [
+        "mower",
+        "lawn_mower"
+    ],
+    "n02669723": [
+        "academic_gown"
+    ],
     "n03374372": [
         "fly_rod"
+    ],
+    "n02364673": [
+        "guinea_pig"
     ],
     "n03240892": [
         "drill_press"
@@ -2570,6 +2819,13 @@
     "n02820556": [
         "bedford_cord"
     ],
+    "n01749939": [
+        "green_mamba"
+    ],
+    "n04346328": [
+        "tope",
+        "stupa"
+    ],
     "n02307325": [
         "tent_caterpillar"
     ],
@@ -2590,11 +2846,18 @@
         "emmentaler",
         "emmental"
     ],
+    "n02088238": [
+        "basset",
+        "basset_hound"
+    ],
     "n12496949": [
         "logwood"
     ],
     "n07709172": [
         "potherb"
+    ],
+    "n04252077": [
+        "snowmobile"
     ],
     "n01748906": [
         "hamadryad",
@@ -2711,6 +2974,18 @@
         "claw_hammer",
         "clawhammer"
     ],
+    "n04264628": [
+        "space_bar"
+    ],
+    "n03764736": [
+        "milk_can"
+    ],
+    "n03026506": [
+        "christmas_stocking"
+    ],
+    "n04355933": [
+        "sunglass"
+    ],
     "n02184473": [
         "pediculus_humanus"
     ],
@@ -2791,6 +3066,11 @@
     "n00482122": [
         "netball"
     ],
+    "n03095699": [
+        "container_ship",
+        "containership",
+        "container_vessel"
+    ],
     "n04295777": [
         "staddle"
     ],
@@ -2855,6 +3135,9 @@
     "n07834872": [
         "russian_dressing"
     ],
+    "n03657121": [
+        "lens_cover"
+    ],
     "n02343320": [
         "golden_hamster",
         "syrian_hamster"
@@ -2870,6 +3153,13 @@
     "n02118643": [
         "vixen"
     ],
+    "n02769748": [
+        "knapsack",
+        "backpack",
+        "haversack",
+        "rucksack",
+        "back_pack"
+    ],
     "n01693783": [
         "chameleon",
         "chamaeleon"
@@ -2877,8 +3167,16 @@
     "n09846755": [
         "beekeeper"
     ],
+    "n04310018": [
+        "steam_locomotive"
+    ],
     "n07892418": [
         "vintage"
+    ],
+    "n01664065": [
+        "loggerhead_turtle",
+        "caretta_caretta",
+        "loggerhead"
     ],
     "n02271897": [
         "thrips"
@@ -2889,11 +3187,19 @@
     "n04559620": [
         "water_filter"
     ],
+    "n03787032": [
+        "mortarboard"
+    ],
     "n03244775": [
         "one_iron"
     ],
     "n02804123": [
         "bass_guitar"
+    ],
+    "n12620546": [
+        "rosehip",
+        "rose_hip",
+        "hip"
     ],
     "n02957252": [
         "capstan"
@@ -2930,6 +3236,9 @@
     "n15062057": [
         "stucco"
     ],
+    "n02091635": [
+        "otterhound"
+    ],
     "n02469248": [
         "scapular"
     ],
@@ -2939,12 +3248,19 @@
     "n02241008": [
         "backswimmer"
     ],
+    "n03721384": [
+        "marimba",
+        "xylophone"
+    ],
     "n03040376": [
         "white_room",
         "clean_room"
     ],
     "n03524976": [
         "hogshead"
+    ],
+    "n04238763": [
+        "slide_rule"
     ],
     "n04441093": [
         "tire_iron"
@@ -3009,6 +3325,9 @@
     ],
     "n06273414": [
         "call_forwarding"
+    ],
+    "n02105505": [
+        "komondor"
     ],
     "n03978966": [
         "polo_shirt"
@@ -3195,6 +3514,10 @@
         "boule",
         "buhl"
     ],
+    "n03733281": [
+        "labyrinth",
+        "maze"
+    ],
     "n02857907": [
         "boards"
     ],
@@ -3270,6 +3593,9 @@
     "n07618119": [
         "duff"
     ],
+    "n02097474": [
+        "tibetan_terrier"
+    ],
     "n07561848": [
         "balanced_diet"
     ],
@@ -3286,6 +3612,9 @@
     ],
     "n03289985": [
         "ensemble"
+    ],
+    "n02093647": [
+        "bedlington_terrier"
     ],
     "n04613015": [
         "yoke"
@@ -3410,6 +3739,9 @@
     "n03615790": [
         "khukuri"
     ],
+    "n04501370": [
+        "turnstile"
+    ],
     "n02042759": [
         "kittiwake"
     ],
@@ -3427,6 +3759,14 @@
     ],
     "n07822053": [
         "caper"
+    ],
+    "n02708093": [
+        "analog_clock"
+    ],
+    "n02398521": [
+        "river_horse",
+        "hippopotamus",
+        "hippo"
     ],
     "n03671914": [
         "linear_accelerator",
@@ -3447,6 +3787,10 @@
         "pinus_ponderosa",
         "ponderosa",
         "ponderosa_pine"
+    ],
+    "n02134084": [
+        "ice_bear",
+        "polar_bear"
     ],
     "n11792341": [
         "spathiphyllum"
@@ -3592,6 +3936,9 @@
     "n04182152": [
         "shadow_box"
     ],
+    "n03777568": [
+        "model_t"
+    ],
     "n03653583": [
         "reading_desk",
         "lectern"
@@ -3713,14 +4060,25 @@
         "shagbark_hickory",
         "shellbark"
     ],
+    "n02783161": [
+        "biro",
+        "ballpoint",
+        "ballpoint_pen"
+    ],
     "n12404729": [
         "trumpet_tree"
+    ],
+    "n02106550": [
+        "rottweiler"
     ],
     "n07906718": [
         "bourbon"
     ],
     "n01612476": [
         "hobby"
+    ],
+    "n03891332": [
+        "parking_meter"
     ],
     "n07807834": [
         "macaroni_salad"
@@ -3759,6 +4117,9 @@
     ],
     "n01670802": [
         "giant_tortoise"
+    ],
+    "n01751748": [
+        "sea_snake"
     ],
     "n09242389": [
         "chasm"
@@ -3817,6 +4178,9 @@
     "n02389128": [
         "palomino"
     ],
+    "n01631663": [
+        "eft"
+    ],
     "n12986227": [
         "tooth_fungus"
     ],
@@ -3832,6 +4196,9 @@
     ],
     "n11709674": [
         "magnolia"
+    ],
+    "n09288635": [
+        "geyser"
     ],
     "n03717447": [
         "manhole"
@@ -3857,6 +4224,9 @@
     "n02348788": [
         "pocket_mouse"
     ],
+    "n01704323": [
+        "triceratops"
+    ],
     "n04375615": [
         "synchronous_motor"
     ],
@@ -3881,6 +4251,10 @@
     ],
     "n02917607": [
         "bullnose"
+    ],
+    "n02098413": [
+        "lhasa_apso",
+        "lhasa"
     ],
     "n07584938": [
         "bouillon"
@@ -3991,6 +4365,14 @@
     "n02953197": [
         "cantilever_bridge"
     ],
+    "n03124170": [
+        "cowboy_hat"
+    ],
+    "n02481823": [
+        "chimpanzee",
+        "chimp",
+        "pan_troglodytes"
+    ],
     "n12329260": [
         "crape_myrtle"
     ],
@@ -4003,6 +4385,10 @@
     ],
     "n03684143": [
         "lock_gate"
+    ],
+    "n02514041": [
+        "snoek",
+        "barracouta"
     ],
     "n01319001": [
         "stayer"
@@ -4036,8 +4422,15 @@
     "n09259025": [
         "crag"
     ],
+    "n02115641": [
+        "warrigal",
+        "dingo"
+    ],
     "n04131929": [
         "salver"
+    ],
+    "n02111129": [
+        "leonberg"
     ],
     "n02424909": [
         "nyala"
@@ -4070,6 +4463,10 @@
     "n12681579": [
         "black_haw"
     ],
+    "n02111277": [
+        "newfoundland",
+        "newfoundland_dog"
+    ],
     "n00466630": [
         "match_play"
     ],
@@ -4093,6 +4490,9 @@
     "n03783873": [
         "monoplane"
     ],
+    "n04275548": [
+        "spider_web"
+    ],
     "n11712282": [
         "liriodendron_tulipifera",
         "tulip_poplar",
@@ -4115,8 +4515,14 @@
     "n07891189": [
         "near_beer"
     ],
+    "n03929855": [
+        "pickelhaube"
+    ],
     "n02871824": [
         "boom"
+    ],
+    "n02101556": [
+        "clumber"
     ],
     "n03603442": [
         "jungle_gym"
@@ -4166,6 +4572,10 @@
     "n09451237": [
         "supernova"
     ],
+    "n03529860": [
+        "home_theatre",
+        "home_theater"
+    ],
     "n09834699": [
         "ballet_dancer"
     ],
@@ -4177,6 +4587,9 @@
     ],
     "n01543175": [
         "baya"
+    ],
+    "n06596364": [
+        "comic_book"
     ],
     "n02454794": [
         "dasypus_novemcinctus",
@@ -4195,6 +4608,9 @@
         "caravansary",
         "khan",
         "caravanserai"
+    ],
+    "n04584207": [
+        "wig"
     ],
     "n01554448": [
         "woodcreeper"
@@ -4227,6 +4643,9 @@
     ],
     "n07678586": [
         "mincemeat"
+    ],
+    "n02007558": [
+        "flamingo"
     ],
     "n02181235": [
         "darkling_beetle",
@@ -4336,6 +4755,9 @@
         "sheet_piling",
         "sheet_pile"
     ],
+    "n02494079": [
+        "squirrel_monkey"
+    ],
     "n07895710": [
         "cabernet_sauvignon",
         "cabernet"
@@ -4363,6 +4785,10 @@
     ],
     "n07727868": [
         "green_bean"
+    ],
+    "n06785654": [
+        "crossword",
+        "crossword_puzzle"
     ],
     "n04069166": [
         "reflectometer"
@@ -4425,6 +4851,10 @@
     ],
     "n03491032": [
         "hang_glider"
+    ],
+    "n04074963": [
+        "remote",
+        "remote_control"
     ],
     "n03782794": [
         "monkey_wrench"
@@ -4494,6 +4924,10 @@
     ],
     "n04486616": [
         "troika"
+    ],
+    "n04258138": [
+        "solar_furnace",
+        "solar_collector"
     ],
     "n13154388": [
         "pinnule",
@@ -4671,6 +5105,9 @@
     "n12110236": [
         "wild_oat"
     ],
+    "n02134418": [
+        "sloth_bear"
+    ],
     "n02434954": [
         "muntjac",
         "barking_deer"
@@ -4727,6 +5164,11 @@
     "n11859472": [
         "spring_beauty"
     ],
+    "n04356056": [
+        "dark_glasses",
+        "shades",
+        "sunglasses"
+    ],
     "n04247544": [
         "smoothbore"
     ],
@@ -4771,6 +5213,9 @@
     "n03469903": [
         "gunny_sack"
     ],
+    "n03720891": [
+        "maraca"
+    ],
     "n07643026": [
         "lemon_curd"
     ],
@@ -4813,6 +5258,10 @@
     ],
     "n04370774": [
         "sweats"
+    ],
+    "n02114855": [
+        "coyote",
+        "canis_latrans"
     ],
     "n11624531": [
         "spruce"
@@ -4889,6 +5338,9 @@
     "n04370600": [
         "sweatshop"
     ],
+    "n04606251": [
+        "wreck"
+    ],
     "n03383211": [
         "forestay"
     ],
@@ -4946,6 +5398,14 @@
     "n02310717": [
         "woolly_bear"
     ],
+    "n06874185": [
+        "traffic_light",
+        "stoplight",
+        "traffic_signal"
+    ],
+    "n02102040": [
+        "english_springer"
+    ],
     "n02766792": [
         "baby_grand"
     ],
@@ -4964,11 +5424,17 @@
     "n01633406": [
         "hellbender"
     ],
+    "n04447861": [
+        "toilet_seat"
+    ],
     "n04003359": [
         "prince_albert"
     ],
     "n04198233": [
         "shirting"
+    ],
+    "n04458633": [
+        "totem_pole"
     ],
     "n02816768": [
         "beany",
@@ -4982,6 +5448,9 @@
     ],
     "n03097673": [
         "control_key"
+    ],
+    "n02088466": [
+        "bloodhound"
     ],
     "n07851926": [
         "processed_cheese"
@@ -5013,6 +5482,10 @@
     "n09618957": [
         "face"
     ],
+    "n02749479": [
+        "assault_gun",
+        "assault_rifle"
+    ],
     "n06276697": [
         "broadcasting"
     ],
@@ -5037,6 +5510,9 @@
     "n05260240": [
         "pompadour"
     ],
+    "n03788365": [
+        "mosquito_net"
+    ],
     "n01944955": [
         "garden_snail"
     ],
@@ -5057,6 +5533,16 @@
         "ticket_booth",
         "ticket_office"
     ],
+    "n03908618": [
+        "pencil_case"
+    ],
+    "n02422699": [
+        "impala"
+    ],
+    "n03496892": [
+        "reaper",
+        "harvester"
+    ],
     "n02871963": [
         "throwing_stick",
         "boomerang"
@@ -5066,6 +5552,9 @@
     ],
     "n03349892": [
         "first_class"
+    ],
+    "n02113799": [
+        "standard_poodle"
     ],
     "n03668067": [
         "lightning_rod",
@@ -5102,6 +5591,9 @@
     "n11811706": [
         "ragged_robin"
     ],
+    "n02790996": [
+        "barbell"
+    ],
     "n01611800": [
         "gyrfalcon"
     ],
@@ -5117,6 +5609,9 @@
     ],
     "n03459328": [
         "griddle"
+    ],
+    "n01693334": [
+        "green_lizard"
     ],
     "n03485198": [
         "hand_mirror"
@@ -5156,6 +5651,9 @@
     "n01617443": [
         "bearded_vulture",
         "lammergeier"
+    ],
+    "n02013706": [
+        "limpkin"
     ],
     "n03005285": [
         "pendant",
@@ -5219,6 +5717,9 @@
     ],
     "n07922147": [
         "perry"
+    ],
+    "n02100735": [
+        "english_setter"
     ],
     "n04611916": [
         "yardstick"
@@ -5324,6 +5825,9 @@
     "n02059852": [
         "giant_petrel"
     ],
+    "n01829413": [
+        "hornbill"
+    ],
     "n03474896": [
         "haft"
     ],
@@ -5346,6 +5850,9 @@
     ],
     "n03828020": [
         "nonsmoker"
+    ],
+    "n04131690": [
+        "salt_shaker"
     ],
     "n04538403": [
         "viscose",
@@ -5396,6 +5903,9 @@
     "n02093056": [
         "bull_terrier"
     ],
+    "n01806567": [
+        "quail"
+    ],
     "n11685091": [
         "pip"
     ],
@@ -5430,6 +5940,9 @@
     ],
     "n02378415": [
         "warhorse"
+    ],
+    "n09472597": [
+        "volcano"
     ],
     "n07600394": [
         "butterscotch"
@@ -5567,8 +6080,14 @@
     "n07611148": [
         "dumpling"
     ],
+    "n01784675": [
+        "centipede"
+    ],
     "n12479537": [
         "dracaena"
+    ],
+    "n03598930": [
+        "jigsaw_puzzle"
     ],
     "n02770830": [
         "backseat"
@@ -5580,6 +6099,14 @@
     "n03233744": [
         "lift_bridge",
         "drawbridge"
+    ],
+    "n02256656": [
+        "cicada",
+        "cicala"
+    ],
+    "n03967562": [
+        "plough",
+        "plow"
     ],
     "n02533834": [
         "anchovy"
@@ -5706,6 +6233,9 @@
     "n11632619": [
         "cupressus_sempervirens",
         "mediterranean_cypress"
+    ],
+    "n01440764": [
+        "tench"
     ],
     "n13226320": [
         "quillwort"
@@ -5874,6 +6404,10 @@
     "n02656301": [
         "burrfish"
     ],
+    "n03930313": [
+        "paling",
+        "picket_fence"
+    ],
     "n03688504": [
         "long_tom"
     ],
@@ -5893,6 +6427,13 @@
     ],
     "n07840395": [
         "curry_sauce"
+    ],
+    "n01687978": [
+        "agama"
+    ],
+    "n02672831": [
+        "piano_accordion",
+        "accordion"
     ],
     "n04184316": [
         "shantung"
@@ -5932,6 +6473,9 @@
     "n02062744": [
         "whale"
     ],
+    "n07745940": [
+        "strawberry"
+    ],
     "n03206282": [
         "disco",
         "discotheque"
@@ -5952,6 +6496,16 @@
     "n12399384": [
         "morus_alba",
         "white_mulberry"
+    ],
+    "n02977058": [
+        "atm",
+        "automatic_teller",
+        "cash_machine",
+        "automated_teller",
+        "cash_dispenser"
+    ],
+    "n13040303": [
+        "stinkhorn"
     ],
     "n07894551": [
         "chablis"
@@ -6079,11 +6633,18 @@
     "n03596543": [
         "jetliner"
     ],
+    "n03223299": [
+        "doormat"
+    ],
     "n04219580": [
         "silks"
     ],
     "n03219010": [
         "doyley"
+    ],
+    "n02492660": [
+        "howler",
+        "howler_monkey"
     ],
     "n02767956": [
         "backbench"
@@ -6108,6 +6669,9 @@
     ],
     "n04487894": [
         "troopship"
+    ],
+    "n03796401": [
+        "moving_van"
     ],
     "n13150894": [
         "peperomia"
@@ -6153,6 +6717,10 @@
     "n09344724": [
         "maar"
     ],
+    "n02102318": [
+        "cocker_spaniel",
+        "cocker"
+    ],
     "n07803213": [
         "pearl_barley"
     ],
@@ -6187,6 +6755,10 @@
     "n11902389": [
         "papaver_somniferum",
         "opium_poppy"
+    ],
+    "n15075141": [
+        "toilet_paper",
+        "bathroom_tissue"
     ],
     "n11680596": [
         "pollen_tube"
@@ -6309,6 +6881,9 @@
         "vibraharp",
         "vibes",
         "vibraphone"
+    ],
+    "n03874599": [
+        "padlock"
     ],
     "n04084517": [
         "return"
@@ -6518,6 +7093,9 @@
     "n07934800": [
         "darjeeling"
     ],
+    "n03908714": [
+        "pencil_sharpener"
+    ],
     "n03939677": [
         "wheelhouse",
         "pilothouse"
@@ -6542,8 +7120,14 @@
         "tank_engine",
         "tank_locomotive"
     ],
+    "n02786058": [
+        "band_aid"
+    ],
     "n02878534": [
         "boudoir"
+    ],
+    "n03544143": [
+        "hourglass"
     ],
     "n02491107": [
         "tamarin"
@@ -6588,6 +7172,9 @@
         "statice",
         "sea_lavender"
     ],
+    "n02091032": [
+        "italian_greyhound"
+    ],
     "n01953361": [
         "cowrie",
         "cowry"
@@ -6606,6 +7193,10 @@
     "n03493792": [
         "hardware",
         "ironware"
+    ],
+    "n03535780": [
+        "high_bar",
+        "horizontal_bar"
     ],
     "n06274092": [
         "long_distance"
@@ -6673,6 +7264,9 @@
     ],
     "n04458201": [
         "torture_chamber"
+    ],
+    "n02110341": [
+        "dalmatian"
     ],
     "n07605040": [
         "spun_sugar",
@@ -6775,6 +7369,9 @@
     "n12524188": [
         "blackwood"
     ],
+    "n03637318": [
+        "lampshade"
+    ],
     "n02836607": [
         "bifocals"
     ],
@@ -6786,6 +7383,9 @@
     ],
     "n01841102": [
         "sapsucker"
+    ],
+    "n03042490": [
+        "cliff_dwelling"
     ],
     "n07921834": [
         "scrumpy"
@@ -6877,6 +7477,10 @@
         "cardiologist",
         "heart_surgeon"
     ],
+    "n01695060": [
+        "komodo_dragon",
+        "giant_lizard"
+    ],
     "n02636854": [
         "mojarra"
     ],
@@ -6911,6 +7515,10 @@
     "n01323781": [
         "giant"
     ],
+    "n02109961": [
+        "eskimo_dog",
+        "husky"
+    ],
     "n02040266": [
         "stone_curlew"
     ],
@@ -6919,6 +7527,10 @@
     ],
     "n01606177": [
         "tercel"
+    ],
+    "n04357314": [
+        "sunscreen",
+        "sunblock"
     ],
     "n02848921": [
         "blank",
@@ -6974,6 +7586,9 @@
     "n01748686": [
         "spitting_cobra"
     ],
+    "n02002724": [
+        "black_stork"
+    ],
     "n02895438": [
         "breathalyser",
         "breathalyzer"
@@ -6983,6 +7598,9 @@
     ],
     "n01690466": [
         "glass_lizard"
+    ],
+    "n01484850": [
+        "white_shark"
     ],
     "n01595624": [
         "martin"
@@ -6996,6 +7614,10 @@
     "n00467536": [
         "shuffleboard"
     ],
+    "n02504458": [
+        "african_elephant",
+        "loxodonta_africana"
+    ],
     "n04382695": [
         "tachograph"
     ],
@@ -7004,6 +7626,9 @@
     ],
     "n02794008": [
         "barograph"
+    ],
+    "n02086910": [
+        "papillon"
     ],
     "n07827750": [
         "poppy_seed"
@@ -7074,11 +7699,20 @@
     "n04579056": [
         "whiskey_bottle"
     ],
+    "n01775062": [
+        "wolf_spider"
+    ],
     "n03465151": [
         "guard_ship"
     ],
     "n12926039": [
         "hevea_brasiliensis"
+    ],
+    "n02966193": [
+        "roundabout",
+        "carousel",
+        "whirligig",
+        "carrousel"
     ],
     "n07855510": [
         "peanut_butter"
@@ -7144,6 +7778,10 @@
         "witness_box",
         "witness_stand"
     ],
+    "n03594945": [
+        "landrover",
+        "jeep"
+    ],
     "n13030337": [
         "elf_cup"
     ],
@@ -7189,6 +7827,9 @@
         "aviary",
         "bird_sanctuary"
     ],
+    "n02116738": [
+        "lycaon_pictus"
+    ],
     "n03415252": [
         "gamp",
         "brolly"
@@ -7217,6 +7858,9 @@
     ],
     "n11926365": [
         "silversword"
+    ],
+    "n02097047": [
+        "miniature_schnauzer"
     ],
     "n02922578": [
         "burka",
@@ -7291,11 +7935,17 @@
         "picea_abies",
         "norway_spruce"
     ],
+    "n01798484": [
+        "prairie_chicken"
+    ],
     "n03518305": [
         "tallboy"
     ],
     "n11646167": [
         "monkey_puzzle"
+    ],
+    "n02971356": [
+        "carton"
     ],
     "n10297234": [
         "mascot"
@@ -7443,8 +8093,15 @@
     "n12330469": [
         "myrtle"
     ],
+    "n03710193": [
+        "letter_box",
+        "mailbox"
+    ],
     "n07812790": [
         "lemon_oil"
+    ],
+    "n03792782": [
+        "mountain_bike"
     ],
     "n03451798": [
         "graffiti",
@@ -7617,6 +8274,9 @@
     "n02115096": [
         "jackal"
     ],
+    "n02085620": [
+        "chihuahua"
+    ],
     "n11961100": [
         "mum"
     ],
@@ -7787,6 +8447,9 @@
     "n11866248": [
         "cleome"
     ],
+    "n07831146": [
+        "carbonara"
+    ],
     "n02216740": [
         "gall_wasp"
     ],
@@ -7868,6 +8531,9 @@
         "tasmanian_tiger",
         "thylacine"
     ],
+    "n02099712": [
+        "labrador_retriever"
+    ],
     "n04063154": [
         "record_changer",
         "changer"
@@ -7877,6 +8543,9 @@
     ],
     "n04273659": [
         "speed_bump"
+    ],
+    "n02100877": [
+        "irish_setter"
     ],
     "n04245218": [
         "scsi"
@@ -7894,6 +8563,18 @@
     ],
     "n12092262": [
         "pimpernel"
+    ],
+    "n12985857": [
+        "coral_fungus"
+    ],
+    "n03998194": [
+        "prayer_rug"
+    ],
+    "n02870880": [
+        "bookcase"
+    ],
+    "n02727426": [
+        "apiary"
     ],
     "n02925666": [
         "combat_boot",
@@ -7914,6 +8595,9 @@
     ],
     "n10467179": [
         "president"
+    ],
+    "n04442312": [
+        "toaster"
     ],
     "n12044467": [
         "aerides"
@@ -8019,6 +8703,9 @@
     "n01916481": [
         "sea_fan"
     ],
+    "n01580077": [
+        "jay"
+    ],
     "n04390873": [
         "tannoy"
     ],
@@ -8088,6 +8775,10 @@
     "n04953296": [
         "glint"
     ],
+    "n04141076": [
+        "sax",
+        "saxophone"
+    ],
     "n04509171": [
         "undies"
     ],
@@ -8126,6 +8817,11 @@
     "n03424630": [
         "petrol_engine",
         "gasoline_engine"
+    ],
+    "n02817516": [
+        "shako",
+        "bearskin",
+        "busby"
     ],
     "n12920204": [
         "christmas_star",
@@ -8229,6 +8925,9 @@
     "n12138248": [
         "kaoliang"
     ],
+    "n01883070": [
+        "wombat"
+    ],
     "n13098962": [
         "bast",
         "phloem"
@@ -8236,6 +8935,11 @@
     "n02682311": [
         "adze",
         "adz"
+    ],
+    "n02110063": [
+        "malamute",
+        "alaskan_malamute",
+        "malemute"
     ],
     "n02381609": [
         "tarpan"
@@ -8260,6 +8964,10 @@
     ],
     "n04495555": [
         "tudor_arch"
+    ],
+    "n02107142": [
+        "doberman",
+        "doberman_pinscher"
     ],
     "n09450163": [
         "sun"
@@ -8337,6 +9045,9 @@
     "n07698543": [
         "reuben"
     ],
+    "n02105251": [
+        "briard"
+    ],
     "n10755080": [
         "violist"
     ],
@@ -8347,8 +9058,14 @@
         "tinfoil",
         "tin_foil"
     ],
+    "n04371774": [
+        "swing"
+    ],
     "n07887967": [
         "light_beer"
+    ],
+    "n04243546": [
+        "slot"
     ],
     "n03911767": [
         "penlight"
@@ -8382,6 +9099,12 @@
     ],
     "n07890540": [
         "guinness"
+    ],
+    "n02536864": [
+        "cohoe",
+        "coho_salmon",
+        "silver_salmon",
+        "coho"
     ],
     "n03672827": [
         "line_printer"
@@ -8488,8 +9211,14 @@
         "rusk",
         "zwieback"
     ],
+    "n03717622": [
+        "manhole_cover"
+    ],
     "n13152339": [
         "yerba_mansa"
+    ],
+    "n01491361": [
+        "tiger_shark"
     ],
     "n07927836": [
         "bitter_lemon"
@@ -8560,6 +9289,12 @@
     ],
     "n03764822": [
         "milk_float"
+    ],
+    "n02114367": [
+        "timber_wolf",
+        "canis_lupus",
+        "gray_wolf",
+        "grey_wolf"
     ],
     "n03707766": [
         "magnetic_stripe"
@@ -8731,6 +9466,9 @@
     "n07729225": [
         "butterbean"
     ],
+    "n04136333": [
+        "sarong"
+    ],
     "n01687128": [
         "teju"
     ],
@@ -8757,6 +9495,9 @@
     "n03541393": [
         "hospital_train"
     ],
+    "n02091134": [
+        "whippet"
+    ],
     "n03641569": [
         "lanyard"
     ],
@@ -8775,6 +9516,9 @@
     "n01906749": [
         "sponge"
     ],
+    "n01986214": [
+        "hermit_crab"
+    ],
     "n05453657": [
         "neutrophil"
     ],
@@ -8785,6 +9529,11 @@
     "n04290507": [
         "spur_gear",
         "spur_wheel"
+    ],
+    "n02841315": [
+        "binoculars",
+        "field_glasses",
+        "opera_glasses"
     ],
     "n06273555": [
         "call_in"
@@ -8803,6 +9552,9 @@
     ],
     "n01415626": [
         "eukaryote"
+    ],
+    "n03794056": [
+        "mousetrap"
     ],
     "n03674731": [
         "link_trainer"
@@ -8855,6 +9607,9 @@
     "n01555004": [
         "pitta"
     ],
+    "n03075370": [
+        "combination_lock"
+    ],
     "n04127395": [
         "guardrail"
     ],
@@ -8885,6 +9640,9 @@
     "n03710421": [
         "maildrop"
     ],
+    "n03902125": [
+        "pay_phone"
+    ],
     "n02450295": [
         "pine_marten"
     ],
@@ -8896,6 +9654,9 @@
     ],
     "n01569566": [
         "blackpoll"
+    ],
+    "n02676566": [
+        "acoustic_guitar"
     ],
     "n02426813": [
         "eland"
@@ -8937,6 +9698,9 @@
     ],
     "n02875948": [
         "borstal"
+    ],
+    "n02095889": [
+        "sealyham"
     ],
     "n02414290": [
         "merino_sheep",
@@ -8983,6 +9747,9 @@
     ],
     "n04124098": [
         "saddlebag"
+    ],
+    "n01537544": [
+        "indigo_bunting"
     ],
     "n02734835": [
         "architrave"
@@ -9071,6 +9838,9 @@
     "n12969425": [
         "scleroderma_citrinum"
     ],
+    "n04532670": [
+        "viaduct"
+    ],
     "n02300554": [
         "bombyx_mori"
     ],
@@ -9099,6 +9869,9 @@
     "n12454159": [
         "tulip"
     ],
+    "n03250847": [
+        "drumstick"
+    ],
     "n12024445": [
         "common_dandelion",
         "taraxacum_officinale"
@@ -9113,6 +9886,10 @@
         "guinea_corn",
         "doura",
         "durra"
+    ],
+    "n04200800": [
+        "shoe_store",
+        "shoe_shop"
     ],
     "n04075813": [
         "rep",
@@ -9161,11 +9938,17 @@
     "n05578095": [
         "heel"
     ],
+    "n02397096": [
+        "warthog"
+    ],
     "n03469832": [
         "gunnery"
     ],
     "n12934036": [
         "astrantia"
+    ],
+    "n02110806": [
+        "basenji"
     ],
     "n03180865": [
         "detached_house",
@@ -9218,6 +10001,9 @@
         "rebate",
         "rabbet"
     ],
+    "n03388183": [
+        "fountain_pen"
+    ],
     "n02008041": [
         "heron"
     ],
@@ -9236,6 +10022,9 @@
     ],
     "n02248887": [
         "soft_scale"
+    ],
+    "n12057211": [
+        "cypripedium_calceolus"
     ],
     "n03474167": [
         "habit"
@@ -9279,6 +10068,16 @@
         "tumbling",
         "acrobatics"
     ],
+    "n02859443": [
+        "boathouse"
+    ],
+    "n04252225": [
+        "snowplow",
+        "snowplough"
+    ],
+    "n02422106": [
+        "hartebeest"
+    ],
     "n06892775": [
         "concert"
     ],
@@ -9294,6 +10093,9 @@
     "n07693590": [
         "danish_pastry",
         "danish"
+    ],
+    "n04548280": [
+        "wall_clock"
     ],
     "n03029445": [
         "churn",
@@ -9332,6 +10134,9 @@
     "n13225365": [
         "resurrection_plant"
     ],
+    "n02037110": [
+        "oystercatcher"
+    ],
     "n03551582": [
         "hydraulic_pump",
         "hydraulic_ram"
@@ -9343,6 +10148,9 @@
         "mechanical_man",
         "android",
         "humanoid"
+    ],
+    "n01740131": [
+        "night_snake"
     ],
     "n02184720": [
         "cootie",
@@ -9359,6 +10167,10 @@
     ],
     "n01958531": [
         "geoduck"
+    ],
+    "n03642806": [
+        "laptop",
+        "laptop_computer"
     ],
     "n02122580": [
         "stray"
@@ -9406,6 +10218,10 @@
     "n02905036": [
         "broiler"
     ],
+    "n09332890": [
+        "lakeshore",
+        "lakeside"
+    ],
     "n01876667": [
         "bilby"
     ],
@@ -9435,8 +10251,17 @@
     "n03175983": [
         "dental_implant"
     ],
+    "n02701002": [
+        "ambulance"
+    ],
     "n11946051": [
         "safflower"
+    ],
+    "n02814860": [
+        "lighthouse",
+        "pharos",
+        "beacon",
+        "beacon_light"
     ],
     "n03300216": [
         "ethernet"
@@ -9465,6 +10290,9 @@
     "n07743902": [
         "cranberry"
     ],
+    "n02791270": [
+        "barbershop"
+    ],
     "n03426134": [
         "petrol_tank",
         "gas_tank",
@@ -9473,6 +10301,9 @@
     "n01448594": [
         "guppy",
         "rainbow_fish"
+    ],
+    "n13044778": [
+        "earthstar"
     ],
     "n01622120": [
         "athene_noctua",
@@ -9533,6 +10364,9 @@
     "n01559477": [
         "hermit_thrush"
     ],
+    "n02483708": [
+        "siamang"
+    ],
     "n12484784": [
         "bogbean",
         "bog_myrtle"
@@ -9590,6 +10424,9 @@
     ],
     "n03063199": [
         "coffee_filter"
+    ],
+    "n04613696": [
+        "yurt"
     ],
     "n08182379": [
         "crowd"
@@ -9724,6 +10561,12 @@
     "n04398951": [
         "tea_table"
     ],
+    "n03876231": [
+        "paintbrush"
+    ],
+    "n03775546": [
+        "mixing_bowl"
+    ],
     "n12624568": [
         "japonica"
     ],
@@ -9733,6 +10576,9 @@
     ],
     "n02660208": [
         "halibut"
+    ],
+    "n03062245": [
+        "cocktail_shaker"
     ],
     "n02869563": [
         "boneshaker"
@@ -9751,6 +10597,9 @@
     ],
     "n02564720": [
         "black_bass"
+    ],
+    "n01592084": [
+        "chickadee"
     ],
     "n07897865": [
         "rioja"
@@ -9825,6 +10674,11 @@
     ],
     "n00476235": [
         "stickball"
+    ],
+    "n04599235": [
+        "woollen",
+        "woolen",
+        "wool"
     ],
     "n03610418": [
         "keg"
@@ -9970,12 +10824,18 @@
     "n01617766": [
         "egyptian_vulture"
     ],
+    "n02096585": [
+        "boston_terrier"
+    ],
     "n03781055": [
         "petrol_bomb",
         "molotov_cocktail"
     ],
     "n02803809": [
         "basset_horn"
+    ],
+    "n04562935": [
+        "water_tower"
     ],
     "n03326948": [
         "magic_marker"
@@ -9986,6 +10846,10 @@
     "n04020912": [
         "pullman",
         "pullman_car"
+    ],
+    "n02130308": [
+        "acinonyx_jubatus",
+        "cheetah"
     ],
     "n01340522": [
         "polyoma_virus",
@@ -10018,6 +10882,9 @@
     ],
     "n02137888": [
         "ichneumon"
+    ],
+    "n02089973": [
+        "english_foxhound"
     ],
     "n02029378": [
         "sanderling"
@@ -10077,6 +10944,10 @@
     "n07874441": [
         "sicilian_pizza"
     ],
+    "n02106662": [
+        "alsatian",
+        "german_shepherd"
+    ],
     "n01791107": [
         "jungle_fowl",
         "gallina"
@@ -10130,6 +11001,9 @@
     "n12705013": [
         "milkwort"
     ],
+    "n02105162": [
+        "malinois"
+    ],
     "n02513939": [
         "spawner"
     ],
@@ -10177,6 +11051,9 @@
     "n02501583": [
         "tarsier"
     ],
+    "n04542943": [
+        "waffle_iron"
+    ],
     "n04562496": [
         "waterspout"
     ],
@@ -10199,6 +11076,9 @@
     ],
     "n09436444": [
         "ski_slope"
+    ],
+    "n02093754": [
+        "border_terrier"
     ],
     "n04074185": [
         "reliquary"
@@ -10424,6 +11304,9 @@
         "pawnshop",
         "loan_office"
     ],
+    "n02276258": [
+        "admiral"
+    ],
     "n01316422": [
         "scavenger"
     ],
@@ -10447,6 +11330,9 @@
     "n03855756": [
         "orlon"
     ],
+    "n03445924": [
+        "golf_cart"
+    ],
     "n04146504": [
         "school_bell"
     ],
@@ -10456,6 +11342,9 @@
     "n07768230": [
         "bartlett"
     ],
+    "n04120489": [
+        "running_shoe"
+    ],
     "n04307767": [
         "staysail"
     ],
@@ -10464,6 +11353,9 @@
     ],
     "n03274435": [
         "electric_typewriter"
+    ],
+    "n03197337": [
+        "digital_watch"
     ],
     "n12754648": [
         "field_maple",
@@ -10486,6 +11378,10 @@
     ],
     "n02048115": [
         "horned_puffin"
+    ],
+    "n01753488": [
+        "horned_viper",
+        "cerastes"
     ],
     "n02288268": [
         "inchworm",
@@ -10546,6 +11442,9 @@
     "n02475669": [
         "modern_man"
     ],
+    "n03617480": [
+        "kimono"
+    ],
     "n02485688": [
         "green_monkey"
     ],
@@ -10602,6 +11501,9 @@
     ],
     "n11760785": [
         "calliandra"
+    ],
+    "n03196217": [
+        "digital_clock"
     ],
     "n02932693": [
         "cabin_class",
@@ -10684,6 +11586,9 @@
     "n07624757": [
         "knish"
     ],
+    "n04069434": [
+        "reflex_camera"
+    ],
     "n11873182": [
         "horseradish"
     ],
@@ -10695,6 +11600,10 @@
     ],
     "n07921239": [
         "turkish_coffee"
+    ],
+    "n02128757": [
+        "ounce",
+        "snow_leopard"
     ],
     "n04201733": [
         "shooting_brake"
@@ -10742,6 +11651,9 @@
     ],
     "n00442437": [
         "bathe"
+    ],
+    "n03676483": [
+        "lipstick"
     ],
     "n07591586": [
         "bouillabaisse"
@@ -10793,6 +11705,9 @@
     "n07628068": [
         "phyllo"
     ],
+    "n02088632": [
+        "bluetick"
+    ],
     "n02027075": [
         "spotted_sandpiper"
     ],
@@ -10820,6 +11735,9 @@
     "n03174079": [
         "delta_wing"
     ],
+    "n01744401": [
+        "rock_python"
+    ],
     "n02010272": [
         "cattle_egret"
     ],
@@ -10828,6 +11746,9 @@
     ],
     "n02563949": [
         "spotted_sunfish"
+    ],
+    "n02165105": [
+        "tiger_beetle"
     ],
     "n04459018": [
         "toupee"
@@ -10888,6 +11809,9 @@
     "n03082450": [
         "compress"
     ],
+    "n07613480": [
+        "trifle"
+    ],
     "n02542958": [
         "argentine"
     ],
@@ -10934,6 +11858,9 @@
     "n03137579": [
         "crosspiece"
     ],
+    "n04127249": [
+        "safety_pin"
+    ],
     "n04081699": [
         "rest_house"
     ],
@@ -10952,6 +11879,9 @@
     "n03618982": [
         "kirk"
     ],
+    "n02108915": [
+        "french_bulldog"
+    ],
     "n07740033": [
         "cortland"
     ],
@@ -10964,11 +11894,17 @@
     "n07896765": [
         "moselle"
     ],
+    "n01978455": [
+        "rock_crab"
+    ],
     "n03104512": [
         "copperware"
     ],
     "n03470948": [
         "gurney"
+    ],
+    "n03920288": [
+        "petri_dish"
     ],
     "n07928163": [
         "cream_soda"
@@ -10988,6 +11924,13 @@
     "n02857477": [
         "boarding_house",
         "boardinghouse"
+    ],
+    "n03085013": [
+        "keypad",
+        "computer_keyboard"
+    ],
+    "n04597913": [
+        "wooden_spoon"
     ],
     "n02392434": [
         "indian_rhinoceros"
@@ -11042,6 +11985,9 @@
     "n07596160": [
         "icing_sugar"
     ],
+    "n01560419": [
+        "bulbul"
+    ],
     "n01956764": [
         "seashell"
     ],
@@ -11088,6 +12034,9 @@
         "dual_carriageway",
         "divided_highway"
     ],
+    "n03290653": [
+        "entertainment_center"
+    ],
     "n15089803": [
         "vitamin_a"
     ],
@@ -11110,6 +12059,9 @@
     ],
     "n04082710": [
         "retaining_wall"
+    ],
+    "n02105641": [
+        "bobtail"
     ],
     "n02880842": [
         "bowie_knife"
@@ -11140,11 +12092,17 @@
     "n07879350": [
         "sashimi"
     ],
+    "n03770679": [
+        "minivan"
+    ],
     "n02994573": [
         "center_punch"
     ],
     "n12113195": [
         "feathertop"
+    ],
+    "n03733805": [
+        "measuring_cup"
     ],
     "n03370387": [
         "fluorescent_lamp"
@@ -11346,6 +12304,9 @@
         "jacaranda",
         "brazilian_rosewood"
     ],
+    "n03272562": [
+        "electric_locomotive"
+    ],
     "n04498873": [
         "turbogenerator"
     ],
@@ -11379,6 +12340,9 @@
     "n03813946": [
         "nebuchadnezzar"
     ],
+    "n04044716": [
+        "radio_telescope"
+    ],
     "n02693246": [
         "air_terminal",
         "airport_terminal"
@@ -11392,12 +12356,20 @@
     "n03574243": [
         "instep"
     ],
+    "n03770439": [
+        "miniskirt",
+        "mini"
+    ],
     "n07616748": [
         "banana_split"
     ],
     "n09249034": [
         "gap",
         "col"
+    ],
+    "n04487081": [
+        "trackless_trolley",
+        "trolleybus"
     ],
     "n02060133": [
         "fulmar"
@@ -11439,6 +12411,9 @@
     "n04022434": [
         "pump_action"
     ],
+    "n02112018": [
+        "pomeranian"
+    ],
     "n09239302": [
         "cavern"
     ],
@@ -11453,6 +12428,12 @@
     ],
     "n02438173": [
         "guanaco"
+    ],
+    "n07695742": [
+        "pretzel"
+    ],
+    "n01882714": [
+        "koala"
     ],
     "n04310721": [
         "steam_whistle"
@@ -11512,6 +12493,10 @@
     "n10564098": [
         "screen_actor",
         "movie_actor"
+    ],
+    "n07871810": [
+        "meat_loaf",
+        "meatloaf"
     ],
     "n02613181": [
         "blenny",
@@ -11577,6 +12562,9 @@
     "n02378541": [
         "cavalry_horse"
     ],
+    "n02110958": [
+        "pug"
+    ],
     "n03688605": [
         "long_pants",
         "long_trousers"
@@ -11601,6 +12589,12 @@
     ],
     "n12270946": [
         "quercus_chrysolepis"
+    ],
+    "n02110185": [
+        "siberian_husky"
+    ],
+    "n07565083": [
+        "menu"
     ],
     "n11690254": [
         "hypanthium",
@@ -11640,6 +12634,9 @@
     "n03622839": [
         "knee_brace"
     ],
+    "n02018207": [
+        "american_coot"
+    ],
     "n01925916": [
         "cercaria"
     ],
@@ -11652,6 +12649,9 @@
     ],
     "n09896685": [
         "carpenter"
+    ],
+    "n03379051": [
+        "football_helmet"
     ],
     "n03215191": [
         "dive_bomber"
@@ -11722,6 +12722,10 @@
     "n01683201": [
         "worm_lizard"
     ],
+    "n02097298": [
+        "scottish_terrier",
+        "scottie"
+    ],
     "n12825497": [
         "dodder"
     ],
@@ -11737,6 +12741,9 @@
     ],
     "n03983712": [
         "popper"
+    ],
+    "n04423845": [
+        "thimble"
     ],
     "n02588286": [
         "grunt"
@@ -11771,6 +12778,12 @@
     "n03270854": [
         "electric_blanket"
     ],
+    "n01641577": [
+        "bullfrog"
+    ],
+    "n02417914": [
+        "ibex"
+    ],
     "n04233715": [
         "slacks"
     ],
@@ -11790,9 +12803,19 @@
         "strawberry_tree",
         "arbutus_unedo"
     ],
+    "n03884397": [
+        "panpipe",
+        "syrinx"
+    ],
+    "n03314780": [
+        "face_powder"
+    ],
     "n02941845": [
         "aventail",
         "camail"
+    ],
+    "n02105056": [
+        "groenendael"
     ],
     "n03730334": [
         "maternity_hospital"
@@ -11831,6 +12854,9 @@
     ],
     "n12002428": [
         "butterbur"
+    ],
+    "n04209239": [
+        "shower_curtain"
     ],
     "n02829596": [
         "bench_press"
@@ -11891,6 +12917,9 @@
     ],
     "n03317788": [
         "faience"
+    ],
+    "n02489166": [
+        "proboscis_monkey"
     ],
     "n03294604": [
         "eprom"
@@ -11960,6 +12989,10 @@
     ],
     "n02823335": [
         "beer_barrel"
+    ],
+    "n04033901": [
+        "quill",
+        "quill_pen"
     ],
     "n04295571": [
         "stacks"
@@ -12031,6 +13064,9 @@
     "n02723165": [
         "antiperspirant"
     ],
+    "n03467068": [
+        "guillotine"
+    ],
     "n03262809": [
         "easel"
     ],
@@ -12042,6 +13078,10 @@
     ],
     "n04095342": [
         "rivet"
+    ],
+    "n03947888": [
+        "pirate",
+        "pirate_ship"
     ],
     "n02892392": [
         "brassard"
@@ -12080,6 +13120,11 @@
     "n04555291": [
         "washroom"
     ],
+    "n02655020": [
+        "pufferfish",
+        "puffer",
+        "blowfish"
+    ],
     "n12269241": [
         "live_oak"
     ],
@@ -12109,6 +13154,13 @@
     ],
     "n03147280": [
         "culvert"
+    ],
+    "n07693725": [
+        "bagel",
+        "beigel"
+    ],
+    "n03240683": [
+        "drilling_platform"
     ],
     "n03367321": [
         "flophouse"
@@ -12153,6 +13205,10 @@
     "n07683360": [
         "bannock"
     ],
+    "n07614500": [
+        "icecream",
+        "ice_cream"
+    ],
     "n04110068": [
         "rose_water"
     ],
@@ -12181,6 +13237,12 @@
     "n02447021": [
         "spotted_skunk"
     ],
+    "n03124043": [
+        "cowboy_boot"
+    ],
+    "n04149813": [
+        "scoreboard"
+    ],
     "n12307240": [
         "jessamine"
     ],
@@ -12206,6 +13268,9 @@
     ],
     "n12307756": [
         "privet"
+    ],
+    "n01824575": [
+        "coucal"
     ],
     "n03318136": [
         "fairlead"
@@ -12302,6 +13367,10 @@
     "n03116008": [
         "couchette"
     ],
+    "n01950731": [
+        "nudibranch",
+        "sea_slug"
+    ],
     "n07876550": [
         "scampi"
     ],
@@ -12315,6 +13384,10 @@
     "n02306825": [
         "egger",
         "eggar"
+    ],
+    "n01677366": [
+        "iguana_iguana",
+        "iguana"
     ],
     "n04967674": [
         "sea_green"
@@ -12377,6 +13450,9 @@
         "panga",
         "machete"
     ],
+    "n03776460": [
+        "mobile_home"
+    ],
     "n03600475": [
         "jodhpur"
     ],
@@ -12388,6 +13464,10 @@
     ],
     "n07621618": [
         "garnish"
+    ],
+    "n07590611": [
+        "hotpot",
+        "hot_pot"
     ],
     "n09262690": [
         "dale"
@@ -12475,6 +13555,9 @@
     "n01537895": [
         "ortolan"
     ],
+    "n01582220": [
+        "magpie"
+    ],
     "n03396580": [
         "friary"
     ],
@@ -12483,6 +13566,10 @@
     ],
     "n03426574": [
         "gas_turbine"
+    ],
+    "n02091467": [
+        "elkhound",
+        "norwegian_elkhound"
     ],
     "n03010915": [
         "chateau"
@@ -12523,6 +13610,9 @@
     "n12266528": [
         "myrtle_beech"
     ],
+    "n01776313": [
+        "tick"
+    ],
     "n01489501": [
         "bull_shark"
     ],
@@ -12544,6 +13634,9 @@
     ],
     "n07816296": [
         "bay_leaf"
+    ],
+    "n03447447": [
+        "gondola"
     ],
     "n11877193": [
         "collard"
@@ -12604,14 +13697,23 @@
     "n02257284": [
         "periodical_cicada"
     ],
+    "n12267677": [
+        "acorn"
+    ],
     "n09462600": [
         "troposphere"
     ],
     "n12592058": [
         "nipa_palm"
     ],
+    "n07697313": [
+        "cheeseburger"
+    ],
     "n11688069": [
         "microsporophyll"
+    ],
+    "n01518878": [
+        "ostrich"
     ],
     "n02755140": [
         "attache"
@@ -12644,8 +13746,15 @@
     "n14919819": [
         "inositol"
     ],
+    "n02441942": [
+        "weasel"
+    ],
     "n13132656": [
         "panicle"
+    ],
+    "n02504013": [
+        "indian_elephant",
+        "elephas_maximus"
     ],
     "n01809752": [
         "hoatzin"
@@ -12656,6 +13765,10 @@
     "n12882779": [
         "foxglove",
         "digitalis"
+    ],
+    "n02317335": [
+        "starfish",
+        "sea_star"
     ],
     "n04409625": [
         "tennis_camp"
@@ -12794,6 +13907,9 @@
     "n03619050": [
         "kirpan"
     ],
+    "n02444819": [
+        "otter"
+    ],
     "n04443433": [
         "toboggan"
     ],
@@ -12871,6 +13987,9 @@
     "n04115802": [
         "royal"
     ],
+    "n01860187": [
+        "black_swan"
+    ],
     "n04110439": [
         "positioner"
     ],
@@ -12893,11 +14012,17 @@
     "n02419336": [
         "chamois"
     ],
+    "n04398044": [
+        "teapot"
+    ],
     "n12402840": [
         "rubber_plant"
     ],
     "n08571898": [
         "flea_market"
+    ],
+    "n02091831": [
+        "saluki"
     ],
     "n03115180": [
         "cotton"
@@ -12935,6 +14060,9 @@
     "n04016846": [
         "psaltery"
     ],
+    "n04370456": [
+        "sweatshirt"
+    ],
     "n04128710": [
         "sailcloth"
     ],
@@ -12946,6 +14074,10 @@
     ],
     "n02702989": [
         "ammeter"
+    ],
+    "n02480495": [
+        "orang",
+        "orangutan"
     ],
     "n04488202": [
         "trophy_case"
@@ -12996,8 +14128,15 @@
     "n03688707": [
         "long_underwear"
     ],
+    "n02123159": [
+        "tiger_cat"
+    ],
     "n09344324": [
         "lunar_crater"
+    ],
+    "n04328186": [
+        "stopwatch",
+        "stop_watch"
     ],
     "n02181477": [
         "mealworm"
@@ -13085,6 +14224,9 @@
         "pack_rat",
         "packrat"
     ],
+    "n03733131": [
+        "maypole"
+    ],
     "n03722646": [
         "marlinspike"
     ],
@@ -13107,8 +14249,14 @@
     "n05262698": [
         "walrus_moustache"
     ],
+    "n03887697": [
+        "paper_towel"
+    ],
     "n07749312": [
         "valencia_orange"
+    ],
+    "n03935335": [
+        "piggy_bank"
     ],
     "n02213543": [
         "vespula_vulgaris"
@@ -13145,6 +14293,9 @@
     ],
     "n02843909": [
         "biretta"
+    ],
+    "n02096437": [
+        "dandie_dinmont"
     ],
     "n03759661": [
         "micrometer"
@@ -13183,6 +14334,9 @@
     "n12059314": [
         "dendrobium"
     ],
+    "n04141327": [
+        "scabbard"
+    ],
     "n02382850": [
         "exmoor"
     ],
@@ -13192,8 +14346,14 @@
     "n03297103": [
         "espadrille"
     ],
+    "n02093991": [
+        "irish_terrier"
+    ],
     "n02341616": [
         "prairie_vole"
+    ],
+    "n04263257": [
+        "soup_bowl"
     ],
     "n13131618": [
         "petiole"
@@ -13216,6 +14376,9 @@
     "n04368496": [
         "swallowtail",
         "morning_coat"
+    ],
+    "n03825788": [
+        "nipple"
     ],
     "n07828642": [
         "vanilla_bean"
@@ -13329,6 +14492,10 @@
     "n01462042": [
         "blastocyst"
     ],
+    "n02114548": [
+        "white_wolf",
+        "arctic_wolf"
+    ],
     "n03638180": [
         "lander"
     ],
@@ -13348,6 +14515,9 @@
     "n04422727": [
         "thermos"
     ],
+    "n03384352": [
+        "forklift"
+    ],
     "n02099997": [
         "pointer"
     ],
@@ -13361,11 +14531,17 @@
     "n02992368": [
         "cellophane"
     ],
+    "n02093428": [
+        "staffordshire_terrier"
+    ],
     "n14810561": [
         "choline"
     ],
     "n07849733": [
         "whey"
+    ],
+    "n04371430": [
+        "swimming_trunks"
     ],
     "n03034244": [
         "breaker",
@@ -13500,6 +14676,9 @@
     "n04536153": [
         "viol"
     ],
+    "n03777754": [
+        "modem"
+    ],
     "n02901481": [
         "brigandine"
     ],
@@ -13549,6 +14728,9 @@
     ],
     "n08640962": [
         "rough"
+    ],
+    "n02086240": [
+        "shih_tzu"
     ],
     "n04083800": [
         "retractor"
@@ -13687,6 +14869,9 @@
         "felis_silvestris",
         "european_wildcat"
     ],
+    "n02092339": [
+        "weimaraner"
+    ],
     "n04172904": [
         "separate"
     ],
@@ -13704,6 +14889,9 @@
     ],
     "n03407865": [
         "fusee"
+    ],
+    "n04483307": [
+        "trimaran"
     ],
     "n07908567": [
         "amaretto"
@@ -13774,6 +14962,9 @@
     ],
     "n03533654": [
         "hookup"
+    ],
+    "n03630383": [
+        "lab_coat"
     ],
     "n01684133": [
         "skink"
@@ -13847,6 +15038,10 @@
     ],
     "n08652376": [
         "ski_resort"
+    ],
+    "n02086079": [
+        "pekingese",
+        "peke"
     ],
     "n13917785": [
         "truncated_cone"
@@ -13936,6 +15131,9 @@
     "n07829248": [
         "cider_vinegar"
     ],
+    "n01742172": [
+        "boa_constrictor"
+    ],
     "n07903731": [
         "armagnac"
     ],
@@ -14004,6 +15202,9 @@
     "n01479213": [
         "eptatretus"
     ],
+    "n03924679": [
+        "photocopier"
+    ],
     "n07846802": [
         "whole_milk"
     ],
@@ -14040,8 +15241,14 @@
     "n00474769": [
         "hardball"
     ],
+    "n03146219": [
+        "cuirass"
+    ],
     "n01668436": [
         "redbelly"
+    ],
+    "n02667093": [
+        "abaya"
     ],
     "n04212165": [
         "shuttle_bus"
@@ -14110,6 +15317,9 @@
     "n03249342": [
         "drugstore",
         "pharmacy"
+    ],
+    "n01682714": [
+        "anole"
     ],
     "n03628511": [
         "kremlin"
@@ -14185,6 +15395,9 @@
     "n01323068": [
         "tiger_cub"
     ],
+    "n07583066": [
+        "guacamole"
+    ],
     "n03874487": [
         "paddock"
     ],
@@ -14202,6 +15415,10 @@
     ],
     "n03864139": [
         "overhand_knot"
+    ],
+    "n01755581": [
+        "diamondback",
+        "diamondback_rattlesnake"
     ],
     "n04138261": [
         "satin"
@@ -14230,6 +15447,9 @@
     "n04354487": [
         "sump_pump"
     ],
+    "n07932039": [
+        "eggnog"
+    ],
     "n04066270": [
         "red_carpet"
     ],
@@ -14254,6 +15474,9 @@
     ],
     "n04484432": [
         "triode"
+    ],
+    "n02730930": [
+        "apron"
     ],
     "n12304703": [
         "fraxinus_excelsior"
@@ -14327,6 +15550,9 @@
     "n04146343": [
         "schoolbag"
     ],
+    "n02105412": [
+        "kelpie"
+    ],
     "n05468739": [
         "oligodendrocyte"
     ],
@@ -14341,6 +15567,12 @@
     ],
     "n11782761": [
         "amorphophallus"
+    ],
+    "n02112350": [
+        "keeshond"
+    ],
+    "n02058221": [
+        "albatross"
     ],
     "n03982331": [
         "poolroom"
@@ -14357,6 +15589,9 @@
     "n01927159": [
         "blood_fluke",
         "schistosome"
+    ],
+    "n02666196": [
+        "abacus"
     ],
     "n09425344": [
         "scablands"
@@ -14452,6 +15687,9 @@
     "n07586099": [
         "marmite"
     ],
+    "n01697457": [
+        "nile_crocodile"
+    ],
     "n03432061": [
         "gearset"
     ],
@@ -14491,6 +15729,9 @@
     ],
     "n12291959": [
         "bluebell"
+    ],
+    "n02094433": [
+        "yorkshire_terrier"
     ],
     "n11769621": [
         "allamanda"
@@ -14618,6 +15859,9 @@
     "n02469472": [
         "tadpole"
     ],
+    "n03958227": [
+        "plastic_bag"
+    ],
     "n01497738": [
         "guitarfish"
     ],
@@ -14641,6 +15885,11 @@
     ],
     "n02104184": [
         "attack_dog"
+    ],
+    "n03982430": [
+        "pool_table",
+        "snooker_table",
+        "billiard_table"
     ],
     "n09214916": [
         "barrier_reef"
@@ -14688,6 +15937,10 @@
         "dvd",
         "videodisc"
     ],
+    "n04553703": [
+        "lavabo",
+        "washbasin"
+    ],
     "n11958499": [
         "brass_buttons"
     ],
@@ -14699,6 +15952,9 @@
     ],
     "n03607923": [
         "kameez"
+    ],
+    "n01817953": [
+        "african_grey"
     ],
     "n12704513": [
         "bilimbi"
@@ -14721,8 +15977,15 @@
     "n04058594": [
         "readout"
     ],
+    "n04443257": [
+        "tobacconist",
+        "tobacco_shop"
+    ],
     "n02896074": [
         "breechblock"
+    ],
+    "n02437312": [
+        "dromedary"
     ],
     "n04292080": [
         "square_sail"
@@ -14757,8 +16020,14 @@
     "n02519340": [
         "pout"
     ],
+    "n01698640": [
+        "american_alligator"
+    ],
     "n12549192": [
         "black_medick"
+    ],
+    "n01768244": [
+        "trilobite"
     ],
     "n03253279": [
         "duckpin"
@@ -14780,6 +16049,9 @@
     ],
     "n03161016": [
         "dampener"
+    ],
+    "n07718472": [
+        "cucumber"
     ],
     "n14942411": [
         "lodestone",
@@ -14866,8 +16138,14 @@
     "n07741235": [
         "northern_spy"
     ],
+    "n02981792": [
+        "catamaran"
+    ],
     "n02076402": [
         "crabeater_seal"
+    ],
+    "n02107312": [
+        "miniature_pinscher"
     ],
     "n03523506": [
         "hobble_skirt"
@@ -14880,6 +16158,10 @@
     ],
     "n04157099": [
         "scullery"
+    ],
+    "n04162706": [
+        "seatbelt",
+        "seat_belt"
     ],
     "n03500699": [
         "haymaker"
@@ -14972,6 +16254,9 @@
     "n05314075": [
         "canthus"
     ],
+    "n04229816": [
+        "ski_mask"
+    ],
     "n07855317": [
         "velveeta"
     ],
@@ -14983,6 +16268,10 @@
     ],
     "n07896060": [
         "california_wine"
+    ],
+    "n02096051": [
+        "airedale_terrier",
+        "airedale"
     ],
     "n07880325": [
         "rarebit",
@@ -14997,6 +16286,9 @@
     "n08571275": [
         "midfield"
     ],
+    "n04509417": [
+        "unicycle"
+    ],
     "n02757061": [
         "audio_cd"
     ],
@@ -15005,6 +16297,9 @@
     ],
     "n01818832": [
         "kea"
+    ],
+    "n03584254": [
+        "ipod"
     ],
     "n04251701": [
         "snowbank"
@@ -15042,6 +16337,12 @@
     "n02976123": [
         "sheath_knife"
     ],
+    "n02643566": [
+        "lionfish"
+    ],
+    "n02106030": [
+        "collie"
+    ],
     "n12312728": [
         "kangaroo_paw"
     ],
@@ -15074,6 +16375,9 @@
     ],
     "n12450344": [
         "dogtooth"
+    ],
+    "n10565667": [
+        "scuba_diver"
     ],
     "n04173511": [
         "sequencer"
@@ -15112,6 +16416,9 @@
     "n02568447": [
         "wreckfish"
     ],
+    "n02259212": [
+        "leafhopper"
+    ],
     "n02138169": [
         "palm_civet"
     ],
@@ -15139,6 +16446,9 @@
     ],
     "n03390673": [
         "frail"
+    ],
+    "n02109047": [
+        "great_dane"
     ],
     "n12463743": [
         "bog_asphodel"
@@ -15192,6 +16502,9 @@
     ],
     "n03571625": [
         "inkpot"
+    ],
+    "n01770393": [
+        "scorpion"
     ],
     "n03973839": [
         "pocket_watch"
@@ -15261,6 +16574,9 @@
     "n02734725": [
         "architecture"
     ],
+    "n07711569": [
+        "mashed_potato"
+    ],
     "n12691428": [
         "elephant_tree",
         "bursera_microphylla"
@@ -15325,6 +16641,9 @@
     "n03881404": [
         "panchromatic_film"
     ],
+    "n02006656": [
+        "spoonbill"
+    ],
     "n01560793": [
         "stonechat"
     ],
@@ -15349,6 +16668,9 @@
     "n00446980": [
         "archery"
     ],
+    "n04435653": [
+        "tile_roof"
+    ],
     "n01609956": [
         "marsh_harrier"
     ],
@@ -15357,6 +16679,9 @@
     ],
     "n07762740": [
         "ackee"
+    ],
+    "n01632777": [
+        "axolotl"
     ],
     "n02629716": [
         "swordfish"
@@ -15384,6 +16709,9 @@
     ],
     "n07868830": [
         "galantine"
+    ],
+    "n03109150": [
+        "corkscrew"
     ],
     "n03236423": [
         "dredger"
@@ -15459,6 +16787,10 @@
     "n01553142": [
         "antbird"
     ],
+    "n01983481": [
+        "american_lobster",
+        "maine_lobster"
+    ],
     "n01552034": [
         "bellbird"
     ],
@@ -15483,6 +16815,13 @@
     ],
     "n04136045": [
         "sarcophagus"
+    ],
+    "n03916031": [
+        "perfume",
+        "essence"
+    ],
+    "n03255030": [
+        "dumbbell"
     ],
     "n03676759": [
         "lcd"
@@ -15522,6 +16861,9 @@
     "n07696839": [
         "club_sandwich"
     ],
+    "n02077923": [
+        "sea_lion"
+    ],
     "n01411450": [
         "chlorella"
     ],
@@ -15543,6 +16885,9 @@
     ],
     "n04306592": [
         "stator"
+    ],
+    "n02113023": [
+        "pembroke"
     ],
     "n12340581": [
         "water_gum"
@@ -15577,8 +16922,15 @@
     "n04240752": [
         "slipcover"
     ],
+    "n03729826": [
+        "matchstick"
+    ],
     "n03823111": [
         "nib"
+    ],
+    "n03761084": [
+        "microwave_oven",
+        "microwave"
     ],
     "n03435593": [
         "geodesic_dome"
@@ -15591,6 +16943,9 @@
     ],
     "n03316873": [
         "factory_ship"
+    ],
+    "n02106166": [
+        "border_collie"
     ],
     "n02831335": [
         "berlin"
@@ -15606,6 +16961,9 @@
     ],
     "n03103396": [
         "cooling_tower"
+    ],
+    "n02088364": [
+        "beagle"
     ],
     "n03640850": [
         "lanolin"
@@ -15639,6 +16997,9 @@
     "n02894337": [
         "breakfast_table"
     ],
+    "n03976467": [
+        "polaroid_camera"
+    ],
     "n07692517": [
         "bialy"
     ],
@@ -15656,6 +17017,9 @@
     ],
     "n02984469": [
         "catheter"
+    ],
+    "n04118538": [
+        "rugby_ball"
     ],
     "n09362945": [
         "mull"
@@ -15744,6 +17108,9 @@
     "n02486908": [
         "mandrill"
     ],
+    "n02782093": [
+        "balloon"
+    ],
     "n01698782": [
         "chinese_alligator"
     ],
@@ -15770,6 +17137,9 @@
     ],
     "n04164757": [
         "second_hand"
+    ],
+    "n04147183": [
+        "schooner"
     ],
     "n11602478": [
         "ceratozamia"
@@ -15819,6 +17189,9 @@
     "n03718789": [
         "mansard_roof",
         "mansard"
+    ],
+    "n04201297": [
+        "shoji"
     ],
     "n04113038": [
         "rouleau"
@@ -15895,6 +17268,9 @@
     "n04416005": [
         "testudo"
     ],
+    "n03692522": [
+        "loupe"
+    ],
     "n04231905": [
         "skivvies"
     ],
@@ -15969,6 +17345,9 @@
     "n12469517": [
         "herb_paris"
     ],
+    "n04392985": [
+        "tape_player"
+    ],
     "n03471030": [
         "gusher"
     ],
@@ -15986,6 +17365,9 @@
     ],
     "n02122430": [
         "mouser"
+    ],
+    "n02823428": [
+        "beer_bottle"
     ],
     "n04204081": [
         "shopping_bag"
@@ -16017,6 +17399,9 @@
     "n01484285": [
         "shortfin_mako"
     ],
+    "n02493793": [
+        "spider_monkey"
+    ],
     "n12625383": [
         "cotoneaster"
     ],
@@ -16028,6 +17413,9 @@
     ],
     "n03946162": [
         "pipe_fitting"
+    ],
+    "n04409515": [
+        "tennis_ball"
     ],
     "n01823013": [
         "cuckoo"
@@ -16109,6 +17497,9 @@
     "n07847453": [
         "clotted_cream"
     ],
+    "n07920052": [
+        "espresso"
+    ],
     "n10469874": [
         "press_photographer"
     ],
@@ -16166,6 +17557,9 @@
     ],
     "n13868515": [
         "s_shape"
+    ],
+    "n02111500": [
+        "great_pyrenees"
     ],
     "n04070207": [
         "refracting_telescope"
@@ -16252,11 +17646,17 @@
     "n03119396": [
         "coupe"
     ],
+    "n02486261": [
+        "patas"
+    ],
     "n03772584": [
         "minute_hand"
     ],
     "n09392402": [
         "pinetum"
+    ],
+    "n04235860": [
+        "sleeping_bag"
     ],
     "n03698723": [
         "lyceum"
@@ -16273,6 +17673,9 @@
     ],
     "n03668803": [
         "lilo"
+    ],
+    "n03843555": [
+        "oil_filter"
     ],
     "n09348460": [
         "massif"
@@ -16364,11 +17767,17 @@
     "n04393808": [
         "tappet"
     ],
+    "n03841143": [
+        "odometer"
+    ],
     "n02418465": [
         "mountain_goat"
     ],
     "n04289576": [
         "spritsail"
+    ],
+    "n02100583": [
+        "vizsla"
     ],
     "n01793715": [
         "orpington"
@@ -16400,6 +17809,9 @@
     "n00443803": [
         "flip"
     ],
+    "n03141823": [
+        "crutch"
+    ],
     "n11700058": [
         "mayapple"
     ],
@@ -16415,8 +17827,14 @@
     "n07800740": [
         "fodder"
     ],
+    "n04254680": [
+        "soccer_ball"
+    ],
     "n03123917": [
         "cowbell"
+    ],
+    "n01774384": [
+        "black_widow"
     ],
     "n07710952": [
         "baked_potato"
@@ -16484,6 +17902,9 @@
     "n01841943": [
         "piculet"
     ],
+    "n03814639": [
+        "neck_brace"
+    ],
     "n03674842": [
         "linocut"
     ],
@@ -16499,6 +17920,9 @@
     ],
     "n01454856": [
         "stickleback"
+    ],
+    "n01608432": [
+        "kite"
     ],
     "n07835921": [
         "bourguignon"
@@ -16564,6 +17988,9 @@
     "n12269406": [
         "quercus_agrifolia"
     ],
+    "n04380533": [
+        "table_lamp"
+    ],
     "n11853356": [
         "christmas_cactus"
     ],
@@ -16597,6 +18024,9 @@
     ],
     "n07904072": [
         "kirsch"
+    ],
+    "n03662601": [
+        "lifeboat"
     ],
     "n02237581": [
         "mirid",
@@ -16650,6 +18080,9 @@
     "n04615644": [
         "zoot_suit"
     ],
+    "n03804744": [
+        "nail"
+    ],
     "n10043643": [
         "economist"
     ],
@@ -16667,6 +18100,9 @@
     ],
     "n02808829": [
         "bathyscaphe"
+    ],
+    "n02094114": [
+        "norfolk_terrier"
     ],
     "n12639376": [
         "beach_plum"
@@ -16698,6 +18134,9 @@
     ],
     "n07910152": [
         "grand_marnier"
+    ],
+    "n04179913": [
+        "sewing_machine"
     ],
     "n09452760": [
         "swell"
@@ -16755,8 +18194,14 @@
         "gem",
         "muffin"
     ],
+    "n11939491": [
+        "daisy"
+    ],
     "n04290615": [
         "sputnik"
+    ],
+    "n03272010": [
+        "electric_guitar"
     ],
     "n03730494": [
         "maternity_ward"
@@ -16844,6 +18289,9 @@
     "n00455173": [
         "surf_fishing"
     ],
+    "n03980874": [
+        "poncho"
+    ],
     "n03429137": [
         "gatling_gun"
     ],
@@ -16865,6 +18313,9 @@
     "n02618827": [
         "dragonet"
     ],
+    "n03344393": [
+        "fireboat"
+    ],
     "n12115180": [
         "pampas_grass"
     ],
@@ -16873,6 +18324,9 @@
     ],
     "n01563449": [
         "gnatcatcher"
+    ],
+    "n02056570": [
+        "king_penguin"
     ],
     "n04006411": [
         "probe"
@@ -16934,6 +18388,9 @@
     "n02419056": [
         "serow"
     ],
+    "n02268853": [
+        "damselfly"
+    ],
     "n08659242": [
         "coal_seam"
     ],
@@ -16989,6 +18446,9 @@
     "n09438940": [
         "snowdrift"
     ],
+    "n02174001": [
+        "rhinoceros_beetle"
+    ],
     "n02243562": [
         "water_strider"
     ],
@@ -17011,6 +18471,9 @@
     "n03496486": [
         "harris_tweed"
     ],
+    "n03871628": [
+        "packet"
+    ],
     "n02290664": [
         "almond_moth"
     ],
@@ -17026,11 +18489,17 @@
     "n07904934": [
         "ouzo"
     ],
+    "n04204347": [
+        "shopping_cart"
+    ],
     "n07740597": [
         "empire"
     ],
     "n03171635": [
         "defibrillator"
+    ],
+    "n04596742": [
+        "wok"
     ],
     "n02539894": [
         "round_whitefish"
@@ -17075,6 +18544,12 @@
     "n02843276": [
         "birdcage"
     ],
+    "n03445777": [
+        "golf_ball"
+    ],
+    "n03785016": [
+        "moped"
+    ],
     "n07579917": [
         "adobo"
     ],
@@ -17083,6 +18558,9 @@
     ],
     "n03565830": [
         "in_basket"
+    ],
+    "n03483316": [
+        "hair_dryer"
     ],
     "n03799240": [
         "multiprocessor"
@@ -17147,6 +18625,15 @@
     "n07861158": [
         "bread_dough"
     ],
+    "n04023962": [
+        "punching_bag"
+    ],
+    "n01748264": [
+        "indian_cobra"
+    ],
+    "n09193705": [
+        "alp"
+    ],
     "n12253229": [
         "epacris"
     ],
@@ -17182,6 +18669,9 @@
     ],
     "n04177931": [
         "settlement_house"
+    ],
+    "n01530575": [
+        "brambling"
     ],
     "n04158956": [
         "sea_chest"
@@ -17220,6 +18710,9 @@
     "n07804771": [
         "wild_rice"
     ],
+    "n03444034": [
+        "go_kart"
+    ],
     "n07616590": [
         "split"
     ],
@@ -17229,6 +18722,9 @@
     "n03796522": [
         "mud_brick"
     ],
+    "n01978287": [
+        "dungeness_crab"
+    ],
     "n03384167": [
         "fork"
     ],
@@ -17237,6 +18733,9 @@
     ],
     "n09206896": [
         "arroyo"
+    ],
+    "n02123394": [
+        "persian_cat"
     ],
     "n03373943": [
         "flying_buttress"
@@ -17266,6 +18765,9 @@
     "n03290096": [
         "ensign"
     ],
+    "n02090379": [
+        "redbone"
+    ],
     "n12566954": [
         "kudzu"
     ],
@@ -17278,6 +18780,9 @@
     ],
     "n02340930": [
         "pine_vole"
+    ],
+    "n02099601": [
+        "golden_retriever"
     ],
     "n01490670": [
         "lemon_shark"
@@ -17333,6 +18838,9 @@
     "n01781570": [
         "acarus"
     ],
+    "n02951585": [
+        "can_opener"
+    ],
     "n04304680": [
         "starting_gate"
     ],
@@ -17350,6 +18858,9 @@
     ],
     "n04432662": [
         "ticking"
+    ],
+    "n03658185": [
+        "letter_opener"
     ],
     "n01488038": [
         "whale_shark"
@@ -17401,6 +18912,9 @@
     ],
     "n07858336": [
         "tapenade"
+    ],
+    "n02916936": [
+        "bulletproof_vest"
     ],
     "n04355821": [
         "sun_gear"
@@ -17496,6 +19010,9 @@
     "n07924443": [
         "cranberry_juice"
     ],
+    "n03180011": [
+        "desktop_computer"
+    ],
     "n02060569": [
         "manx_shearwater"
     ],
@@ -17565,6 +19082,9 @@
     "n02685995": [
         "airbrush"
     ],
+    "n03868242": [
+        "oxcart"
+    ],
     "n03688066": [
         "long_iron"
     ],
@@ -17613,6 +19133,9 @@
     "n01751215": [
         "banded_krait"
     ],
+    "n02988304": [
+        "cd_player"
+    ],
     "n01570676": [
         "yellowthroat"
     ],
@@ -17640,6 +19163,9 @@
     "n01891633": [
         "shrew"
     ],
+    "n02104029": [
+        "kuvasz"
+    ],
     "n07903643": [
         "calvados"
     ],
@@ -17660,6 +19186,9 @@
     ],
     "n03309687": [
         "eyeshadow"
+    ],
+    "n01847000": [
+        "drake"
     ],
     "n03374649": [
         "flywheel"
@@ -17688,6 +19217,9 @@
     "n08539072": [
         "downtown",
         "business_district"
+    ],
+    "n02028035": [
+        "redshank"
     ],
     "n12750767": [
         "leatherwood"
@@ -17725,6 +19257,9 @@
     "n12979829": [
         "white_fungus"
     ],
+    "n03187595": [
+        "dial_telephone"
+    ],
     "n01622352": [
         "horned_owl"
     ],
@@ -17755,6 +19290,9 @@
     "n04489695": [
         "trousseau"
     ],
+    "n03476991": [
+        "hair_spray"
+    ],
     "n13190747": [
         "dicksonia_antarctica"
     ],
@@ -17781,6 +19319,9 @@
     ],
     "n11669786": [
         "floret"
+    ],
+    "n02787622": [
+        "banjo"
     ],
     "n04457767": [
         "torque_converter"
@@ -17963,6 +19504,9 @@
     "n04030414": [
         "pyxis"
     ],
+    "n04259630": [
+        "sombrero"
+    ],
     "n02412629": [
         "lambkin"
     ],
@@ -17974,6 +19518,9 @@
     ],
     "n01573240": [
         "eastern_meadowlark"
+    ],
+    "n02111889": [
+        "samoyed"
     ],
     "n03168217": [
         "beach_chair"
@@ -18032,6 +19579,9 @@
     ],
     "n11745817": [
         "zebrawood"
+    ],
+    "n02834397": [
+        "bib"
     ],
     "n07681450": [
         "challah"
@@ -18185,11 +19735,17 @@
     "n04613939": [
         "zamboni"
     ],
+    "n03127747": [
+        "crash_helmet"
+    ],
     "n02619550": [
         "mudskipper"
     ],
     "n07801779": [
         "alfalfa"
+    ],
+    "n02090622": [
+        "borzoi"
     ],
     "n02754656": [
         "atrium"
@@ -18283,11 +19839,17 @@
     "n03609397": [
         "kazoo"
     ],
+    "n04486054": [
+        "triumphal_arch"
+    ],
     "n04585318": [
         "wimple"
     ],
     "n04598318": [
         "woodshed"
+    ],
+    "n04325704": [
+        "stole"
     ],
     "n03943266": [
         "pinnacle"
@@ -18300,6 +19862,9 @@
     ],
     "n03408264": [
         "fusil"
+    ],
+    "n02092002": [
+        "deerhound"
     ],
     "n01438581": [
         "loach"
@@ -18382,6 +19947,9 @@
     "n03595409": [
         "jeroboam"
     ],
+    "n01871265": [
+        "tusker"
+    ],
     "n04163530": [
         "secateurs"
     ],
@@ -18408,6 +19976,9 @@
     ],
     "n03759243": [
         "microfiche"
+    ],
+    "n03063599": [
+        "coffee_mug"
     ],
     "n02768655": [
         "back_brace"
@@ -18457,6 +20028,9 @@
     "n01531512": [
         "siskin"
     ],
+    "n04355338": [
+        "sundial"
+    ],
     "n02609302": [
         "bluehead"
     ],
@@ -18468,6 +20042,9 @@
     ],
     "n03963294": [
         "playback"
+    ],
+    "n03775071": [
+        "mitten"
     ],
     "n02357911": [
         "antelope_squirrel"
@@ -18551,6 +20128,9 @@
     "n03300443": [
         "ethernet_cable"
     ],
+    "n04560804": [
+        "water_jug"
+    ],
     "n07561590": [
         "dietary"
     ],
@@ -18562,6 +20142,9 @@
     ],
     "n10618342": [
         "soccer_player"
+    ],
+    "n02966687": [
+        "tool_kit"
     ],
     "n03373611": [
         "flying_boat"
@@ -18580,6 +20163,9 @@
     ],
     "n02814428": [
         "beach_towel"
+    ],
+    "n02107908": [
+        "appenzeller"
     ],
     "n02069974": [
         "tursiops_truncatus"
@@ -18602,11 +20188,17 @@
     "n12380761": [
         "wild_peach"
     ],
+    "n04146614": [
+        "school_bus"
+    ],
     "n04058239": [
         "rom"
     ],
     "n03005033": [
         "chancellery"
+    ],
+    "n03769881": [
+        "minibus"
     ],
     "n02903126": [
         "brochette"
@@ -18635,6 +20227,9 @@
     "n12489815": [
         "poinciana"
     ],
+    "n03788195": [
+        "mosque"
+    ],
     "n03697552": [
         "lunchroom"
     ],
@@ -18650,8 +20245,14 @@
     "n03186199": [
         "dhoti"
     ],
+    "n02108551": [
+        "tibetan_mastiff"
+    ],
     "n07891309": [
         "ginger_beer"
+    ],
+    "n01943899": [
+        "conch"
     ],
     "n02522637": [
         "codling"
@@ -18699,6 +20300,9 @@
     "n07733005": [
         "garden_cress"
     ],
+    "n04311174": [
+        "steel_drum"
+    ],
     "n04206790": [
         "shot_tower"
     ],
@@ -18726,6 +20330,9 @@
     "n07585758": [
         "gazpacho"
     ],
+    "n02138441": [
+        "meerkat"
+    ],
     "n03938401": [
         "pillow_block"
     ],
@@ -18741,14 +20348,23 @@
     "n02749169": [
         "headache_powder"
     ],
+    "n04525038": [
+        "velvet"
+    ],
     "n07761611": [
         "sugar_apple"
     ],
     "n04186624": [
         "shawm"
     ],
+    "n03208938": [
+        "disc_brake"
+    ],
     "n07768139": [
         "anjou"
+    ],
+    "n01818515": [
+        "macaw"
     ],
     "n02833403": [
         "bevel"
@@ -18765,6 +20381,9 @@
     "n03067339": [
         "cold_cream"
     ],
+    "n02090721": [
+        "irish_wolfhound"
+    ],
     "n02024185": [
         "dotterel"
     ],
@@ -18779,6 +20398,9 @@
     ],
     "n03307037": [
         "extension_cord"
+    ],
+    "n02087394": [
+        "rhodesian_ridgeback"
     ],
     "n04156946": [
         "scull"
@@ -18797,6 +20419,9 @@
     ],
     "n09218494": [
         "belay"
+    ],
+    "n02483362": [
+        "gibbon"
     ],
     "n11791569": [
         "pistia"
@@ -18827,6 +20452,9 @@
     ],
     "n02129991": [
         "liger"
+    ],
+    "n03417042": [
+        "garbage_truck"
     ],
     "n02712545": [
         "angle_iron"
@@ -18915,8 +20543,14 @@
     "n03170292": [
         "decoupage"
     ],
+    "n02356798": [
+        "fox_squirrel"
+    ],
     "n12279772": [
         "quercus_virginiana"
+    ],
+    "n01843065": [
+        "jacamar"
     ],
     "n04209613": [
         "shower_stall"
@@ -19073,6 +20707,9 @@
     ],
     "n02956393": [
         "capital_ship"
+    ],
+    "n04326547": [
+        "stone_wall"
     ],
     "n04138977": [
         "saucepan"

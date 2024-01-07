@@ -14,7 +14,8 @@ def get_dict(file_path, seeds, id_pairs_1k=None, ratio_flag=False, save_root=Pat
     if "21k" in file_path:
         file_suffix = "cleaned"
         for id in id_pairs_1k:
-            id_pairs.pop(id)
+            if id in id_pairs:
+                id_pairs.pop(id)
     else:
         file_suffix = "1k_only"
 
@@ -25,7 +26,7 @@ def get_dict(file_path, seeds, id_pairs_1k=None, ratio_flag=False, save_root=Pat
         random.seed(seed)
         random.shuffle(shuffle_keys)
 
-        ratios = [0.1, 0.5, 1, 5, 10, 70] if ratio_flag else [70]
+        ratios = [0.1, 0.5, 1, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70] if ratio_flag else [70]
         
         for ratio in ratios:
             train, test = [], []

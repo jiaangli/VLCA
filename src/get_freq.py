@@ -21,10 +21,10 @@ def generate_freq_dicts(table, pairs, name, num_cal):
     #             ("_freq_end", lambda x: 50000 <= x)
     #             ]
 
-    files = [("_freq10000", lambda x: 23928 <= x),
-                ("_freq100000", lambda x: 727 <= x < 23928),
+    files = [("_freq10000", lambda x: 23928 < x),
+                ("_freq100000", lambda x: 727 <= x <= 23928),
                 # ("_freq_end", lambda x: 100000 <= x or x < 0)
-                ("_freq_end", lambda x: x <= 727)
+                ("_freq_end", lambda x: x < 727)
                 ]
     
     for filename, condition in files:

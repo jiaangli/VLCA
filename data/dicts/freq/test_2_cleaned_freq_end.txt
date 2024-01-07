@@ -1345,7 +1345,6 @@ n03272810 power_meter
 n02498743 slender_loris
 n12285049 grey_alder
 n01664990 eretmochelys_imbricata
-n01664990 hawksbill
 n01664990 hawkbill
 n01664990 hawksbill_turtle
 n12336333 eucalyptus_camaldulensis

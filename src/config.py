@@ -70,7 +70,7 @@ class MuseConfig(argparse.Namespace):
             else:
                 test_dict_dir = "freq"
         else:
-            test_dict_dir = f"original"
+            test_dict_dir = dataset_name
         self.hyperparams = argparse.Namespace(**{
             "disp_flag": disp_flag,
             "seed": seed,
@@ -80,7 +80,7 @@ class MuseConfig(argparse.Namespace):
             "normalize_embeddings": "center",
             "emb_dim": dim,
             "dico_eval": dictionary_path + f"/{test_dict_dir}/test_{fold}_{data_range}{bin_name}.txt",
-            "dico_train": dictionary_path + f"/original/train_{fold}_{data_range}.txt",
+            "dico_train": dictionary_path + f"/{dataset_name}/train_{fold}_{data_range}.txt",
             "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{dataset_name}/{vm}_{dim}.pth",
             # "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
             "tgt_emb": f"{alias_emb_dir}/LM/{lm}_{dim}.pth",
