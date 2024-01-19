@@ -16,6 +16,7 @@ class LMEmbedding:
         self.labels = labels
         self.dataset_name = args.data.dataset_name
         self.alias_emb_dir = Path(args.data.alias_emb_dir) / args.model.model_type
+        self.emb_per_object = True if self.model_name in ["bert-large-uncased", "gpt2-xl", "opt-30b", "Llama-2-13b-hf"] else args.data.emb_per_object
         self.device = [i for i in range(torch.cuda.device_count())] if torch.cuda.device_count() >= 1 else ["cpu"]
 
     def get_lm_layer_representations(self):
@@ -115,12 +116,15 @@ class LMEmbedding:
             lm_dict.update({"last": []})
         return outputs.last_hidden_state, lm_dict
 
-    @staticmethod
-    def add_word_lm_embedding(lm_dict, embeddings_to_add, token_inds_to_avrg, specific_layer=-1):
+    # @staticmethod
+    def add_word_lm_embedding(self,lm_dict, embeddings_to_add, token_inds_to_avrg, specific_layer=-1):
 
-        layer_embedding = embeddings_to_add
-        full_sequence_embedding = layer_embedding.cpu().detach().numpy()
-        lm_dict["last"].append(np.mean(full_sequence_embedding[0, token_inds_to_avrg, :], 0))
+        # layer_embedding = embeddings_to_add
+        # full_sequence_embedding = embeddings_to_add.cpu().detach().numpy()
+        if "bert" in self.model_name:
+            lm_dict["last"].append(np.mean(embeddings_to_add[0, token_inds_to_avrg, :], 0).astype(np.float16))
+        else:
+            lm_dict["last"].append(embeddings_to_add[0, token_inds_to_avrg[-1], :].astype(np.float16))
 
         return lm_dict
 
@@ -129,7 +133,7 @@ class LMEmbedding:
         
         for i, sentence in enumerate(batch):
             word_ind_to_token_ind = self.get_word_ind_to_token_ind(sentence, related_alias, tokenizer, list(sentence))
-            lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings[i:i+1], word_ind_to_token_ind)
+            lm_dict = self.add_word_lm_embedding(lm_dict, all_sequence_embeddings[i:i+1].cpu().detach().numpy(), word_ind_to_token_ind)
 
 
         return lm_dict
@@ -144,7 +148,7 @@ class LMEmbedding:
         # print(len(model_layer_dict), len(model_layer_dict[0])) # number of layers, number of words
 
         layer = "last"
-        if self.config.data.emb_per_object:
+        if self.emb_per_object:
             torch.save({"dico": wordlist, "vectors": torch.from_numpy(np.vstack(model_layer_dict[layer])).float()},
                         str(self.alias_emb_dir / f"{self.model_name}_{len(model_layer_dict[layer][0])}_per_object.pth"))
         word_embeddings = self.__get_mean_word_embeddings(np.vstack(model_layer_dict[layer]), wordlist, unique_words)

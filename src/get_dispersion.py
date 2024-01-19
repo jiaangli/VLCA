@@ -8,13 +8,7 @@ import math
 import multiprocessing as mp
 import torch
 
-root_path = "/projects/nlp/people/kfb818/Dir/datasets/dispersions/vit-mae-huge"
-save_file = "./sorted_dispersion_mae.txt"
-
-new_file = "/projects/nlp/people/kfb818/Dir/datasets/dispersions/Llama-2-13b-hf_5120_per_sentence.pth"
-new_save_file = "./sorted_dispersion_Llama-2-13b-hf.txt"
-
-def old_get_sorted_dispersion():
+def vm_get_sorted_dispersion():
     """
     Calculate the dispersion of all embeddings of words/images and sorted them.
     save the result to a file.
@@ -32,7 +26,7 @@ def old_get_sorted_dispersion():
     
     res = [
         p.apply_async(
-        func=old_get_dispersion_multi, 
+        func=vm_get_dispersion_multi, 
         args=(root_path, categories[i*block_size:i*block_size+block_size])) for i in range(num_cpus)
         ]
 
@@ -48,7 +42,7 @@ def old_get_sorted_dispersion():
         ssw.close()
 
 
-def old_get_dispersion(root_path, embeddigns_path):
+def vm_get_dispersion(root_path, embeddigns_path):
     """
     Calculating the dispersion of embeddings.
     
@@ -79,7 +73,7 @@ def old_get_dispersion(root_path, embeddigns_path):
     cos_avg = np.mean(cos_results)
     return cos_avg, name
 
-def old_get_dispersion_multi(root_path, obj_categories):
+def vm_get_dispersion_multi(root_path, obj_categories):
     """
     This function takes in a root path and a list of object categories 
     to use multi-processing with some CPUs speeding up.
@@ -90,11 +84,11 @@ def old_get_dispersion_multi(root_path, obj_categories):
     """
     categories_dis = {}
     for obj_category in obj_categories:
-        dis, name = old_get_dispersion(root_path, obj_category)
+        dis, name = vm_get_dispersion(root_path, obj_category)
         categories_dis[name] = dis
     return categories_dis
 
-def new_get_sorted_dispersion():
+def lm_get_sorted_dispersion():
     data = torch.load(new_file)
     # all_words = np.array(data["dico"])
     # # unique_words = list(dict.fromkeys(data["dico"]))
@@ -115,7 +109,7 @@ def new_get_sorted_dispersion():
     
     res = [
         p.apply_async(
-        func=new_get_dispersion_multi, 
+        func=lm_get_dispersion_multi, 
         args=(data, indices[i*block_size:i*block_size+block_size])) for i in range(num_cpus)
         ]
     
@@ -130,7 +124,7 @@ def new_get_sorted_dispersion():
             ssw.write(f"{i[0]}: {i[1]}\n")
         ssw.close()
 
-def new_get_dispersion(data, ids):
+def lm_get_dispersion(data, ids):
     """
     Calculating the dispersion of embeddings.
     
@@ -151,7 +145,7 @@ def new_get_dispersion(data, ids):
     cos_avg = np.mean(cos_results)
     return cos_avg, name
 
-def new_get_dispersion_multi(all_data, categories):
+def lm_get_dispersion_multi(all_data, categories):
     """
     This function takes in a root path and a list of object categories 
     to use multi-processing with some CPUs speeding up.
@@ -162,13 +156,18 @@ def new_get_dispersion_multi(all_data, categories):
     """
     categories_dis = {}
     for objs in categories:
-        dis, name = new_get_dispersion(all_data, objs)
+        dis, name = lm_get_dispersion(all_data, objs)
         categories_dis[name] = dis
     return categories_dis
 
 
 if __name__ == "__main__":
-    # old_get_sorted_dispersion()
-    new_get_sorted_dispersion()
+    root_path = "/projects/nlp/people/kfb818/Dir/datasets/dispersions/vit-mae-huge"
+    save_file = "./sorted_dispersion_mae.txt"
+
+    new_file = "/projects/nlp/people/kfb818/Dir/datasets/dispersions/Llama-2-13b-hf_5120_per_sentence.pth"
+    new_save_file = "./sorted_dispersion_Llama-2-13b-hf.txt"
+    # vm_get_sorted_dispersion()
+    lm_get_sorted_dispersion()
     # get_dispersion_multi()
     # get_dispersion()
