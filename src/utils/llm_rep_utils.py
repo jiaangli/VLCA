@@ -148,7 +148,7 @@ class LMEmbedding:
         # print(len(model_layer_dict), len(model_layer_dict[0])) # number of layers, number of words
 
         layer = "last"
-        if self.emb_per_object:
+        if self.emb_per_object: # save per object (sentence here) embeddings
             torch.save({"dico": wordlist, "vectors": torch.from_numpy(np.vstack(model_layer_dict[layer])).float()},
                         str(self.alias_emb_dir / f"{self.model_name}_{len(model_layer_dict[layer][0])}_per_object.pth"))
         word_embeddings = self.__get_mean_word_embeddings(np.vstack(model_layer_dict[layer]), wordlist, unique_words)
