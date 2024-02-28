@@ -1,105 +1,358 @@
-import argparse
+from dataclasses import dataclass, field
+from enum import Enum
 
-seed = 42
-dataset_name = "imagenet" # imagenet or cldi
-sentences_path = "./data/sentences.json"
-wordlist_path = "./data/all_words.json"
-alias_emb_dir = "/projects/nlp/people/kfb818/Dir/datasets" # path to save word embeddings (decontextualized)
-# alias_emb_dir = "./data/"
-emb_per_object = False
-num_classes = 1000000 # number of sample ratio
-dictionary_path = "./data/dicts"
-image_dir = "/projects/nlp/people/kfb818/Dir/datasets/imagenet_21k_small" # for imagenet dataset
-image_id_pairs = "./data/id_pairs_21k.json" # for imagenet dataset
-# image_dir = "/projects/nlp/people/kfb818/Dir/datasets/cldi2" # for clidi dataset
-# image_id_pairs = "./data/cldi.json" # for cldi dataset
-
-MODEL_DIM = { 
-    "VM": {
-        'resnet18': 512, 'resnet34': 512, 'resnet50': 2048, 'resnet101': 2048, 'resnet152': 2048,
-        "segformer-b0-finetuned-ade-512-512":256,
-        "segformer-b1-finetuned-ade-512-512":512,
-        "segformer-b2-finetuned-ade-512-512":512,
-        "segformer-b3-finetuned-ade-512-512":512,
-        "segformer-b4-finetuned-ade-512-512":512,
-        "segformer-b5-finetuned-ade-640-640":512,
-        "vit-mae-base":768, "vit-mae-large":1024, "vit-mae-huge":1280},
-    "LM": {
-        # "fasttext": 300,
-        'bert_uncased_L-2_H-128_A-2': 128, 'bert_uncased_L-4_H-256_A-4': 256, 'bert_uncased_L-4_H-512_A-8': 512,
-        'bert_uncased_L-8_H-512_A-8': 512, 'bert-base-uncased': 768, 'bert-large-uncased': 1024,
-        'gpt2': 768, 'gpt2-large': 1280, 'gpt2-xl': 1600,
-        'opt-125m':768, 'opt-6.7b':4096, 'opt-30b':7168, 'opt-66b':9216,
-        "Llama-2-7b-hf": 4096, "Llama-2-13b-hf":5120, "Llama-2-70b-hf":8192}
-    }
+from omegaconf import II, MISSING
 
 
-class ModelConfig(argparse.Namespace):
-    def __init__(self, model_type="LM", pretrained_model='bert-base-uncased'):
-        super().__init__()
-        self.seed = seed
-        self.model = argparse.Namespace(**{
-            "model_type": model_type,
-            "pretrained_model": pretrained_model,
-            "model_name": pretrained_model.split('/')[-1],
-            "dim": MODEL_DIM[model_type][pretrained_model.split('/')[-1]]})
-
-        self.data = argparse.Namespace(**{
-            "dataset_name": dataset_name,
-            "sentences_path": sentences_path,
-            "wordlist_path": wordlist_path,
-            "alias_emb_dir": alias_emb_dir,
-            "emb_per_object": emb_per_object,
-            "num_classes": num_classes,
-            "image_dir": image_dir,
-            "image_id_pairs": image_id_pairs
-        })
+class ModelType(Enum):
+    LM = "LM"
+    VM = "VM"
 
 
-class MuseConfig(argparse.Namespace):
-    def __init__(self, more_exp, lm, vm, dim, fold, bin_name, data_range="cleaned") -> None:
-        super().__init__()
-        disp_flag = False if len(more_exp)==0 or "image" in more_exp else True
-        if "image" in more_exp:
-            test_dict_dir = f"{vm}_disp"
-        elif disp_flag:
-            if "disp" in more_exp:
-                test_dict_dir = f"{lm}_disp"
-            elif "poly" in more_exp:
-                test_dict_dir = "poly"
-            else:
-                test_dict_dir = "freq"
-        else:
-            test_dict_dir = dataset_name
-        self.hyperparams = argparse.Namespace(**{
-            "disp_flag": disp_flag,
-            "seed": seed,
-            "tgt_lang": lm,
-            "src_lang": vm,
-            "n_refinement": 0,
-            "normalize_embeddings": "center",
-            "emb_dim": dim,
-            "dico_eval": dictionary_path + f"/{test_dict_dir}/test_{fold}_{data_range}{bin_name}.txt",
-            "dico_train": dictionary_path + f"/{dataset_name}/train_{fold}_{data_range}.txt",
-            "src_emb": f"/projects/nlp/people/kfb818/Dir/datasets/VM/{dataset_name}/{vm}_{dim}.pth",
-            # "tgt_emb": f"/projects/nlp/people/kfb818/Dir/datasets/LM/{lm}_{dim}.pth",
-            "tgt_emb": f"{alias_emb_dir}/LM/{lm}_{dim}.pth",
-            "exp_name": "./exps/muse_results",
-            "cuda": True,
-            "export": "",
-            # No need to change the following parameters
-            "exp_id": "",
-            "max_vocab": 200000,
-            "dico_method": "csls_knn_100",
-            "dico_build": "S2T&T2S",
-            "load_optim": False,
-            "verbose": 2,
-            "exp_path": "",
-            "dico_threshold": 0,
-            "dico_max_rank": 10000,
-            "dico_min_size": 0,
-            "dico_max_size": 0,
-        })
-        
-        
+class ExperimentsType(Enum):
+    IMAGE_DISP = "image_disp"
+    LANG_DISP = "lang_disp"
+    FREQ = "freq"
+    POLY = "poly"
+    BASE = "base"
 
+
+@dataclass
+class ModelInfo:
+    model_type: ModelType = field(
+        default=ModelType.LM, metadata={"help": "Model types: LM/VM"}
+    )
+    model_id: str = field(
+        default="bert-base-uncased", metadata={"help": "Model to use."}
+    )
+    dim: int = field(default=768, metadata={"help": "size of dimension."})
+    model_size: float = field(
+        default=110, metadata={"help": "Millions of Parameters in the model."}
+    )
+    model_name: str = field(init=False)
+
+    def __post_init__(self):
+        self.model_name = self.model_id.split("/")[-1]
+
+
+MODEL_CONFIGS = {
+    "bert_uncased_L-2_H-128_A-2": ModelInfo(
+        model_id="google/bert_uncased_L-2_H-128_A-2",
+        model_size=4.4,
+        dim=128,
+        model_type=ModelType.LM,
+    ),
+    "bert_uncased_L-4_H-256_A-4": ModelInfo(
+        model_id="google/bert_uncased_L-4_H-256_A-4",
+        model_size=11.3,
+        dim=256,
+        model_type=ModelType.LM,
+    ),
+    "bert_uncased_L-4_H-512_A-8": ModelInfo(
+        model_id="google/bert_uncased_L-4_H-512_A-8",
+        model_size=29.1,
+        dim=512,
+        model_type=ModelType.LM,
+    ),
+    "bert_uncased_L-8_H-512_A-8": ModelInfo(
+        model_id="google/bert_uncased_L-8_H-512_A-8",
+        model_size=41.7,
+        dim=512,
+        model_type=ModelType.LM,
+    ),
+    "bert-base-uncased": ModelInfo(
+        model_id="bert-base-uncased",
+        model_size=110,
+        dim=768,
+        model_type=ModelType.LM,
+    ),
+    "bert-large-uncased": ModelInfo(
+        model_id="bert-large-uncased",
+        model_size=340,
+        dim=1024,
+        model_type=ModelType.LM,
+    ),
+    "gpt2": ModelInfo(
+        model_id="gpt2",
+        model_size=117,
+        dim=768,
+        model_type=ModelType.LM,
+    ),
+    "gpt2-medium": ModelInfo(
+        model_id="gpt2-medium",
+        model_size=345,
+        dim=1024,
+        model_type=ModelType.LM,
+    ),
+    "gpt2-large": ModelInfo(
+        model_id="gpt2-large",
+        model_size=762,
+        dim=1280,
+        model_type=ModelType.LM,
+    ),
+    "gpt2-xl": ModelInfo(
+        model_id="gpt2-xl",
+        model_size=1542,
+        dim=1600,
+        model_type=ModelType.LM,
+    ),
+    "opt-125m": ModelInfo(
+        model_id="facebook/opt-125m",
+        model_size=125,
+        dim=768,
+        model_type=ModelType.LM,
+    ),
+    "opt-1.3b": ModelInfo(
+        model_id="facebook/opt-1.3b",
+        model_size=1300,
+        dim=2048,
+        model_type=ModelType.LM,
+    ),
+    "opt-6.7b": ModelInfo(
+        model_id="facebook/opt-6.7b",
+        model_size=6700,
+        dim=4096,
+        model_type=ModelType.LM,
+    ),
+    "opt-30b": ModelInfo(
+        model_id="facebook/opt-30b",
+        model_size=30000,
+        dim=7168,
+        model_type=ModelType.LM,
+    ),
+    "Llama-2-7b-hf": ModelInfo(
+        model_id="meta/Llama-2-7b-hf",
+        model_size=7000,
+        dim=4096,
+        model_type=ModelType.LM,
+    ),
+    "Llama-2-13b-hf": ModelInfo(
+        model_id="meta/Llama-2-13b-hf",
+        model_size=13000,
+        dim=5120,
+        model_type=ModelType.LM,
+    ),
+    "resnet18": ModelInfo(
+        model_id="resnet18",
+        dim=512,
+        model_size=512,
+        model_type=ModelType.VM,
+    ),
+    "resnet34": ModelInfo(
+        model_id="resnet34",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "resnet50": ModelInfo(
+        model_id="resnet50",
+        dim=2048,
+        model_type=ModelType.VM,
+    ),
+    "resnet101": ModelInfo(
+        model_id="resnet101",
+        dim=2048,
+        model_type=ModelType.VM,
+    ),
+    "resnet152": ModelInfo(
+        model_id="resnet152",
+        dim=2048,
+        model_type=ModelType.VM,
+    ),
+    "segformer-b0-finetuned-ade-512-512": ModelInfo(
+        model_id="nvidia/segformer-b0-finetuned-ade-512-512",
+        dim=256,
+        model_type=ModelType.VM,
+    ),
+    "segformer-b1-finetuned-ade-512-512": ModelInfo(
+        model_id="nvidia/segformer-b1-finetuned-ade-512-512",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "segformer-b2-finetuned-ade-512-512": ModelInfo(
+        model_id="nvidia/segformer-b2-finetuned-ade-512-512",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "segformer-b3-finetuned-ade-512-512": ModelInfo(
+        model_id="nvidia/segformer-b3-finetuned-ade-512-512",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "segformer-b4-finetuned-ade-512-512": ModelInfo(
+        model_id="nvidia/segformer-b4-finetuned-ade-512-512",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "segformer-b5-finetuned-ade-640-640": ModelInfo(
+        model_id="nvidia/segformer-b5-finetuned-ade-640-640",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "vit-mae-base": ModelInfo(
+        model_id="facebook/vit-mae-base",
+        dim=768,
+        model_type=ModelType.VM,
+    ),
+    "vit-mae-large": ModelInfo(
+        model_id="facebook/vit-mae-large",
+        dim=1024,
+        model_type=ModelType.VM,
+    ),
+    "vit-mae-huge": ModelInfo(
+        model_id="facebook/vit-mae-huge",
+        dim=1280,
+        model_type=ModelType.VM,
+    ),
+}
+
+
+@dataclass
+class CommonConfig:
+    seed: int = field(default=42, metadata={"help": "Seed for reproducibility."})
+    sentences_file: str = field(
+        default="./data/sentences.json",
+        metadata={"help": "Path to save the sentences."},
+    )
+    wordlist_file: str = field(
+        default="./data/all_words.json",
+        metadata={"help": "Path to save the wordlist."},
+    )
+    alias_emb_dir: str = field(
+        default="./data/emb",
+        metadata={"help": "Path to save word embeddings (decontextualized)"},
+    )
+    emb_per_object: bool = field(
+        default=False,
+        metadata={"help": "Path to save one embedding per image or sentence"},
+    )
+    num_classes: int = field(
+        default=100000,
+        metadata={"help": "Number of classes in the dataset."},
+    )
+    dictionary_path: str = field(
+        default="./data/dicts",
+        metadata={"help": "Path to save the dictionary."},
+    )
+
+
+@dataclass
+class DataConfig:
+    dataset_name: str = field(
+        default="imagenet", metadata={"help": "Name of the image dataset."}
+    )
+    image_dir: str = field(
+        default=MISSING,
+        metadata={"help": "Path to save the raw image data."},
+    )
+    image_id_pairs: str = field(
+        default=MISSING,
+        metadata={"help": "Path to save the image id pairs."},
+    )
+
+
+@dataclass
+class MuseConfig:
+    seed: int = field(
+        default=II("common.seed"), metadata={"help": "Seed for reproducibility."}
+    )
+    exp_type: ExperimentsType = field(
+        default=ExperimentsType.BASE,
+        metadata={
+            "help": "Different experiments settings: BASE, image_disp, lang_disp, freq, poly."
+        },
+    )
+    lm: str = field(default="lm", metadata={"help": "Language model name."})
+    vm: str = field(default="vm", metadata={"help": "Vision model name."})
+    dim: int = field(default=768, metadata={"help": "Dimension of the embeddings."})
+    fold: int = field(default=1, metadata={"help": "Fold number."})
+    bin_name: str = field(
+        default="",
+        metadata={"help": "Various Bins name only for non-original experiments."},
+    )
+    data_type: str = field(default="cleaned", metadata={"help": "Data types: cleaned."})
+    n_refinement: int = field(default=0, metadata={"help": "Number of refinements."})
+    normalize_embeddings: str = field(
+        default="center", metadata={"help": "Normalization."}
+    )
+    more_exp: bool = field(init=False)
+    tgt_lang: str = field(init=False, metadata={"help": "Target language."})
+    src_lang: str = field(init=False, metadata={"help": "Source language."})
+    emb_dim: int = field(init=False, metadata={"help": "Dimension of the embeddings."})
+    dico_eval: str = field(
+        init=False, metadata={"help": "Path to load evaluation dictionary."}
+    )
+    dico_train: str = field(
+        init=False, metadata={"help": "Path to load training dictionary."}
+    )
+    src_emb: str = field(
+        init=False, metadata={"help": "Path to load source representations."}
+    )
+    tgt_emb: str = field(
+        init=False, metadata={"help": "Path to load target representations."}
+    )
+    exp_name: str = field(
+        default="", metadata={"help": "Path to log and store experiments."}
+    )
+    cuda: bool = field(default=True, metadata={"help": "Use GPU."})
+    export: str = field(
+        default="", metadata={"help": "Export embeddings after training (txt / pth)"}
+    )
+
+    # No need to change the following parameters
+    exp_id: str = field(default="", metadata={"help": "Experiment ID."})
+    max_vocab: int = field(
+        default=200000, metadata={"help": "Maximum vocabulary size (-1 to disable)"}
+    )
+    dico_method: str = field(
+        default="csls_knn_100",
+        metadata={
+            "help": "Method used for dictionary generation (nn/invsm_beta_30/csls_knn_10)"
+        },
+    )
+    dico_build: str = field(
+        default="S2T&T2S", metadata={"help": "S2T,T2S,S2T|T2S,S2T&T2S"}
+    )
+    dico_threshold: float = field(
+        default=0, metadata={"help": "Threshold confidence for dictionary generation"}
+    )
+    dico_max_rank: int = field(
+        default=10000, metadata={"help": "Maximum dictionary words rank (0 to disable)"}
+    )
+    dico_min_size: int = field(
+        default=0, metadata={"help": "Minimum dictionary size (0 to disable)"}
+    )
+    dico_max_size: int = field(
+        default=0, metadata={"help": "Maximum dictionary size (0 to disable)"}
+    )
+    verbose: int = field(default=2, metadata={"help": "Verbosity level."})
+    load_optim: bool = field(
+        default=False, metadata={"help": "Load optimized results."}
+    )
+
+    def __post_init__(self):
+        self.more_exp = True if self.exp_type != ExperimentsType.BASE else False
+        exp_dict_folders = {
+            ExperimentsType.IMAGE_DISP: f"{self.vm}_disp",
+            ExperimentsType.LANG_DISP: f"{self.vm}_disp",
+            ExperimentsType.POLY: "poly",
+            ExperimentsType.FREQ: "freq",
+            ExperimentsType.BASE: "base",
+        }
+
+        test_dict_folder = exp_dict_folders.get(self.exp_type, "base")
+        self.src_lang = self.vm
+        self.tgt_lang = self.lm
+        self.emb_dim = self.dim
+        self.dico_train = f"{II('common.dictionary_path')}/{II('dataset.dataset_name')}/{self.exp_type.value}/train_{self.fold}_{self.data_type}.txt"
+        self.dico_eval = f"{II('common.dictionary_path')}/{II('dataset.dataset_name')}/{test_dict_folder}/test_{self.fold}_{self.data_type}.txt"
+        self.src_emb = f"{II('common.alias_emb_dir')}/VM/{II('dataset.dataset_name')}/{self.vm}_{self.emb_dim}.pth"
+        self.tgt_emb = f"{II('common.alias_emb_dir')}/LM/{self.lm}_{self.emb_dim}.pth"
+
+
+@dataclass
+class RunConfig:
+    model: ModelInfo = field(default_factory=lambda: MODEL_CONFIGS["opt-125m"])
+    common: CommonConfig = field(default_factory=CommonConfig)
+    dataset: DataConfig = field(default_factory=DataConfig)
+    muse: MuseConfig = field(default_factory=MuseConfig)
+    run_muse: bool = field(default=False, metadata={"help": "Run MUSE part."})

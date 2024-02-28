@@ -1,0 +1,3 @@
+dataset_name: imagenet  # imagenet or cldi
+image_dir: ${hydra:runtime.cwd}/data/imagenet_21k  # for imagenet dataset
+image_id_pairs: ${hydra:runtime.cwd}/data/id_pairs_21k.json  # for imagenet dataset

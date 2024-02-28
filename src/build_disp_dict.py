@@ -1,7 +1,7 @@
 from pathlib import Path
 import numpy as np
 
-model_type = "vm" # "lm" or "vm"
+model_type = "lm" # "lm" or "vm"
 if model_type == "vm":
     dispersion_ranking_paths = ["./data_v1/sorted_dispersion_vit-mae-huge.txt",
                             "./data_v1/sorted_dispersion_resnet152.txt",
@@ -9,11 +9,11 @@ if model_type == "vm":
                             ]
 else:
     dispersion_ranking_paths = ["./data_v1/sorted_dispersion_bert-large-uncased.txt",
-                            "./data_v1/sorted_dispersion_gpt2-xl.txt",
-                            "./data_v1/sorted_dispersion_opt-30b.txt",
+                            "./sorted_dispersion_gpt2-xl.txt",
+                            "./sorted_dispersion_opt-30b.txt",
                             # "./data_v1/sorted_dispersion_opt-66b.txt",
                             # "./data_v1/sorted_dispersion_Llama-2-70b-hf.txt",
-                            "./data_v1/sorted_dispersion_Llama-2-13b-hf.txt"
+                            "./sorted_dispersion_Llama-2-13b-hf.txt"
                             ]
     
 # dispersion_ranking_path = "./data_v1/sorted_dispersion_resnet152.txt"
@@ -50,7 +50,7 @@ for dispersion_ranking_path in dispersion_ranking_paths:
         else:
             keys3.append(pair.split(":")[0].replace(" ","_"))
 
-    original_path = Path("./data/dicts/original")
+    original_path = Path("./data/dicts/imagenet")
     lower = []
     medium = []
     higher = []

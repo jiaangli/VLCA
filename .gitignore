@@ -166,7 +166,12 @@ scripts/
 *.pth
 wandb/
 sorted*
+*_v1
 *old
 weak*
 *.bin
 *.gz
+/outputs
+*.zip
+logs/
+multi*
