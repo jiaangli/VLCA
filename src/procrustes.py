@@ -34,6 +34,7 @@ class MuseExp:
         }.get(exp_type.value, [""])
 
         project_name = f"img2{self.model_type.value}-{data_type}-{exp_type.value}"
+        wandb.login(key=os.environ.get("WANDB_API_KEY"))
         wandb.init(project=project_name, name=f"{self.model_name}")
         metrics_df = pd.DataFrame()
         input_model = model_info[self.model_name]  # model in the command line

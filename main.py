@@ -37,5 +37,4 @@ def main(cfg: DictConfig) -> None:
 
 
 if __name__ == "__main__":
-    # args = io_utils.parser()
     main()
