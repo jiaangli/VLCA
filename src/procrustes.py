@@ -3,9 +3,9 @@ from collections import OrderedDict
 
 import pandas as pd
 import torch
-import wandb
 from omegaconf import DictConfig
 
+import wandb
 from MUSE.src.evaluation import Evaluator
 from MUSE.src.models import build_model
 from MUSE.src.trainer import Trainer

@@ -8,6 +8,8 @@ from omegaconf import DictConfig
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 
+from ..config import ModelType
+
 
 def enforce_reproducibility(seed: int = 42) -> None:
     # Sets seed manually for both CPU and CUDA
@@ -36,16 +38,16 @@ def CV_ind(n: int, n_folds: int) -> np.ndarray:
 
 
 def reduce_dim(config: DictConfig, models: dict) -> None:
-    if config.model.model_type == "LM":
+    if config.model.model_type == ModelType.LM:
         data_path = (
             Path(config.common.alias_emb_dir)
-            / config.model.model_type
+            / config.model.model_type.value
             / f"{config.model.model_name}_{config.model.dim}.pth"
         )
     else:
         data_path = (
             Path(config.common.alias_emb_dir)
-            / config.model.model_type
+            / config.model.model_type.value
             / config.dataset.dataset_name
             / f"{config.model.model_name}_{config.model.dim}.pth"
         )
