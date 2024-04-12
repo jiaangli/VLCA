@@ -1,6 +1,7 @@
 defaults:
-  - basic_config
-  - dataset: imagenet
+  - run_config
+  # - model: opt-125m
+  # - dataset: imagenet
   - _self_
 
 common:

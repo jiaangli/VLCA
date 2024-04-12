@@ -18,7 +18,7 @@ class LMEmbedding:
         self.labels: list = labels
         self.dataset_name: str = args.dataset.dataset_name
         self.alias_emb_dir: Path = (
-            Path(args.common.alias_emb_dir) / args.model.model_type
+            Path(args.common.alias_emb_dir) / args.model.model_type.value
         )
         self.emb_per_object: bool = (
             True
@@ -256,7 +256,7 @@ class LMEmbedding:
         print(f"Saved extracted features to {str(self.alias_emb_dir)}")
 
     def __get_mean_word_embeddings(
-        self, vecs: np.ndarray, all_words: list, uni_words: list
+        self, vecs: np.ndarray, all_words: Any, uni_words: list
     ) -> np.ndarray:
         word_indices = [np.where(all_words == w)[0] for w in uni_words]
         word_embeddings = np.empty((len(uni_words), vecs.shape[1]), dtype=np.float16)

@@ -1,4 +1,5 @@
 import hydra
+from dotenv import load_dotenv
 from hydra.core.config_store import ConfigStore
 from omegaconf import DictConfig, OmegaConf
 
@@ -22,7 +23,7 @@ def run_muse(args: DictConfig) -> None:
 
 
 cs = ConfigStore.instance()
-cs.store(name="basic_config", node=RunConfig)
+cs.store(name="run_config", node=RunConfig)
 for model in MODEL_CONFIGS:
     cs.store(group="model", name=f"{model}", node=MODEL_CONFIGS[model])
 
@@ -37,4 +38,5 @@ def main(cfg: DictConfig) -> None:
 
 
 if __name__ == "__main__":
+    load_dotenv("./.env")
     main()

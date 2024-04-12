@@ -27,12 +27,15 @@ class ModelInfo:
     )
     dim: int = field(default=768, metadata={"help": "size of dimension."})
     model_size: float = field(
-        default=110, metadata={"help": "Millions of Parameters in the model."}
+        default=MISSING, metadata={"help": "Millions of Parameters in the model."}
     )
     model_name: str = field(init=False)
 
     def __post_init__(self):
-        self.model_name = self.model_id.split("/")[-1]
+        if self.model_id in ["ViT-B/32", "ViT-L/14", "RN50", "RN101", "RN50x64"]:
+            self.model_name = f"clip-{self.model_id.replace('/', '-')}"
+        else:
+            self.model_name = self.model_id.split("/")[-1]
 
 
 MODEL_CONFIGS = {
@@ -203,12 +206,37 @@ MODEL_CONFIGS = {
         dim=1280,
         model_type=ModelType.VM,
     ),
+    "clip-rn50x64": ModelInfo(
+        model_id="RN50x64",
+        dim=1024,
+        model_type=ModelType.VM,
+    ),
+    "clip-rn50": ModelInfo(
+        model_id="RN50",
+        dim=1024,
+        model_type=ModelType.VM,
+    ),
+    "clip-rn101": ModelInfo(
+        model_id="RN101",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "clip-vit-b-32": ModelInfo(
+        model_id="ViT-B/32",
+        dim=512,
+        model_type=ModelType.VM,
+    ),
+    "clip-vit-l-14": ModelInfo(
+        model_id="ViT-L/14",
+        dim=768,
+        model_type=ModelType.VM,
+    ),
 }
 
 
 @dataclass
 class CommonConfig:
-    seed: int = field(default=42, metadata={"help": "Seed for reproducibility."})
+    seed: int = field(default=0, metadata={"help": "Seed for reproducibility."})
     sentences_file: str = field(
         default="./data/sentences.json",
         metadata={"help": "Path to save the sentences."},
@@ -293,6 +321,9 @@ class MuseConfig:
     exp_name: str = field(
         default="", metadata={"help": "Path to log and store experiments."}
     )
+    exp_path: str = field(
+        default="", metadata={"help": "Path to log and store experiments."}
+    )
     cuda: bool = field(default=True, metadata={"help": "Use GPU."})
     export: str = field(
         default="", metadata={"help": "Export embeddings after training (txt / pth)"}
@@ -328,6 +359,18 @@ class MuseConfig:
     load_optim: bool = field(
         default=False, metadata={"help": "Load optimized results."}
     )
+    dico_root: str = field(
+        default=f"{II('common.dictionary_path')}/{II('dataset.dataset_name')}",
+        metadata={"help": "Path to save the dictionary."},
+    )
+    vm_emb_root: str = field(
+        default=f"{II('common.alias_emb_dir')}/{ModelType.VM.value}/{II('dataset.dataset_name')}",
+        metadata={"help": "Path to save the vision model embeddings."},
+    )
+    lm_emb_root: str = field(
+        default=f"{II('common.alias_emb_dir')}/{ModelType.LM.value}",
+        metadata={"help": "Path to save the language model embeddings."},
+    )
 
     def __post_init__(self):
         self.more_exp = True if self.exp_type != ExperimentsType.BASE else False
@@ -343,10 +386,12 @@ class MuseConfig:
         self.src_lang = self.vm
         self.tgt_lang = self.lm
         self.emb_dim = self.dim
-        self.dico_train = f"{II('common.dictionary_path')}/{II('dataset.dataset_name')}/{self.exp_type.value}/train_{self.fold}_{self.data_type}.txt"
-        self.dico_eval = f"{II('common.dictionary_path')}/{II('dataset.dataset_name')}/{test_dict_folder}/test_{self.fold}_{self.data_type}.txt"
-        self.src_emb = f"{II('common.alias_emb_dir')}/VM/{II('dataset.dataset_name')}/{self.vm}_{self.emb_dim}.pth"
-        self.tgt_emb = f"{II('common.alias_emb_dir')}/LM/{self.lm}_{self.emb_dim}.pth"
+        self.dico_train = f"{self.dico_root}/{self.exp_type.value}/train_{self.fold}_{self.data_type}.txt"
+        self.dico_eval = (
+            f"{self.dico_root}/{test_dict_folder}/test_{self.fold}_{self.data_type}.txt"
+        )
+        self.src_emb = f"{self.vm_emb_root}/{self.vm}_{self.emb_dim}.pth"
+        self.tgt_emb = f"{self.lm_emb_root}/{self.lm}_{self.emb_dim}.pth"
 
 
 @dataclass
