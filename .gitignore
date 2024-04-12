@@ -175,3 +175,4 @@ weak*
 *.zip
 logs/
 multi*
+figures/
