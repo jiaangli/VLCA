@@ -39,6 +39,42 @@ class ModelInfo:
 
 
 MODEL_CONFIGS = {
+    "opt-125m": ModelInfo(
+        model_id="facebook/opt-125m",
+        model_size=125,
+        dim=768,
+        model_type=ModelType.LM,
+    ),
+    # "opt-1.3b": ModelInfo(
+    #     model_id="facebook/opt-1.3b",
+    #     model_size=1300,
+    #     dim=2048,
+    #     model_type=ModelType.LM,
+    # ),
+    "opt-6.7b": ModelInfo(
+        model_id="facebook/opt-6.7b",
+        model_size=6700,
+        dim=4096,
+        model_type=ModelType.LM,
+    ),
+    "opt-30b": ModelInfo(
+        model_id="facebook/opt-30b",
+        model_size=30000,
+        dim=7168,
+        model_type=ModelType.LM,
+    ),
+    "Llama-2-7b-hf": ModelInfo(
+        model_id="meta/Llama-2-7b-hf",
+        model_size=7000,
+        dim=4096,
+        model_type=ModelType.LM,
+    ),
+    "Llama-2-13b-hf": ModelInfo(
+        model_id="meta/Llama-2-13b-hf",
+        model_size=13000,
+        dim=5120,
+        model_type=ModelType.LM,
+    ),
     "bert_uncased_L-2_H-128_A-2": ModelInfo(
         model_id="google/bert_uncased_L-2_H-128_A-2",
         model_size=4.4,
@@ -81,12 +117,12 @@ MODEL_CONFIGS = {
         dim=768,
         model_type=ModelType.LM,
     ),
-    "gpt2-medium": ModelInfo(
-        model_id="gpt2-medium",
-        model_size=345,
-        dim=1024,
-        model_type=ModelType.LM,
-    ),
+    # "gpt2-medium": ModelInfo(
+    #     model_id="gpt2-medium",
+    #     model_size=345,
+    #     dim=1024,
+    #     model_type=ModelType.LM,
+    # ),
     "gpt2-large": ModelInfo(
         model_id="gpt2-large",
         model_size=762,
@@ -97,42 +133,6 @@ MODEL_CONFIGS = {
         model_id="gpt2-xl",
         model_size=1542,
         dim=1600,
-        model_type=ModelType.LM,
-    ),
-    "opt-125m": ModelInfo(
-        model_id="facebook/opt-125m",
-        model_size=125,
-        dim=768,
-        model_type=ModelType.LM,
-    ),
-    "opt-1.3b": ModelInfo(
-        model_id="facebook/opt-1.3b",
-        model_size=1300,
-        dim=2048,
-        model_type=ModelType.LM,
-    ),
-    "opt-6.7b": ModelInfo(
-        model_id="facebook/opt-6.7b",
-        model_size=6700,
-        dim=4096,
-        model_type=ModelType.LM,
-    ),
-    "opt-30b": ModelInfo(
-        model_id="facebook/opt-30b",
-        model_size=30000,
-        dim=7168,
-        model_type=ModelType.LM,
-    ),
-    "Llama-2-7b-hf": ModelInfo(
-        model_id="meta/Llama-2-7b-hf",
-        model_size=7000,
-        dim=4096,
-        model_type=ModelType.LM,
-    ),
-    "Llama-2-13b-hf": ModelInfo(
-        model_id="meta/Llama-2-13b-hf",
-        model_size=13000,
-        dim=5120,
         model_type=ModelType.LM,
     ),
     "resnet18": ModelInfo(

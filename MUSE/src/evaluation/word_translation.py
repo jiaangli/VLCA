@@ -161,23 +161,24 @@ def get_word_translation_accuracy(
     # top_matches = scores.topk(10, 1, True)[1]
     for k in [1, 5, 10, 30, 50, 100]:
         # for k in [100]:
-        # # for k in [1, 10, 100]:
+        # for k in [1]:
         top_k_matches = top_matches[:, :k]
-        #     id12word = {y: x for x, y in word2id1.items()}
-        #     id22word = {y: x for x, y in word2id2.items()}
-        #     mapping_res = {}
-        #     candicates = []
-        #     for x in top_k_matches:
-        #         candicates.append([id22word[int(y)] for y in x])
+        # id12word = {y: x for x, y in word2id1.items()}
+        # id22word = {y: x for x, y in word2id2.items()}
+        # mapping_res = {}
+        # candicates = []
+        # for x in top_k_matches:
+        #     candicates.append([id22word[int(y)] for y in x])
 
-        #     for idx, soucrce_word in enumerate(dico[:,0]):
-        #         try:
-        #             mapping_res[id12word[int(soucrce_word)]] = candicates[idx]
-        #         except:
-        #             print('error:', soucrce_word)
-        #     import json
-        #     with open(f'mapping_res_{k}.json', 'w') as f:
-        #         json.dump(mapping_res, f)
+        # for idx, soucrce_word in enumerate(dico[:, 0]):
+        #     try:
+        #         mapping_res[id12word[int(soucrce_word)]] = candicates[idx]
+        #     except:
+        #         print("error:", soucrce_word)
+        # import json
+
+        # with open(f"mapping_res_{k}.json", "w") as f:
+        #     json.dump(mapping_res, f)
 
         _matching = (
             (top_k_matches == dico[:, 1][:, None].expand_as(top_k_matches))

@@ -18,7 +18,8 @@ class MuseExp:
         self.config: DictConfig = config
         self.seed = config.common.seed
         self.model_type: ModelType = config.model.model_type
-        self.model_name: str = config.model.model_id.split("/")[-1]
+        # self.model_name: str = config.model.model_id.split("/")[-1]
+        self.model_name = config.model.model_name
         self.dico_root = self.config.muse.dico_root
         self.lm_emb_root = self.config.muse.lm_emb_root
         self.vm_emb_root = self.config.muse.vm_emb_root
@@ -36,11 +37,11 @@ class MuseExp:
             "image_disp": ["_low", "_medium", "_high"],
         }.get(exp_type.value, [""])
 
-        project_name = f"round2img2{self.model_type.value}-{data_type}-{exp_type.value}"
+        project_name = f"img2{self.model_type.value}-{data_type}-{exp_type.value}"
         wandb.login(key=os.environ.get("WANDB_API_KEY"))
         wandb.init(project=project_name, name=f"{self.model_name}")
         metrics_df = pd.DataFrame()
-        input_model = model_info[self.model_name]  # model in the command line
+        input_model = model_info[self.model_name.lower()]  # model in the command line
 
         for other_model_name in model_info:
             other_model = model_info[other_model_name]
