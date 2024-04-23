@@ -35,7 +35,7 @@ Example to sequentially run GPT2 and OPT-125m models on ImageNet-21K dataset:
 python main.py \
     --multirun \
     +model=gpt2,opt-125m \
-    dataset=imagenet \
+    +dataset=imagenet \
     muse.exp_type=BASE
 ```
 
