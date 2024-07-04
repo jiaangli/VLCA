@@ -1,21 +1,20 @@
 import re
 from pathlib import Path
-from typing import Any, Tuple
+from typing import Any, Optional, Tuple
 
 import numpy as np
 import torch
+from datasets import load_dataset
 from omegaconf import DictConfig
 from tqdm import tqdm
 from transformers import AutoConfig, AutoModel, AutoTokenizer
 
 
 class LMEmbedding:
-    def __init__(self, args: DictConfig, text_sentences_array: dict, labels: list):
+    def __init__(self, args: DictConfig):
         self.config: DictConfig = args
-        self.text_sentences_array: dict = text_sentences_array
         self.model_id: str = args.model.model_id
         self.model_name: str = args.model.model_name
-        self.labels: list = labels
         self.dataset_name: str = args.dataset.dataset_name
         self.alias_emb_dir: Path = (
             Path(args.common.alias_emb_dir) / args.model.model_type.value
@@ -78,27 +77,28 @@ class LMEmbedding:
             #                                   max_memory=max_memory)
         model = model.eval()
         # where to store layer-wise bert embeddings of particular length
+
+        # Load the text dataset
+        text_sentences_array = load_dataset(
+            "jaagli/common_words_79k", split="whole", cache_dir="./data"
+        )
         lm_dict = {}
         pattern = r"\s+([^\w\s]+)(\s*)$"
         replacement = r"\1\2"
         # get the token embeddings
-        all_words_in_context = []
 
-        for word_idx, keys in enumerate(
-            tqdm(self.text_sentences_array, mininterval=300, maxinterval=3600)
-        ):
-            batch_sentences = []
-            for sentence in self.text_sentences_array[keys]:
-                sentence = re.sub(pattern, replacement, sentence).lower()
-                # sentences_words = [w for w in sentences.strip().split(' ')]
-                related_alias = keys.replace("_", " ")
-                all_words_in_context.append(keys)
-                batch_sentences.append(sentence.strip())
+        for word_data in tqdm(text_sentences_array):
+            related_alias = word_data["alias"].replace("_", " ")
+            batch_sentences = [
+                re.sub(pattern, replacement, sentence).lower()
+                for sentence in word_data["sentences"]
+            ]
 
             lm_dict = self.add_token_embedding_for_specific_word(
                 batch_sentences, tokenizer, model, related_alias, lm_dict
             )
-        self.save_embeddings(all_words_in_context, lm_dict)
+
+        self.save_embeddings(text_sentences_array["alias"], lm_dict)
 
     def get_word_ind_to_token_ind(
         self, words_in_array: str, related_words: str, tokenizer: Any, words_mask: list
@@ -218,7 +218,9 @@ class LMEmbedding:
 
         return lm_dict
 
-    def save_embeddings(self, all_context_words: list, model_layer_dict: dict) -> None:
+    def save_embeddings(
+        self, all_context_words: Optional[list], model_layer_dict: dict
+    ) -> None:
         wordlist = np.array(all_context_words)
         if "bert" in self.model_name:
             wordlist = np.array([w.lower() for w in wordlist])
