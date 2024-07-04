@@ -1,14 +1,13 @@
-from concurrent.futures import ProcessPoolExecutor
 import json
+import math
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
-import threading
 
 import fasttext as ft
 import requests
-import pandas as pd
-import math
 
 ft.FastText.eprint = lambda x: None
+
 
 class CrawlSentences:
     def __init__(self, processID, wordlist, batch_size, download_path):
@@ -19,12 +18,12 @@ class CrawlSentences:
 
     @staticmethod
     def is_english(text, model):
-        return model.predict(text)[0][0] == '__label__en'
+        return model.predict(text)[0][0] == "__label__en"
 
     @staticmethod
     def check_symbols(s):
         arr = []
-        SYMBOLS = {'}': '{', ']': '[', ')': '(', '>': '<'}
+        SYMBOLS = {"}": "{", "]": "[", ")": "(", ">": "<"}
         SYMBOLS_L = SYMBOLS.values()
         for c in s:
             if c in SYMBOLS_L:
@@ -40,7 +39,6 @@ class CrawlSentences:
         else:
             return True
 
-
     def crawl_sentences(self, word, model):
         """
         Download sentences related to the word from wiki
@@ -50,39 +48,51 @@ class CrawlSentences:
         model: the model you want to use to crawl the sentences.
         """
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0'}
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0"
+        }
 
         sentence_list = []
         # ft_model = ft.load_model("./pretrained/lid.176.bin")
 
         try:
-            r = requests.get(f'https://api.rhymezone.com/words?max=501&nonorm=1&k=rz_wke&rel_wke={word}',
-                            headers=headers).text
+            r = requests.get(
+                f"https://api.rhymezone.com/words?max=501&nonorm=1&k=rz_wke&rel_wke={word}",
+                headers=headers,
+            ).text
 
             if len(r) > 2:
                 try:
-                    start = r.index('[{')
-                    end = r.index('}]') + 2
+                    start = r.index("[{")
+                    end = r.index("}]") + 2
                     data = json.loads(r[start:end])
                 except Exception:
                     print(f"loaded error: {word}")
                 for item in data:
-                    item_info = item['word'].replace('<b>', '').replace('</b>', '').split(':', 3)
+                    item_info = (
+                        item["word"]
+                        .replace("<b>", "")
+                        .replace("</b>", "")
+                        .split(":", 3)
+                    )
                     # print(item_info)
                     # Only select the wiki source
                     item_sentence = item_info[-1]
                     # if (item_info[0] == 'd' or item_info[0] == 'b' or item_info[0] == 'q')
-                    if (item_info[0] == 'd') \
-                            and len(item_sentence.split(' ')) < 16 and '...' not in item_sentence \
-                            and self.check_symbols(item_sentence) and item_sentence.count('"') % 2 == 0 \
-                            and item_sentence.isascii() and self.is_english(item_sentence, model):
+                    if (
+                        (item_info[0] == "d")
+                        and len(item_sentence.split(" ")) < 16
+                        and "..." not in item_sentence
+                        and self.check_symbols(item_sentence)
+                        and item_sentence.count('"') % 2 == 0
+                        and item_sentence.isascii()
+                        and self.is_english(item_sentence, model)
+                    ):
                         # source = f'{word}: {item_sentence}'
                         sentence_list.append(item_sentence)
 
         except Exception:
             print(f"request error:{word}")
         return sentence_list
-
 
     def format_sentences(self, wordslist):
         """
@@ -95,29 +105,29 @@ class CrawlSentences:
         download_path: the path to the directory where the downloaded files are stored
         """
         # with open(wordslist, 'r') as words_read:
-        words = wordslist[self.processID * self.bs : (self.processID+1) * self.bs]
+        words = wordslist[self.processID * self.bs : (self.processID + 1) * self.bs]
         examples = {}
         ft_model = ft.load_model("./ft_pretrained/lid.176.bin")
         for word_n in words:
-            word = word_n.strip('\n').replace(' ', '_')
+            word = word_n.strip("\n").replace(" ", "_")
             crawled_sentences = self.crawl_sentences(word=word, model=ft_model)
             if len(crawled_sentences) >= 5:
                 examples[word] = crawled_sentences[:15]
             else:
                 print(word)
         return examples
-    
-def sentences_download(args):
-    sentences_path = Path(args.data.sentences_path)
-    if sentences_path.exists():
-        print('Sentences already downloaded.')
-    else:
-        with open(Path(args.data.wordlist_path)) as json_file:
-            wordlist = json.load(json_file)["all_words"]
-        # wordlist = pd.read_json(str(Path(args.data.wordlist_path)))["non_digit_labels"].tolist()
-        download_path = Path("./data/downloads")
 
-        print('Begin downloading sentences.')
+
+def sentences_download(args):
+    sentences_file = Path(args.common.sentences_file)
+    if sentences_file.exists():
+        print("Sentences already downloaded.")
+    else:
+        with open(Path(args.common.wordlist_file)) as json_file:
+            wordlist = json.load(json_file)["all_words"]
+            download_path = Path("./data/downloads")
+
+        print("Begin downloading sentences.")
         if not download_path.exists():
             download_path.mkdir(exist_ok=True, parents=True)
 
@@ -127,7 +137,12 @@ def sentences_download(args):
         with ProcessPoolExecutor(max_workers=process_num) as executor:
             processes = []
             for i in range(process_num):
-                process_index = CrawlSentences(i, wordlist=wordlist, batch_size=batch_size, download_path=download_path)
+                process_index = CrawlSentences(
+                    i,
+                    wordlist=wordlist,
+                    batch_size=batch_size,
+                    download_path=download_path,
+                )
                 processes.append(process_index)
 
             # Merge dictionaries from process_results list
@@ -143,7 +158,8 @@ def sentences_download(args):
         with output_file.open("w") as f:
             json.dump(merged_results, f, indent=4)
 
-        print('Download sentences successfully.')
+        print("Download sentences successfully.")
+
 
 def run_process(process):
     print(f"Begin: Process-{process.processID}")

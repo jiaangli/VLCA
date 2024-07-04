@@ -1,0 +1,15 @@
+defaults:
+  - run_config
+  # - model: opt-125m
+  # - dataset: imagenet
+  - _self_
+
+common:
+  seed: 42
+  sentences_file: ${hydra:runtime.cwd}/data/sentences.json
+  wordlist_file: ${hydra:runtime.cwd}/data/all_words.json
+  alias_emb_dir: ${oc.env:DATASET_ROOT}  # path to save word embeddings (decontextualized)
+  emb_per_object: false # if use save one embedding per image or sentence
+  num_classes: 1000000  # number of sample ratio
+  dictionary_path: ${hydra:runtime.cwd}/data/dicts
+  

@@ -1,34 +1,42 @@
-from pathlib import Path
+import hydra
+from dotenv import load_dotenv
+from hydra.core.config_store import ConfigStore
+from omegaconf import DictConfig, OmegaConf
 
-from src.utils import io_utils
-from src.rep_extractor import RepExtractor
+from src.config import MODEL_CONFIGS, RunConfig
 from src.procrustes import MuseExp
-from src.config import ModelConfig, MODEL_DIM
+from src.rep_extractor import RepExtractor
 from src.utils.utils_helper import reduce_dim
 
-def get_reps(args):
-    config = ModelConfig(args.model_type, args.pretrained)
-    rep_extractor = RepExtractor(config=config)
-    rep_extractor.process_embeddings(config)
+
+def get_reps(args: DictConfig) -> None:
+    rep_extractor = RepExtractor(config=args)
+    rep_extractor.process_embeddings(args)
     print("-" * 25 + "Extract and Decontextualize representation completed!" + "-" * 25)
-    
-    reduce_dim(config, MODEL_DIM)
-    
-def run_muse(args):
 
-    # utils_helper.enforce_reproducibility(seed=config.data.seed)
-    # method = config.method
-    # config = utils_helper.uniform_config(args=config)
+    reduce_dim(args, MODEL_CONFIGS)
+
+
+def run_muse(args: DictConfig) -> None:
     procrustes_exp = MuseExp(args)
-    procrustes_exp.run(data_split=args.data_class, extend_exp=args.more_exps)
-    # procrustes_exp.run(data_split="cleaned", extend_exp="image_disp")
-    pass
+    procrustes_exp.run(data_type=args.muse.data_type, exp_type=args.muse.exp_type)
 
-def main(args):
-    get_reps(args)
-    if args.muse:
-        run_muse(args)
 
-if __name__ == '__main__':
-    args = io_utils.parser()
-    main(args)
+cs = ConfigStore.instance()
+cs.store(name="run_config", node=RunConfig)
+for model in MODEL_CONFIGS:
+    cs.store(group="model", name=f"{model}", node=MODEL_CONFIGS[model])
+
+
+@hydra.main(version_base=None, config_path="conf", config_name="base_config")
+def main(cfg: DictConfig) -> None:
+    OmegaConf.resolve(cfg)
+    print(f"Run config:\n{'-'*20}\n{OmegaConf.to_yaml(cfg)}{'-'*20}\n")
+    get_reps(cfg)
+    if cfg.run_muse:
+        run_muse(cfg)
+
+
+if __name__ == "__main__":
+    load_dotenv("./.env")
+    main()

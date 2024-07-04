@@ -14,8 +14,14 @@ import torch
 
 from ..utils import get_nn_avg_dist
 
-DIC_EVAL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'crosslingual',
-                             'dictionaries')
+DIC_EVAL_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "..",
+    "..",
+    "data",
+    "crosslingual",
+    "dictionaries",
+)
 
 logger = getLogger()
 
@@ -26,8 +32,9 @@ def load_identical_char_dico(word2id1, word2id2):
     """
     pairs = [(w1, w1) for w1 in word2id1.keys() if w1 in word2id2]
     if len(pairs) == 0:
-        raise Exception("No identical character strings were found. "
-                        "Please specify a dictionary.")
+        raise Exception(
+            "No identical character strings were found. " "Please specify a dictionary."
+        )
 
     logger.info("Found %i pairs of identical character strings." % len(pairs))
 
@@ -53,7 +60,7 @@ def load_dictionary(path, word2id1, word2id2):
     not_found1 = 0
     not_found2 = 0
 
-    with io.open(path, 'r', encoding='utf-8') as f:
+    with io.open(path, "r", encoding="utf-8") as f:
         for index, line in enumerate(f):
             # assert line == line.lower()
             parts = line.rstrip().split()
@@ -68,11 +75,18 @@ def load_dictionary(path, word2id1, word2id2):
                 not_found1 += int(word1 not in word2id1)
                 not_found2 += int(word2 not in word2id2)
 
-    logger.info("Found %i pairs of words in the dictionary (%i unique). "
-                "%i other pairs contained at least one unknown word "
-                "(%i in lang1, %i in lang2)"
-                % (len(pairs), len(set([x for x, _ in pairs])),
-                   not_found, not_found1, not_found2))
+    logger.info(
+        "Found %i pairs of words in the dictionary (%i unique). "
+        "%i other pairs contained at least one unknown word "
+        "(%i in lang1, %i in lang2)"
+        % (
+            len(pairs),
+            len(set([x for x, _ in pairs])),
+            not_found,
+            not_found1,
+            not_found2,
+        )
+    )
 
     # sort the dictionary by source word frequencies
     pairs = sorted(pairs, key=lambda x: word2id1[x[0]])
@@ -84,13 +98,15 @@ def load_dictionary(path, word2id1, word2id2):
     return dico
 
 
-def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, method, dico_eval, disp_flag=False):
+def get_word_translation_accuracy(
+    lang1, word2id1, emb1, lang2, word2id2, emb2, method, dico_eval, more_exp=False
+):
     """
     Given source and target word embeddings, and a dictionary,
     evaluate the translation accuracy using the precision@k.
     """
-    if dico_eval == 'default':
-        path = os.path.join(DIC_EVAL_PATH, '%s-%s.5000-6500.txt' % (lang1, lang2))
+    if dico_eval == "default":
+        path = os.path.join(DIC_EVAL_PATH, "%s-%s.5000-6500.txt" % (lang1, lang2))
     else:
         path = dico_eval
     dico = load_dictionary(path, word2id1, word2id2)
@@ -104,26 +120,26 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
     emb2 = emb2 / emb2.norm(2, 1, keepdim=True).expand_as(emb2)
 
     # nearest neighbors
-    if method == 'nn':
+    if method == "nn":
         query = emb1[dico[:, 0]]
         scores = query.mm(emb2.transpose(0, 1))
 
     # inverted softmax
-    elif method.startswith('invsm_beta_'):
-        beta = float(method[len('invsm_beta_'):])
+    elif method.startswith("invsm_beta_"):
+        beta = float(method[len("invsm_beta_") :])
         bs = 128
         word_scores = []
         for i in range(0, emb2.size(0), bs):
-            scores = emb1.mm(emb2[i:i + bs].transpose(0, 1))
+            scores = emb1.mm(emb2[i : i + bs].transpose(0, 1))
             scores.mul_(beta).exp_()
             scores.div_(scores.sum(0, keepdim=True).expand_as(scores))
             word_scores.append(scores.index_select(0, dico[:, 0]))
         scores = torch.cat(word_scores, 1)
 
     # contextual dissimilarity measure
-    elif method.startswith('csls_knn_'):
+    elif method.startswith("csls_knn_"):
         # average distances to k nearest neighbors
-        knn = method[len('csls_knn_'):]
+        knn = method[len("csls_knn_") :]
         assert knn.isdigit()
         knn = int(knn)
         average_dist1 = get_nn_avg_dist(emb2, emb1, knn)
@@ -144,35 +160,41 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
     top_matches = scores.topk(100, 1, True)[1]
     # top_matches = scores.topk(10, 1, True)[1]
     for k in [1, 5, 10, 30, 50, 100]:
-    # for k in [100]:
-    # # for k in [1, 10, 100]:
+        # for k in [100]:
+        # for k in [1]:
         top_k_matches = top_matches[:, :k]
-    #     id12word = {y: x for x, y in word2id1.items()}
-    #     id22word = {y: x for x, y in word2id2.items()}
-    #     mapping_res = {}
-    #     candicates = []
-    #     for x in top_k_matches:
-    #         candicates.append([id22word[int(y)] for y in x])
+        # id12word = {y: x for x, y in word2id1.items()}
+        # id22word = {y: x for x, y in word2id2.items()}
+        # mapping_res = {}
+        # candicates = []
+        # for x in top_k_matches:
+        #     candicates.append([id22word[int(y)] for y in x])
 
-    #     for idx, soucrce_word in enumerate(dico[:,0]):
-    #         try:
-    #             mapping_res[id12word[int(soucrce_word)]] = candicates[idx]
-    #         except:
-    #             print('error:', soucrce_word)
-    #     import json
-    #     with open(f'mapping_res_{k}.json', 'w') as f:
-    #         json.dump(mapping_res, f)
+        # for idx, soucrce_word in enumerate(dico[:, 0]):
+        #     try:
+        #         mapping_res[id12word[int(soucrce_word)]] = candicates[idx]
+        #     except:
+        #         print("error:", soucrce_word)
+        # import json
 
-        _matching = (top_k_matches == dico[:, 1][:, None].expand_as(top_k_matches)).sum(1).cpu().numpy()
+        # with open(f"mapping_res_{k}.json", "w") as f:
+        #     json.dump(mapping_res, f)
+
+        _matching = (
+            (top_k_matches == dico[:, 1][:, None].expand_as(top_k_matches))
+            .sum(1)
+            .cpu()
+            .numpy()
+        )
         # allow for multiple possible translations
         matching = {}
 
-        if not disp_flag:
-        # Original code
+        if not more_exp:
+            # Original code
             for i, src_id in enumerate(dico[:, 0].cpu().numpy()):
                 matching[src_id] = min(matching.get(src_id, 0) + _matching[i], 1)
         else:
-        # for dispersion and polysemy calculation
+            # for dispersion and polysemy calculation
             for i, src_id in enumerate(dico[:, 0].cpu().numpy()):
                 if src_id in matching:
                     matching[src_id].append(_matching[i])
@@ -185,8 +207,10 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
 
         # evaluate precision@k
         precision_at_k = 100 * np.mean(list(matching.values()))
-        logger.info("%i source words - %s - Precision at k = %i: %f" %
-                    (len(matching), method, k, precision_at_k))
-        results.append(('precision_at_%i' % k, precision_at_k))
+        logger.info(
+            "%i source words - %s - Precision at k = %i: %f"
+            % (len(matching), method, k, precision_at_k)
+        )
+        results.append(("precision_at_%i" % k, precision_at_k))
 
     return results

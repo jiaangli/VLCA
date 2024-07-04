@@ -14,7 +14,6 @@ from .utils import load_embeddings, normalize_embeddings
 
 
 class Discriminator(nn.Module):
-
     def __init__(self, params):
         super(Discriminator, self).__init__()
 
@@ -61,20 +60,23 @@ def build_model(params, with_dis, logger=None):
 
     # mapping
     mapping = nn.Linear(params.emb_dim, params.emb_dim, bias=False)
-    if getattr(params, 'map_id_init', True):
+    if getattr(params, "map_id_init", True):
         mapping.weight.data.copy_(torch.diag(torch.ones(params.emb_dim)))
-    elif getattr(params, 'adversarial', False) and not getattr(params, 'map_id_init', False) and getattr(params, 'load_optim', True):
-        # path = os.path.join(os.path.expanduser('~/Dir/projects/IPLVE/data/best_mapping'), \
-        #     f'seed_{params.seed}_best_mapping_{params.src_lang}_{params.tgt_lang}.pth')
-        path = os.path.join(os.path.expanduser(f'/home/kfb818/projects/vislm-geo/super_image_mae-lang-bert-best_mapping.pth'))
-        logger.info('* Reloading the best model from %s ...' % path)
+    elif (
+        getattr(params, "adversarial", False)
+        and not getattr(params, "map_id_init", False)
+        and getattr(params, "load_optim", True)
+    ):
+        path = os.path.join(
+            os.path.expanduser("./image_mae-lang-bert-best_mapping.pth")
+        )
+        logger.info("* Reloading the best model from %s ..." % path)
         # reload the model
         assert os.path.isfile(path)
         to_reload = torch.from_numpy(torch.load(path))
         assert to_reload.size() == mapping.weight.data.size()
         with torch.no_grad():
             mapping.weight.copy_(to_reload.type_as(mapping.weight))
-        
 
     # discriminator
     discriminator = Discriminator(params) if with_dis else None
@@ -89,8 +91,12 @@ def build_model(params, with_dis, logger=None):
             discriminator.cuda()
 
     # normalize embeddings
-    params.src_mean = normalize_embeddings(src_emb.weight.data, params.normalize_embeddings)
+    params.src_mean = normalize_embeddings(
+        src_emb.weight.data, params.normalize_embeddings
+    )
     if params.tgt_lang:
-        params.tgt_mean = normalize_embeddings(tgt_emb.weight.data, params.normalize_embeddings)
+        params.tgt_mean = normalize_embeddings(
+            tgt_emb.weight.data, params.normalize_embeddings
+        )
 
     return src_emb, tgt_emb, mapping, discriminator
