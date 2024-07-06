@@ -167,6 +167,7 @@ debug/
 wandb/
 sorted*
 *_v1
+*_v2
 *old
 weak*
 *.bin
@@ -176,3 +177,5 @@ weak*
 logs/
 multi*
 figures/
+*jaagli*
+plots/
