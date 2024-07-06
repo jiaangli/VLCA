@@ -51,6 +51,17 @@ python main.py \
     +dataset=cldi \
     muse.exp_type=BASE
 ```
+## Findings
+LMs converge toward the geometry of visual models as they grow larger.
+
+![convergence.png](assets/convergence.png)
+
+We also investigate the effects of incorporating text signals during vision pretraining by comparing pure vision models against selected CLIP vision encoders.
+
+<div class="row" style="display: flex; clear: both;">
+    <img src="assets/clip-rn-lms.png" alt="Forest" style="float: left; width: 49%">
+    <img src="assets/clip-vit-lms.png" alt="Snow" style="float: left; width: 49%">
+</div>
 
 ## Citation
 If you find our code, data or ideas useful in your research, please consider citing the paper:
