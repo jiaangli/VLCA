@@ -1,11 +1,12 @@
 import hydra
 import pandas as pd
-import wandb
 from hydra.core.config_store import ConfigStore
 from omegaconf import DictConfig, OmegaConf
 
-from src.config import ExperimentsType, MuseConfig, RunConfig
-from src.procrustes import muse_supervised
+import wandb
+
+from .config import ExperimentsType, MuseConfig, RunConfig
+from .procrustes import muse_supervised
 
 cs = ConfigStore.instance()
 cs.store(name="basic_config", node=RunConfig)
@@ -27,7 +28,7 @@ def main(cfg: DictConfig) -> None:
     for idx, vm in enumerate(VM):
         emb_dim = dims[idx]
         for train_ratio in [0.1, 0.5, 1, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70]:
-            for fold in [1, 2, 3, 4, 5]:
+            for fold in range(1, 6):
                 metrics = {
                     "VM": vm,
                     "LM": LM,

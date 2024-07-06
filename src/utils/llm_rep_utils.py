@@ -80,7 +80,7 @@ class LMEmbedding:
 
         # Load the text dataset
         text_sentences_array = load_dataset(
-            "jaagli/common_words_79k", split="whole", cache_dir="./data"
+            "jaagli/common-words-79k", split="whole", cache_dir="./data"
         )
         lm_dict = {}
         pattern = r"\s+([^\w\s]+)(\s*)$"

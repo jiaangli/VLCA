@@ -1,15 +1,15 @@
 # Do Vision and Language Models Share Concepts? A Vector Space Alignment Study
 
-This is the code to replicate the experiments described in the paper. 
+<p align="center">
+  <img src="https://github.com/jiaangli/VLCA/assets/steps.png"/>
+</p>
 
-> Jiaang Li, Constanza Fierro, Yova Kementchedjhieva, and Anders Søgaard. ["Do Vision and Language Models Share Concepts? A Vector Space Alignment Study"](https://arxiv.org/abs/2302.06555) arXiv preprint arXiv:2302.06555 (2023).
+As discussed in [our paper](https://arxiv.org/abs/2302.06555), we have studied the question of whether LMs and VMs learn similar representations of the world, despite being trained on independent data from independent modalities. We present an empirical evaluation across four families of LMs ([BERT](https://arxiv.org/abs/1810.04805), [GPT-2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), [OPT](https://arxiv.org/abs/2205.01068), and [LLaMA-2](https://arxiv.org/abs/2307.09288)) and three vision model architectures ([ResNet](https://arxiv.org/abs/1512.03385), [Segformer](https://arxiv.org/abs/2105.15203), and [MAE](https://arxiv.org/abs/2111.06377)). Our experiments show that LMs partially converge towards representations isomorphic to those of VMs.
 
-We implement transformer-based language models ([BERT](https://arxiv.org/abs/1810.04805), [GPT2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), [OPT](https://arxiv.org/abs/2205.01068), and [Llama 2](https://arxiv.org/abs/2307.09288)) to obtain word embeddings. Additionally, we implement Vision Models ([ResNet](https://arxiv.org/abs/1512.03385), [Segformer](https://arxiv.org/abs/2105.15203), and [MAE](https://arxiv.org/abs/2111.06377)) to obtain image embeddings.
-
-## Setup
+## Getting Started
 You can clone this repository issuing:
 ```bash
-git@github.com:jiaangli/vislm-geo.git
+git@github.com:jiaangli/vision-lang-vec-align.git
 ```
 
 1\. Create a fresh conda environment and install all dependencies.
@@ -18,10 +18,14 @@ conda create -n vislm-geo python=3.11
 conda activate vislm-geo
 pip install -r requirements.txt
 ```
-2\. Download the datasets
+2\. Datasets
+As part of this work, we release the following datasets:
 
-imagenet-21k and cldi
-
+| Dataset | Dataset HF Alias |
+| ---------- | ----------- |
+| Common Words 79K | [`jaagli/common-words-79k`](https://huggingface.co/datasets/jaagli/common-words-79k)
+| Unique Labels IMAGENET | [`jaagli/ul-imagenet`](https://huggingface.co/datasets/jaagli/ul-imagenet)
+| English CLDI | [`jaagli/en-cldi`](https://huggingface.co/datasets/jaagli/en-cldi)
 
 ## How to run
 
@@ -39,12 +43,12 @@ python main.py \
     muse.exp_type=BASE
 ```
 
-## How to Cite
+## Citation
 If you find our code, data or ideas useful in your research, please consider citing the paper:
 ```bibtex
 @article{li2023implications,
   title={Do Vision and Language Models Share Concepts? A Vector Space Alignment Study},
-  author={Li, Jiaang and Kementchedjhieva, Yova and S{\o}gaard, Anders},
+  author={Li, Jiaang and Kementchedjhieva, Yova and Fierro, Constanza and S{\o}gaard, Anders},
   journal={arXiv preprint arXiv:2302.06555},
   year={2023}
 }
@@ -55,19 +59,3 @@ If you find our code, data or ideas useful in your research, please consider cit
 Our codebase heavily relies on these excellent repositories:
 - [MUSE](https://github.com/facebookresearch/MUSE)
 - [transformers](https://github.com/huggingface/transformers)
-
-<!-- ## Get word embeddings
-To get the embeddings of specific words in the wordlist, simply run:
-```bash
-python main.py 
-```
-## Get image embeddings
-To get the embeddings of specific image class, simply run:
-```bash
-python3 main.py --pretrained facebook/vit-mae-huge --model_type VM
-```
-## Align word and image embeddings
-To learn a mapping between the source and the target space, simply run:
-```bash
-python3 main.py --pretrained meta-llama/Llama-2-7b-hf --model_type LM --muse True
-``` -->
