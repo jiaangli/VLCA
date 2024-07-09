@@ -23,11 +23,11 @@ pip install -r requirements.txt
 2\. Datasets
 As part of this work, we release the following datasets:
 
-| Dataset | Dataset HF Alias |
-| ---------- | ----------- |
-| Common Words 79K | [`jaagli/common-words-79k`](https://huggingface.co/datasets/jaagli/common-words-79k)
-| Unique Labels IMAGENET | [`jaagli/ul-imagenet`](https://huggingface.co/datasets/jaagli/ul-imagenet)
-| English CLDI | [`jaagli/en-cldi`](https://huggingface.co/datasets/jaagli/en-cldi)
+| Dataset                     | Dataset HF Alias |
+|-----------------------------| ----------- |
+| Common Words 79K            | [`jaagli/common-words-79k`](https://huggingface.co/datasets/jaagli/common-words-79k)
+| IMAGENET with Unique Labels | [`jaagli/imagenet-ul`](https://huggingface.co/datasets/jaagli/imagenet-ul)
+| English CLDI                | [`jaagli/en-cldi`](https://huggingface.co/datasets/jaagli/en-cldi)
 
 ## How to run
 

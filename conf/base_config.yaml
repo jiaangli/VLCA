@@ -1,0 +1,11 @@
+defaults:
+  - run_config
+  - _self_
+
+common:
+  seed: 42
+  alias_emb_dir: ${oc.env:DATASET_ROOT}  # path to save word embeddings (decontextualized)
+  emb_per_object: false # if use save one embedding per image or sentence
+  num_classes: 1000000  # number of sample ratio
+  dictionary_path: ${hydra:runtime.cwd}/data/dicts
+  

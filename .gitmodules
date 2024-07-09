@@ -1,0 +1,3 @@
+[submodule "MUSE"]
+	path = MUSE
+	url = git@github.com:jiaangli/MUSE.git
