@@ -73,12 +73,13 @@ class LMEmbedding:
 
         # Load the text dataset
         text_sentences_array = load_dataset(
-            "jaagli/common-words-79k", split="whole",
-            token=os.getenv("HUGGINGFACE_API_KEY")
+            "jaagli/common-words-79k", split="whole"
         )
+
         lm_dict = {}
         pattern = r"\s+([^\w\s]+)(\s*)$"
         replacement = r"\1\2"
+        all_words_in_context = []
         # get the token embeddings
 
         for word_data in tqdm(text_sentences_array):
@@ -87,12 +88,13 @@ class LMEmbedding:
                 re.sub(pattern, replacement, sentence)
                 for sentence in word_data["sentences"]
             ]
-
-            lm_dict = self.add_token_embedding_for_specific_word(
+            # all_words_in_context.extend([word_data["alias"] * len(batch_sentences)])
+            lm_dict, tmp_alias = self.add_token_embedding_for_specific_word(
                 batch_sentences, tokenizer, model, related_alias, lm_dict
             )
+            all_words_in_context.extend(tmp_alias)
 
-        self.save_embeddings(text_sentences_array["alias"], lm_dict)
+        self.save_embeddings(all_words_in_context, lm_dict)
 
     def get_word_ind_to_token_ind(
             self, words_in_array: str, related_words: str, tokenizer: Any,
@@ -116,7 +118,7 @@ class LMEmbedding:
         # Use span to directly get start and end positions
         start_pos, end_pos = match.span()
         # to be suitable for cased and uncased
-        related_words = words_in_array[start_pos: end_pos]
+        related_words = words_in_array[start_pos: end_pos].strip()
 
         if self.model_name.startswith("bert"):
             word_tokens = tokenizer.tokenize(related_words)
@@ -141,8 +143,9 @@ class LMEmbedding:
                 decode_str = tokenizer.decode(
                     token_ids[:i] if self.model_name.startswith("gpt") else token_ids[1:i])
                 # Append to word_ind_to_token_ind based on conditions
-                if (start_pos == 0 and len(decode_str) == 0) or len(decode_str) == start_pos - 1:
-                    word_ind_to_token_ind.append(i)
+                if (start_pos == 0 and len(decode_str) == 0) or (len(decode_str) == start_pos - 1 and words_mask[start_pos - 1].isspace()) or (len(decode_str) == start_pos and not words_mask[start_pos - 1].isspace()):
+                    word_ind_to_token_ind = list(range(i, i + len(word_tokens)))
+                    break
 
         return word_ind_to_token_ind
 
@@ -187,24 +190,26 @@ class LMEmbedding:
             related_alias: str,
             lm_dict: dict,
             is_avg: bool = True,
-    ) -> dict:
+    ) -> Tuple[dict, list]:
+
         all_sequence_embeddings, lm_dict = self.predict_lm_embeddings(
             batch, tokenizer, model, lm_dict
         )
 
+        tmp_alias = []
         for i, sentence in enumerate(batch):
             word_ind_to_token_ind = self.get_word_ind_to_token_ind(
                 sentence, related_alias, tokenizer, list(sentence)
             )
-            if not word_ind_to_token_ind:
-                continue
-            lm_dict = self.add_word_lm_embedding(
-                lm_dict,
-                all_sequence_embeddings[i: i + 1].cpu().detach().numpy(),
-                word_ind_to_token_ind,
-            )
+            if word_ind_to_token_ind:
+                lm_dict = self.add_word_lm_embedding(
+                    lm_dict,
+                    all_sequence_embeddings[i: i + 1].cpu().detach().numpy(),
+                    word_ind_to_token_ind,
+                )
+                tmp_alias.append(related_alias.replace(" ", "_"))
 
-        return lm_dict
+        return lm_dict, tmp_alias
 
     def save_embeddings(
             self, all_context_words: Optional[list], model_layer_dict: dict
