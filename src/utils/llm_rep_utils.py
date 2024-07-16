@@ -6,7 +6,7 @@ from typing import Any, Tuple
 import duckdb
 import numpy as np
 import torch
-from datasets import load_from_disk, Dataset
+from datasets import Dataset, load_dataset
 from omegaconf import DictConfig
 from tqdm import tqdm
 from transformers import AutoConfig, AutoModel, AutoTokenizer
@@ -79,11 +79,8 @@ class LMEmbedding:
         # where to store layer-wise bert embeddings of particular length
 
         # Load the text dataset
-        # text_sentences_array = load_dataset(
-        #     "jaagli/common-words-79k", split="whole"
-        # )
-        text_sentences_array = load_from_disk(
-            "/home/kfb818/projects/xmodal-transfer/embed/filtered_text"
+        text_sentences_array = load_dataset(
+            "jaagli/common-words-79k", split="whole"
         )
 
         pattern = r"\s+([^\w\s]+)(\s*)$"
