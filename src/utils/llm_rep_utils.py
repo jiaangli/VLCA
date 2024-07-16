@@ -1,11 +1,12 @@
-import os
 import re
+from itertools import chain
 from pathlib import Path
-from typing import Any, Optional, Tuple
+from typing import Any, Tuple
 
+import duckdb
 import numpy as np
 import torch
-from datasets import load_dataset
+from datasets import load_from_disk, Dataset
 from omegaconf import DictConfig
 from tqdm import tqdm
 from transformers import AutoConfig, AutoModel, AutoTokenizer
@@ -15,7 +16,9 @@ class LMEmbedding:
     def __init__(self, args: DictConfig):
         self.config: DictConfig = args
         self.model_id: str = args.model.model_id
+        self.bs = 32
         self.model_name: str = args.model.model_name
+        self.model_dim = args.model.dim
         self.dataset_name: str = args.dataset.dataset_name
         self.alias_emb_dir: Path = (
                 Path(args.common.alias_emb_dir) / args.model.model_type.value
@@ -31,6 +34,10 @@ class LMEmbedding:
             if torch.cuda.device_count() >= 1
             else ["cpu"]
         )
+        self.con = duckdb.connect(f"{self.alias_emb_dir}/{self.model_name}.db")
+        self.con.execute("DROP TABLE IF EXISTS data")
+        self.con.commit()
+        self.con.execute(f"CREATE TABLE IF NOT EXISTS data (alias VARCHAR, embedding FLOAT[{self.model_dim}])")
 
     def get_lm_layer_representations(self) -> None:
         cache_path = (
@@ -72,36 +79,55 @@ class LMEmbedding:
         # where to store layer-wise bert embeddings of particular length
 
         # Load the text dataset
-        text_sentences_array = load_dataset(
-            "jaagli/common-words-79k", split="whole"
+        # text_sentences_array = load_dataset(
+        #     "jaagli/common-words-79k", split="whole"
+        # )
+        text_sentences_array = load_from_disk(
+            "/home/kfb818/projects/xmodal-transfer/embed/filtered_text"
         )
 
-        lm_dict = {}
         pattern = r"\s+([^\w\s]+)(\s*)$"
         replacement = r"\1\2"
-        all_words_in_context = []
         # get the token embeddings
 
-        for word_data in tqdm(text_sentences_array):
-            related_alias = word_data["alias"].replace("_", " ")
+        for i in tqdm(range(0, len(text_sentences_array), self.bs)):
+            batch = text_sentences_array[i: i + self.bs]
             batch_sentences = [
                 re.sub(pattern, replacement, sentence)
-                for sentence in word_data["sentences"]
+                for sentences in batch["sentences"]
+                for sentence in sentences
             ]
-            # all_words_in_context.extend([word_data["alias"] * len(batch_sentences)])
-            lm_dict, tmp_alias = self.add_token_embedding_for_specific_word(
-                batch_sentences, tokenizer, model, related_alias, lm_dict
+            num_sentences = [len(sentences) for sentences in batch["sentences"]]
+            batch_related_alias = list(chain.from_iterable([
+                [word_data] * num_sentences[n] for n, word_data in enumerate(batch["alias"])
+            ]))
+            embeddings, related_alias = self.alias_embed(
+                batch_sentences, tokenizer, model, batch_related_alias
             )
-            all_words_in_context.extend(tmp_alias)
 
-        self.save_embeddings(all_words_in_context, lm_dict)
+            assert len(embeddings) == len(related_alias)
 
-    def get_word_ind_to_token_ind(
+            # Prepare the data for batch insert
+            insert_data = [(related_alias[j], e.tolist()) for j, e in enumerate(embeddings)]
+            # Execute the batch insert
+            self.con.executemany("INSERT INTO data VALUES (?, ?)", insert_data)
+
+        self.save_avg_embed(text_sentences_array["alias"])
+        self.con.close()
+
+    def map_word_to_token_ind(
             self, words_in_array: str, related_words: str, tokenizer: Any,
             words_mask: list
     ) -> list:
-        # dict that maps index of word in words_in_array to index of tokens in seq_tokens
-        word_ind_to_token_ind = []
+        """
+
+        :param words_in_array: sentence
+        :param related_words: the specific word in the sentence for which we want to obtain embeddings
+        :param tokenizer:
+        :param words_mask: a list of characters in the sentence
+        :return: a list of token indices for the specific word
+        """
+        word_to_token_ind = []
         token_ids = tokenizer(words_in_array).input_ids
         tokenized_text = tokenizer.convert_ids_to_tokens(token_ids)
 
@@ -143,116 +169,73 @@ class LMEmbedding:
                 decode_str = tokenizer.decode(
                     token_ids[:i] if self.model_name.startswith("gpt") else token_ids[1:i])
                 # Append to word_ind_to_token_ind based on conditions
-                if (start_pos == 0 and len(decode_str) == 0) or (len(decode_str) == start_pos - 1 and words_mask[start_pos - 1].isspace()) or (len(decode_str) == start_pos and not words_mask[start_pos - 1].isspace()):
-                    word_ind_to_token_ind = list(range(i, i + len(word_tokens)))
+                if (start_pos == 0 and len(decode_str) == 0) or (
+                        len(decode_str) == start_pos - 1 and words_mask[start_pos - 1].isspace()) or (
+                        len(decode_str) == start_pos and not words_mask[start_pos - 1].isspace()):
+                    word_to_token_ind = list(range(i, i + len(word_tokens)))
                     break
 
-        return word_ind_to_token_ind
+        return word_to_token_ind
 
-    def predict_lm_embeddings(
-            self, batch_sentences: list, tokenizer: Any, model: Any, lm_dict: dict
-    ) -> Tuple[torch.Tensor, dict]:
+    def extract_sentences_embeddings(
+            self, batch_sentences: list, tokenizer: Any, model: Any
+    ) -> np.ndarray:
         indexed_tokens = tokenizer(batch_sentences, return_tensors="pt", padding=True)
         indexed_tokens = indexed_tokens.to(self.device[0])
         with torch.no_grad():
             outputs = model(**indexed_tokens)
 
         # only get last hidden state
-        if not lm_dict:
-            lm_dict.update({"last": []})
-        return outputs.last_hidden_state, lm_dict
+        return outputs.last_hidden_state.detach().cpu().numpy()
 
     # @staticmethod
-    def add_word_lm_embedding(
+    def get_tokens_embedding(
             self,
-            lm_dict: dict,
             embeddings_to_add: np.ndarray,
-            token_inds_to_avg: list,
-    ) -> dict:
+            tokens_indices: list,
+    ) -> np.ndarray:
         if "bert" in self.model_name:
-            lm_dict["last"].append(
-                np.mean(embeddings_to_add[0, token_inds_to_avg, :], 0).astype(
-                    np.float16
-                )
-            )
+            emb = np.mean(embeddings_to_add[0, tokens_indices, :], 0)
         else:
-            lm_dict["last"].append(
-                embeddings_to_add[0, token_inds_to_avg[-1], :].astype(np.float16)
-            )
+            emb = embeddings_to_add[0, tokens_indices[-1], :]
 
-        return lm_dict
+        return emb
 
-    def add_token_embedding_for_specific_word(
+    def alias_embed(
             self,
             batch: list,
             tokenizer: Any,
             model: Any,
-            related_alias: str,
-            lm_dict: dict,
-            is_avg: bool = True,
-    ) -> Tuple[dict, list]:
+            related_alias: list,
+    ) -> Tuple[list, list]:
 
-        all_sequence_embeddings, lm_dict = self.predict_lm_embeddings(
-            batch, tokenizer, model, lm_dict
+        all_sequence_embeddings = self.extract_sentences_embeddings(
+            batch, tokenizer, model
         )
 
-        tmp_alias = []
+        tmp_embeddings, tmp_alias = [], []
         for i, sentence in enumerate(batch):
-            word_ind_to_token_ind = self.get_word_ind_to_token_ind(
-                sentence, related_alias, tokenizer, list(sentence)
+            w2t_indices = self.map_word_to_token_ind(
+                sentence, related_alias[i].replace("_", " "), tokenizer, list(sentence)
             )
-            if word_ind_to_token_ind:
-                lm_dict = self.add_word_lm_embedding(
-                    lm_dict,
-                    all_sequence_embeddings[i: i + 1].cpu().detach().numpy(),
-                    word_ind_to_token_ind,
+            if w2t_indices:
+                tmp_emb = self.get_tokens_embedding(
+                    all_sequence_embeddings[i: i + 1],
+                    w2t_indices,
                 )
-                tmp_alias.append(related_alias.replace(" ", "_"))
+                tmp_embeddings.append(tmp_emb)
+                tmp_alias.append(related_alias[i])
 
-        return lm_dict, tmp_alias
+        return tmp_embeddings, tmp_alias
 
-    def save_embeddings(
-            self, all_context_words: Optional[list], model_layer_dict: dict
-    ) -> None:
-        wordlist = np.array(all_context_words)
-        if "bert" in self.model_name:
-            wordlist = np.array([w.lower() for w in wordlist])
-        unique_words = list(dict.fromkeys(wordlist))
-
-        layer = "last"
-        if self.emb_per_object:  # save per object (sentence here) embeddings
-            torch.save(
-                {
-                    "dico": wordlist,
-                    "vectors": torch.from_numpy(
-                        np.vstack(model_layer_dict[layer])
-                    ).float(),
-                },
-                str(
-                    self.alias_emb_dir
-                    / f"{self.model_name}_{len(model_layer_dict[layer][0])}_per_object.pth"
-                ),
-            )
-        word_embeddings = self.__get_mean_word_embeddings(
-            np.vstack(model_layer_dict[layer]), wordlist, unique_words
-        )
-
-        torch.save(
-            {
-                "dico": unique_words,
-                "vectors": torch.from_numpy(word_embeddings).float(),
-            },
-            str(
-                self.alias_emb_dir / f"{self.model_name}_{word_embeddings.shape[1]}.pth"
-            ),
-        )
-        print(f"Saved extracted features to {str(self.alias_emb_dir)}")
-
-    def __get_mean_word_embeddings(
-            self, vecs: np.ndarray, all_words: Any, uni_words: list
-    ) -> np.ndarray:
-        word_indices = [np.where(all_words == w)[0] for w in uni_words]
-        word_embeddings = np.empty((len(uni_words), vecs.shape[1]), dtype=np.float16)
-        for i, indices in enumerate(word_indices):
-            word_embeddings[i] = np.mean(vecs[indices], axis=0)
-        return word_embeddings
+    def save_avg_embed(self, aliases: Dataset) -> None:
+        avg_embeddings, final_alias = [], []
+        for i in aliases:
+            query = f"SELECT embedding FROM data WHERE alias = '{i}'"
+            result = self.con.execute(query).fetchall()
+            if result:
+                result = np.concatenate(result, axis=0)
+                avg_embeddings.append(np.mean(result, axis=0))
+                final_alias.append(i)
+        torch.save({"dico": final_alias, "vectors": torch.from_numpy(np.array(avg_embeddings))},
+                   self.alias_emb_dir / f"{self.model_name}_{self.model_dim}.pth")
