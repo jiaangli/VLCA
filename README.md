@@ -86,14 +86,19 @@ against selected CLIP vision encoders.
 If you find our code, data or ideas useful in your research, please consider citing the paper:
 
 ```bibtex
-@misc{li2024visionlanguagemodelsshare,
-      title={Do Vision and Language Models Share Concepts? A Vector Space Alignment Study}, 
-      author={Jiaang Li and Yova Kementchedjhieva and Constanza Fierro and Anders Søgaard},
-      year={2024},
-      eprint={2302.06555},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2302.06555}, 
+@article{10.1162/tacl_a_00698,
+    author = {Li, Jiaang and Kementchedjhieva, Yova and Fierro, Constanza and Søgaard, Anders},
+    title = "{Do Vision and Language Models Share Concepts? A Vector Space Alignment Study}",
+    journal = {Transactions of the Association for Computational Linguistics},
+    volume = {12},
+    pages = {1232-1249},
+    year = {2024},
+    month = {09},
+    abstract = "{Large-scale pretrained language models (LMs) are said to “lack the ability to connect utterances to the world” (Bender and Koller, 2020), because they do not have “mental models of the world” (Mitchell and Krakauer, 2023). If so, one would expect LM representations to be unrelated to representations induced by vision models. We present an empirical evaluation across four families of LMs (BERT, GPT-2, OPT, and LLaMA-2) and three vision model architectures (ResNet, SegFormer, and MAE). Our experiments show that LMs partially converge towards representations isomorphic to those of vision models, subject to dispersion, polysemy, and frequency. This has important implications for both multi-modal processing and the LM understanding debate (Mitchell and Krakauer, 2023).1}",
+    issn = {2307-387X},
+    doi = {10.1162/tacl_a_00698},
+    url = {https://doi.org/10.1162/tacl\_a\_00698},
+    eprint = {https://direct.mit.edu/tacl/article-pdf/doi/10.1162/tacl\_a\_00698/2473674/tacl\_a\_00698.pdf},
 }
 ```
 
