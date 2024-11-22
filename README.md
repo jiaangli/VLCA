@@ -37,8 +37,8 @@ As part of this work, we release the following datasets:
 | Dataset                                   | Dataset HF Alias                                                                     |
 |-------------------------------------------|--------------------------------------------------------------------------------------|
 | Common Words 79K                          | [`jaagli/common-words-79k`](https://huggingface.co/datasets/jaagli/common-words-79k) 
-| IMAGENET with Unique Labels (coming soon) | [`jaagli/imagenet-ul`](https://huggingface.co/datasets/jaagli/imagenet-ul)           
-| English CLDI (coming soon)                | [`jaagli/en-cldi`](https://huggingface.co/datasets/jaagli/en-cldi)                   
+| IMAGENET with Unique Labels               | [`jaagli/imagenet-ul`](https://huggingface.co/datasets/jaagli/imagenet-ul)           
+| English CLDI                              | [`jaagli/en-cldi`](https://huggingface.co/datasets/jaagli/en-cldi)                   
 
 ## How to run
 
